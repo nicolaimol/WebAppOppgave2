@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Lugar } from 'src/app/interface/lugar';
 import { Reise } from 'src/app/interface/reise';
+import { BestillingInfoService } from 'src/app/service/bestilling-info.service';
 import { ReiseService } from 'src/app/service/reise.service';
 
 @Component({
@@ -39,7 +40,7 @@ export class HomeComponent implements OnInit {
   antallVoksen: number = 1;
   pris = 0;
 
-  constructor(private reiseService: ReiseService) {}
+  constructor(private reiseService: ReiseService, private bestillingService: BestillingInfoService) {}
 
   ngOnInit(): void {
     this.reiseService.hentAlleReiser().subscribe(reiser => {
