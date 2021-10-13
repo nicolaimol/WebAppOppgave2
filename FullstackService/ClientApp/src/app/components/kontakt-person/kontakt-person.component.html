@@ -1,0 +1,19 @@
+<button  (click)="showInput = !showInput" class="btn btn-outline-secondary">Kontaktperson 18+</button>
+<div [hidden]="!showInput" class="absolute">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark"style="background-color: azure;">
+            <div class="container">Navbar</div>
+        </nav>
+    </header>
+    <div class="container">
+        <form class="form-vertical" role="form" (submit)="submit()">
+            <input type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
+            <input type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
+            <input type="date" class="form-control" name="foedselsdato" [(ngModel)]="person.foedselsdato">
+            <input type="text" class="form-control" name="adresse" placeholder="Adresse" [(ngModel)]="person.adresse">
+            <input type="text" class="form-control" name="telefon" placeholder="Telefon" [(ngModel)]="person.telefon">
+            <input type="email" class="form-control" name="epost" placeholder="Epost" [(ngModel)]="person.epost">
+            <button type="submit" class="btn btn-primary">Lagre</button>
+        </form>
+    </div>
+</div>

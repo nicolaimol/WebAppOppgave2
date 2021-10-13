@@ -182,6 +182,7 @@ export class BestillComponent implements OnInit {
     }
 
     this.bestillingInfoService.changeBestilling(bestilling);
+    localStorage.setItem("bestilling", JSON.stringify(bestilling));
 
     this.router.navigate(['/reisende'])
   }

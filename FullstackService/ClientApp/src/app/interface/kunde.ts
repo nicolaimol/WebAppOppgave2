@@ -18,5 +18,5 @@ export interface Kunde {
 
 export interface Post {
     postnummer: number;
-    poststed: number;
+    poststed: string;
 }

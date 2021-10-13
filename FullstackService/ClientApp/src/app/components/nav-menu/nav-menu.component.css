@@ -31,3 +31,7 @@ nav {
 .highlight {
     color: rgba(255,255,255,1) !important;
 }
+
+#navmenu {
+  justify-content: flex-end;
+}

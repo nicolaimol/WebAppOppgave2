@@ -14,7 +14,7 @@ export class BestillingInfoService {
     antall_barn: 0,
     antall_voksen: 1
   };
-  private bestillingInfoSource = new BehaviorSubject(this.bestilling);
+  private bestillingInfoSource = new BehaviorSubject(null);
   currentBestilling = this.bestillingInfoSource.asObservable();
 
   constructor() { }

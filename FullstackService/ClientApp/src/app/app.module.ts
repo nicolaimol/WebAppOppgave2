@@ -16,6 +16,7 @@ import { ReiseItemComponent } from './components/reise-item/reise-item.component
 import { ReisendeComponent } from './components/reisende/reisende.component';
 import { BestillComponent } from './components/bestill/bestill.component';
 import { NavAdminComponent } from './components/nav-admin/nav-admin.component';
+import { KontaktPersonComponent } from './components/kontakt-person/kontakt-person.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NavAdminComponent } from './components/nav-admin/nav-admin.component';
     ReiseItemComponent,
     ReisendeComponent,
     BestillComponent,
-    NavAdminComponent
+    NavAdminComponent,
+    KontaktPersonComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
