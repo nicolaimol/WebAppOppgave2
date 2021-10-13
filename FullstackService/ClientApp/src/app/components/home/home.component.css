@@ -1,0 +1,39 @@
+#flags {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+.flags {
+    object-fit: cover;
+    height: 3em;
+    width: 3em;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: auto;
+}
+
+#reise{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2em;
+    max-width: 50%!important;
+    width: 50%!important;
+}
+
+.reise {
+    width: 200px;
+}
+
+#pris {
+    text-align: right;
+    max-width: 50%!important;
+    width: 50%!important;
+}
+
+.trykkemus{
+    cursor: pointer;
+}
+
+.flag-sm {
+    display: none;
+}

@@ -56,7 +56,7 @@
         <!-- Price -->
         
         <div id="pris">
-            <p>Din totalpris blir: <span id="setPris"></span>,- kr</p>
+            <p>Din totalpris blir: {{pris}},- kr</p>
         </div>
     </div>
 
@@ -71,7 +71,7 @@
             <td>
                 <select [ngClass]="{'is-valid': validStrekning}" [(ngModel)]="strekning" (change)="validerStrekning()" class="form-control trykkemus" name="ferjestrekning" id="ferjestrekning">
                     <option selected disabled value="VelgFerjestrekning">Velg ferjestrekning</option>
-                    <option *ngFor="let reise of reiser" value="{{reise.strekning}}">{{reise.strekning}}</option>
+                    <option *ngFor="let reise of reiser" value="{{reise.id}}">{{reise.strekning}}</option>
                 </select>
             </td>
         </tr>
@@ -96,10 +96,11 @@
             
             <td><label for="lugar">Velg lugar</label></td>
             <td>
-                <select [(ngModel)]="lugar" onchange="validerLugar(this)" class="form-control trykkemus" disabled id="lugar">
-                    <option disabled selected>Velg lugar</option>
+                <select [ngClass]="{'is-valid': validLugar}" [(ngModel)]="lugar" (change)="validerLugar()" class="form-control trykkemus" [disabled]="!skalLugar" id="lugar">
+                    <option selected disabled value="VelgLugar">Velg lugar</option>
+                    <option *ngFor="let lugar of lugarer" value="{{lugar.id}}">{{lugar.type}}</option>
                 </select>
-                <input class="form-check-input trykkemus" onclick="skalLugar()" id="lugarCheck" type="checkbox"> <label
+                <input [(ngModel)]="skalLugar" class="form-check-input trykkemus" id="lugarCheck" type="checkbox" [disabled]="maLugar"> <label
                     for="lugarCheck">Skal ha lugar</label>
             </td>
         </tr>
@@ -127,7 +128,7 @@
                 <!-- Number of children -->
                 
                 <label style="margin-right: 5%" for="barn">Barn</label>
-                <input [(ngModel)]="antallBarn" onkeyup="validerBarn(this)" class="form-control" id="barn" type="number"></td>
+                <input [ngClass]="{'is-valid': validAntallBarn}" [(ngModel)]="antallBarn" (keyup)="validerBarn()" class="form-control" id="barn" type="number"></td>
         </tr>
         <tr class="align-under index-media">
 

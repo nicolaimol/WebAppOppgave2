@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Lugar } from 'src/app/interface/lugar';
 import { Reise } from 'src/app/interface/reise';
 import { ReiseService } from 'src/app/service/reise.service';
 
@@ -15,27 +16,28 @@ export class HomeComponent implements OnInit {
   validHjemreise: boolean = false;
   skalLugar: boolean = false;
   validLugar: boolean = false;
+  maLugar: boolean = false;
   skalBil: boolean = false;
   validBil: boolean = false;
-  validAntallBarn: boolean = false;
+  validAntallBarn: boolean = true;
   validAntallVoksen: boolean = true;
 
-  validTotal = this.validStrekning && this.validUtreise
-  && (this.validHjemreise || !this.skalHjem) 
-  && (this.validLugar || !this.skalLugar) 
-  && (this.validBil || !this.skalBil) && this.validAntallBarn 
-  && this.validAntallVoksen
+  validTotal:boolean = false; 
 
 
   reiser: Reise[] = []
+  reiseItem: Reise;
+  lugarer: Lugar[] = []
+  lugarItem: Lugar;
 
-  strekning: string = "Velg ferjestrekning"
+  strekning: number;
   utreise: string;
   hjemreise: string;
-  lugar: string;
+  lugar: number;
   bil: string;
-  antallBarn: number;
+  antallBarn: number = 0;
   antallVoksen: number = 1;
+  pris = 0;
 
   constructor(private reiseService: ReiseService) {}
 
@@ -45,8 +47,46 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  setPris() {
+    let pris = 0;
+    const rute = this.reiseItem
+    pris += this.reiseItem.prisPerGjest
+    
+    const lugar = this.lugarItem;
+    let antall_barn = Number(this.antallBarn);
+    let antall_voksen = Number(this.antallVoksen);
+    // antall_lugarer depends on if the user has chosen lugar, and that the lugar is valid
+    let antall_lugarer = this.skalLugar && this.lugarItem != null ?
+        Math.ceil((antall_voksen + antall_barn)/lugar.antall):
+        0
+
+    pris *= antall_voksen + (0.5*antall_barn);
+
+    pris += antall_lugarer !== 0 ? Number(antall_lugarer*(lugar.pris)) : 0
+
+    pris += this.skalBil ? rute.prisBil : 0
+
+    pris *= this.skalHjem ? 2 : 1
+    this.pris = pris;
+
+    this.validTotal = this.validStrekning && this.validUtreise
+    && (this.validHjemreise || !this.skalHjem) 
+    && (this.validLugar || !this.skalLugar) 
+    && (this.validBil || !this.skalBil) && this.validAntallBarn 
+    && this.validAntallVoksen
+  }
+
   validerStrekning() {
+    this.reiseService.hentAlleLugererById(this.strekning).subscribe(lugarer => {
+      this.lugarer = lugarer;
+    })
+
+    const reise = this.reiser.filter(reiseIn => reiseIn.id == this.strekning)
+    this.maLugar = this.skalLugar = reise[0].maLugar;
+    this.reiseItem = reise[0];
     this.validStrekning = true;
+
+    this.setPris()
   }
 
   validerUtreise() {
@@ -67,6 +107,7 @@ export class HomeComponent implements OnInit {
     else {
       this.validUtreise = false;
     }
+    this.setPris()
   }
 
   validerHjemreise() {
@@ -84,6 +125,15 @@ export class HomeComponent implements OnInit {
     else {
       this.validHjemreise = false;
     }
+
+    this.setPris()
+  }
+
+  validerLugar() {
+    this.validLugar = true;
+    this.lugarItem = this.lugarer.filter(lugarIn => lugarIn.id == this.lugar)[0]
+
+    this.setPris()
   }
 
   setHjem() {
@@ -97,6 +147,20 @@ export class HomeComponent implements OnInit {
     } else {
       this.validBil = false;
     }
+
+    this.setPris()
+  }
+
+  validerVoksne() {
+    this.validAntallVoksen = Number(this.antallVoksen) >= 1;
+
+    this.setPris()
+  }
+
+  validerBarn() {
+    this.validAntallBarn = Number(this.antallBarn) >= 0;
+
+    this.setPris()
   }
 
 
