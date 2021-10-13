@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BestillingInfo } from 'src/app/interface/bestilling';
 import { Lugar } from 'src/app/interface/lugar';
 import { Reise } from 'src/app/interface/reise';
 import { BestillingInfoService } from 'src/app/service/bestilling-info.service';
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   skalLugar: boolean = false;
   validLugar: boolean = false;
   maLugar: boolean = false;
+  antallLugarer: number;
   skalBil: boolean = false;
   validBil: boolean = false;
   validAntallBarn: boolean = true;
@@ -40,7 +42,7 @@ export class HomeComponent implements OnInit {
   antallVoksen: number = 1;
   pris = 0;
 
-  constructor(private reiseService: ReiseService, private bestillingService: BestillingInfoService) {}
+  constructor(private reiseService: ReiseService, private bestillingInfoService: BestillingInfoService) {}
 
   ngOnInit(): void {
     this.reiseService.hentAlleReiser().subscribe(reiser => {
@@ -60,6 +62,7 @@ export class HomeComponent implements OnInit {
     let antall_lugarer = this.skalLugar && this.lugarItem != null ?
         Math.ceil((antall_voksen + antall_barn)/lugar.antall):
         0
+    this.antallLugarer = antall_lugarer;
 
     pris *= antall_voksen + (0.5*antall_barn);
 
@@ -162,6 +165,22 @@ export class HomeComponent implements OnInit {
     this.validAntallBarn = Number(this.antallBarn) >= 0;
 
     this.setPris()
+  }
+
+  videre() {
+    const bestilling: BestillingInfo = {
+      utreiseDato: this.utreise,
+      hjemreiseDato: this.skalHjem ? null: this.hjemreise,
+      pris: this.pris,
+      registreringsnummer: this.skalBil? this.bil : null,
+      antallLugarer: this.antallLugarer,
+      lugar: this.skalLugar ? this.lugarItem: null,
+      antall_barn: this.antallBarn,
+      antall_voksen: this.antallVoksen,
+      reiseId: this.strekning,
+    }
+
+    this.bestillingInfoService.changeBestilling(bestilling);
   }
 
 

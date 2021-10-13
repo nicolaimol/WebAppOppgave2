@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { VisreiserComponent } from './components/visreiser/visreiser.component';
 import { ReiseItemComponent } from './components/reise-item/reise-item.component';
+import { ReisendeComponent } from './components/reisende/reisende.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReiseItemComponent } from './components/reise-item/reise-item.component
     LoginComponent,
     AdminComponent,
     VisreiserComponent,
-    ReiseItemComponent
+    ReiseItemComponent,
+    ReisendeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
