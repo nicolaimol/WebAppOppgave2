@@ -14,6 +14,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { VisreiserComponent } from './components/visreiser/visreiser.component';
 import { ReiseItemComponent } from './components/reise-item/reise-item.component';
 import { ReisendeComponent } from './components/reisende/reisende.component';
+import { BestillComponent } from './components/bestill/bestill.component';
+import { NavAdminComponent } from './components/nav-admin/nav-admin.component';
 
 @NgModule({
   declarations: [
@@ -26,18 +28,26 @@ import { ReisendeComponent } from './components/reisende/reisende.component';
     AdminComponent,
     VisreiserComponent,
     ReiseItemComponent,
-    ReisendeComponent
+    ReisendeComponent,
+    BestillComponent,
+    NavAdminComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'admin', component: AdminComponent },
-      { path: 'admin/reiser', component: VisreiserComponent}
+      { path: '', component: HomeComponent,  children: [
+        { path: '', component: BestillComponent, },
+        { path: 'reisende', component: ReisendeComponent },
+      ]},
+      { path: 'admin', component: AdminComponent, children: [
+        { path: 'reiser', component: VisreiserComponent},
+      ]}, 
+
+      
+      
+      
     ])
   ],
   providers: [],
