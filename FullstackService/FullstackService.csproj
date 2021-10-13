@@ -14,7 +14,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.11" />
+        <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,6 +27,18 @@
         <Content Remove="$(SpaRoot)**" />
         <None Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+        <None Include="wwwroot\res\Color_Hybrid.jpeg" />
+        <None Include="wwwroot\res\Color_Line_logo.svg" />
+        <None Include="wwwroot\res\Color_Magic.jpeg" />
+        <None Include="wwwroot\res\Flag_of_Denmark.svg" />
+        <None Include="wwwroot\res\Flag_of_Germany.svg" />
+        <None Include="wwwroot\res\Flag_of_Sweden.svg" />
+        <None Include="wwwroot\res\nets_logo.png" />
+        <None Include="wwwroot\res\SuperSpeed_2.jpg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ClientApp\src\app\components" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
