@@ -1,3 +1,23 @@
-<p>reisende works!</p>
-
-<app-kontakt-person [person]="kontaktPerson" [avreise]="bestilling.utreiseDato" (personUpdate)="updateKontaktPerson(kontaktPerson)"></app-kontakt-person>
+<div class="row">
+    <app-kontakt-person 
+        [person]="kontaktPerson" 
+        [avreise]="bestilling.utreiseDato" 
+        (notifyParent)="updateKontaktPerson($event)"
+        [ngClass]="{'btn-outline-success': validKontaktPerson}" ></app-kontakt-person>
+    <app-kunde 
+        *ngFor="let voksen of voksne; index as i" 
+        [person]="voksen" 
+        [avreise]="bestilling.utreiseDato" 
+        [index]="i" 
+        type="voksen" 
+        (notifyParent)="updateKontakt($event)"
+        ></app-kunde>
+    <app-kunde 
+        *ngFor="let barn of barn; index as i" 
+        [person]="barn" 
+        [avreise]="bestilling.utreiseDato" 
+        [index]="i" 
+        type="barn" 
+        (notifyParent)="updateKontakt($event)"
+        ></app-kunde>
+</div>

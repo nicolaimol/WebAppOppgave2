@@ -1,0 +1,10 @@
+.row {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row *{
+    margin: 1em;
+}

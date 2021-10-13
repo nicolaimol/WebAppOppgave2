@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BestillingInfo } from 'src/app/interface/bestilling';
-import { KontaktPerson, Kunde, Post } from 'src/app/interface/kunde';
+import { KontaktPerson, Kunde, KundeObj, Post } from 'src/app/interface/kunde';
 import { BestillingInfoService } from 'src/app/service/bestilling-info.service';
 
 @Component({
@@ -16,8 +16,12 @@ export class ReisendeComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   kontaktPerson: KontaktPerson;
+  validKontaktPerson: boolean = false;
+  kundeObj: KundeObj;
   voksne: Kunde[] = [];
+  validVoksne: boolean[] = [];
   barn: Kunde[] = [];
+  validBarn: boolean[] = [];
 
   constructor(private bestillingInfoService: BestillingInfoService, private router: Router) { }
 
@@ -48,11 +52,48 @@ export class ReisendeComponent implements OnInit, OnDestroy {
         telefon: "",
         epost: ""
       }
+
+      for (let i = 1; i < this.bestilling.antall_voksen; i++) {
+        this.voksne.push({
+          fornavn: "",
+          etternavn: "",
+          foedselsdato: "",
+        })
+        this.validVoksne.push(false);
+      }
+
+      for (let i = 0; i < this.bestilling.antall_barn; i++) {
+        this.barn.push({
+          fornavn: "",
+          etternavn: "",
+          foedselsdato: "",
+        })
+        this.validBarn.push(false);
+      }
     }
   }
 
   updateKontaktPerson(kontaktPerson: KontaktPerson) {
     this.kontaktPerson = kontaktPerson;
-    console.log(this.kontaktPerson);
+    this.validKontaktPerson = true;
+
+    this.validerTotal();
+  }
+
+  updateKontakt(kundeObj: KundeObj) {
+
+    if (kundeObj.type === 'voksen') {
+      this.voksne[kundeObj.index] = kundeObj.kunde;
+      this.validVoksne[kundeObj.index] = true;
+    } else {
+      this.barn[kundeObj.index] = kundeObj.kunde;
+      this.validBarn[kundeObj.index] = true;
+    }
+
+    this.validerTotal();
+  }
+
+  validerTotal() {
+
   }
 }

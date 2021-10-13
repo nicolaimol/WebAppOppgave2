@@ -20,3 +20,9 @@ export interface Post {
     postnummer: number;
     poststed: string;
 }
+
+export interface KundeObj {
+    kunde: Kunde,
+    index: number;
+    type: string;
+}

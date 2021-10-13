@@ -1,4 +1,4 @@
-<button  (click)="showInput = !showInput" class="btn btn-outline-secondary">Kontaktperson 18+</button>
+<button [ngClass]="{'btn-outline-success': validTotalOut}" (click)="showInput = !showInput" class="btn btn-outline-secondary">Kontaktperson 18+</button>
 <div [hidden]="!showInput" class="absolute">
     <header>
         <nav class="navbar navbar-expand-md navbar-dark"style="background-color: azure;">
@@ -15,5 +15,7 @@
             <input [ngClass]="{'is-valid': validEpost}" (keyup)="validerEpost()" type="email" class="form-control" name="epost" placeholder="Epost" [(ngModel)]="person.epost">
             <button [disabled]="!validTotal" type="submit" class="btn btn-primary">Lagre</button>
         </form>
+
+        <button class="btn btn-danger" (click)="avbryt()">Avbryt</button>
     </div>
 </div>

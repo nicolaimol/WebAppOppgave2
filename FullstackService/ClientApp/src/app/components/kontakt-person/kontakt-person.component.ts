@@ -10,7 +10,7 @@ export class KontaktPersonComponent implements OnInit {
 
   @Input() person: KontaktPerson;
   @Input() avreise: string;
-  @Output() personUpdated: EventEmitter<KontaktPerson> = new EventEmitter();
+  @Output() notifyParent: EventEmitter<KontaktPerson> = new EventEmitter();
 
   showInput: boolean = false;
 
@@ -22,6 +22,7 @@ export class KontaktPersonComponent implements OnInit {
   validEpost: boolean = false;
 
   validTotal: boolean = false;
+  validTotalOut: boolean = false;
 
   constructor() { }
 
@@ -29,10 +30,15 @@ export class KontaktPersonComponent implements OnInit {
     console.log(this.person);
   }
 
+  avbryt() {
+    this.showInput = false;
+  }
+
   submit() {
     console.log(this.person);
+    this.validTotalOut = true
     this.showInput = false;
-    this.personUpdated.emit(this.person);
+    this.notifyParent.emit(this.person);
   }
 
   validerFornavn() {
