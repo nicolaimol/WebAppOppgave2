@@ -27,7 +27,7 @@ export class KontaktPersonComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.person);
+    
   }
 
   avbryt() {
@@ -35,7 +35,6 @@ export class KontaktPersonComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.person);
     this.validTotalOut = true
     this.showInput = false;
     this.notifyParent.emit(this.person);
