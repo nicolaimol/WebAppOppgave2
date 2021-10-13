@@ -23,6 +23,8 @@ export class ReisendeComponent implements OnInit, OnDestroy {
   barn: Kunde[] = [];
   validBarn: boolean[] = [];
 
+  validTotal: boolean = false;
+
   constructor(private bestillingInfoService: BestillingInfoService, private router: Router) { }
 
 
@@ -94,6 +96,17 @@ export class ReisendeComponent implements OnInit, OnDestroy {
   }
 
   validerTotal() {
+    this.validTotal = true;
+    this.validTotal = this.validTotal && this.validKontaktPerson;
+    for (let valid of this.validVoksne) {
+      this.validTotal = this.validTotal && valid
+    }
+    for (let valid of this.validBarn) {
+      this.validTotal = this.validTotal && valid
+    }
+  }
 
+  submit() {
+    console.log('nå kan vi bestille')
   }
 }

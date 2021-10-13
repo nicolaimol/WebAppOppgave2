@@ -67,11 +67,20 @@ export class KundeComponent implements OnInit {
     let diff = new Date(dateObj)
     diff.setDate(diff.getDate() - 1)
     let diffYear = Math.abs(diff.getUTCFullYear() - 1970);
-    if (diffYear >= 18) {
-      this.validFoedselsdato = true;
+    if (this.type === 'voksen') {
+      if (diffYear >= 18) {
+        this.validFoedselsdato = true;
+      } else {
+        this.validFoedselsdato = false;
+      }
     } else {
-      this.validFoedselsdato = false;
+      if (diffYear >= 0 && diffYear < 18) {
+        this.validFoedselsdato = true;
+      } else {
+        this.validFoedselsdato = false;
+      }
     }
+    
 
     this.validerTotal();
   }

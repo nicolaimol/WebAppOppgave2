@@ -20,4 +20,6 @@
         type="barn" 
         (notifyParent)="updateKontakt($event)"
         ></app-kunde>
+
+    <button [disabled]="!validTotal" class="btn btn-primary"(click)="submit()" >Bestill</button>
 </div>
