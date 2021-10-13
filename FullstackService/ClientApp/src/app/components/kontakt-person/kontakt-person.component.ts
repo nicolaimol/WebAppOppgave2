@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { KontaktPerson } from 'src/app/interface/kunde';
 
 @Component({
@@ -9,8 +9,19 @@ import { KontaktPerson } from 'src/app/interface/kunde';
 export class KontaktPersonComponent implements OnInit {
 
   @Input() person: KontaktPerson;
+  @Input() avreise: string;
+  @Output() personUpdated: EventEmitter<KontaktPerson> = new EventEmitter();
 
   showInput: boolean = false;
+
+  validFornavn: boolean = false;
+  validEtternavn: boolean = false;
+  validFoedselsdato: boolean = false;
+  validAdresse: boolean = false;
+  validTelefon: boolean = false;
+  validEpost: boolean = false;
+
+  validTotal: boolean = false;
 
   constructor() { }
 
@@ -20,6 +31,83 @@ export class KontaktPersonComponent implements OnInit {
 
   submit() {
     console.log(this.person);
+    this.showInput = false;
+    this.personUpdated.emit(this.person);
   }
 
+  validerFornavn() {
+    const regNavn = new RegExp(`^([A-ZÆØÅ]{1}[a-zæøå]{0,}\\s{0,1}){1,}$`);
+    if (regNavn.test(this.person.fornavn)) {
+      this.validFornavn = true;
+    } else {
+      this.validFornavn = false;
+    }
+
+    this.validerTotal();
+  }
+
+  validerEtternavn() {
+    const regNavn = new RegExp(`^[A-ZÆØÅ]{1}[a-zæøå]{0,}$`);
+    if (regNavn.test(this.person.etternavn)) {
+      this.validEtternavn = true;
+    } else {
+      this.validEtternavn = false;
+    }
+
+    this.validerTotal();
+
+  }
+
+  validerFoedselsdato() {
+    let date = this.person.foedselsdato;
+    let dateObj = new Date(this.avreise).getTime() - new Date(date).getTime()
+    let diff = new Date(dateObj)
+    diff.setDate(diff.getDate() - 1)
+    let diffYear = Math.abs(diff.getUTCFullYear() - 1970);
+    if (diffYear >= 18) {
+      this.validFoedselsdato = true;
+    } else {
+      this.validFoedselsdato = false;
+    }
+
+    this.validerTotal();
+  }
+
+  validerAdresse() {
+    const regAdresse = new RegExp("^[A-ZØÆÅ][a-zøæå]+[ ]([a-zøæåA-Zøæå]+[ ])*[0-9]{1,4}[A-ZÆØÅ]{0,1}$")
+    if (regAdresse.test(this.person.adresse)) {
+      this.validAdresse = true;
+    } else {
+      this.validAdresse = false;
+    }
+
+    this.validerTotal();
+  }
+
+  validerTelefon() {
+    const regTelefon = new RegExp(`^[49][0-9]{7}$`);
+    if (regTelefon.test(this.person.telefon)) {
+      this.validTelefon = true;
+    } else {
+      this.validTelefon = false;
+    }
+
+    this.validerTotal();
+  }
+
+  validerEpost() {
+    const regEpost = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    if (regEpost.test(this.person.epost)) {
+      this.validEpost = true;
+    } else {
+      this.validEpost = false;
+    }
+
+    this.validerTotal();
+  } 
+
+  validerTotal() {
+    this.validTotal = this.validFornavn && this.validEtternavn && this.validAdresse
+    && this.validTelefon && this.validEpost;
+  }
 }

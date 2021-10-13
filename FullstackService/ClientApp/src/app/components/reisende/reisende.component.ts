@@ -51,4 +51,8 @@ export class ReisendeComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateKontaktPerson(kontaktPerson: KontaktPerson) {
+    this.kontaktPerson = kontaktPerson;
+    console.log(this.kontaktPerson);
+  }
 }

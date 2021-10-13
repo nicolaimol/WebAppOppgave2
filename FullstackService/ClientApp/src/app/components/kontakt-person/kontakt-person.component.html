@@ -7,13 +7,13 @@
     </header>
     <div class="container">
         <form class="form-vertical" role="form" (submit)="submit()">
-            <input type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
-            <input type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
-            <input type="date" class="form-control" name="foedselsdato" [(ngModel)]="person.foedselsdato">
-            <input type="text" class="form-control" name="adresse" placeholder="Adresse" [(ngModel)]="person.adresse">
-            <input type="text" class="form-control" name="telefon" placeholder="Telefon" [(ngModel)]="person.telefon">
-            <input type="email" class="form-control" name="epost" placeholder="Epost" [(ngModel)]="person.epost">
-            <button type="submit" class="btn btn-primary">Lagre</button>
+            <input [ngClass]="{'is-valid': validFornavn}" (keyup)="validerFornavn()" type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
+            <input [ngClass]="{'is-valid': validEtternavn}" (keyup)="validerEtternavn()" type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
+            <input [ngClass]="{'is-valid': validFoedselsdato}" (change)="validerFoedselsdato()" type="date" class="form-control" name="foedselsdato" [(ngModel)]="person.foedselsdato">
+            <input [ngClass]="{'is-valid': validAdresse}" (keyup)="validerAdresse()" type="text" class="form-control" name="adresse" placeholder="Adresse" [(ngModel)]="person.adresse">
+            <input [ngClass]="{'is-valid': validTelefon}" (keyup)="validerTelefon()" type="text" class="form-control" name="telefon" placeholder="Telefon" [(ngModel)]="person.telefon">
+            <input [ngClass]="{'is-valid': validEpost}" (keyup)="validerEpost()" type="email" class="form-control" name="epost" placeholder="Epost" [(ngModel)]="person.epost">
+            <button [disabled]="!validTotal" type="submit" class="btn btn-primary">Lagre</button>
         </form>
     </div>
 </div>

@@ -17,6 +17,7 @@ import { ReisendeComponent } from './components/reisende/reisende.component';
 import { BestillComponent } from './components/bestill/bestill.component';
 import { NavAdminComponent } from './components/nav-admin/nav-admin.component';
 import { KontaktPersonComponent } from './components/kontakt-person/kontakt-person.component';
+import { KundeComponent } from './components/kunde/kunde.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { KontaktPersonComponent } from './components/kontakt-person/kontakt-pers
     ReisendeComponent,
     BestillComponent,
     NavAdminComponent,
-    KontaktPersonComponent
+    KontaktPersonComponent,
+    KundeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
