@@ -17,8 +17,8 @@ export interface Kunde {
 }
 
 export interface Post {
-    postnummer: number;
-    poststed: string;
+    postNummer: string;
+    postSted: string;
 }
 
 export interface KundeObj {

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using FullstackService.DAL;
 using FullstackService.Models;
@@ -23,14 +24,26 @@ namespace FullstackService.Controllers
             return Ok(reiser);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetReiseById(int id)
+        {
+            var reise = await _repo.GetOneById(id);
+            if (reise == null)
+            {
+                return BadRequest("Ingen reise funnet");
+            }
+
+            return Ok(reise);
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateOne([FromBody] Reise reise)
         {
+            
             if ( await _repo.AddOne(reise))
             {
-                return await CreateOne(reise);
+                return Ok(reise);
             }
-
             return BadRequest("No reise created");
         }
 
@@ -51,6 +64,17 @@ namespace FullstackService.Controllers
 
             return BadRequest();
         }
-        
+
+        [HttpPut("{reiseId}")]
+        public async Task<ActionResult> UpdateReise(int reiseId, [FromBody] Reise reise)
+        {
+            var dbReise = await _repo.UpdateReise(reiseId, reise);
+            if (dbReise is null)
+            {
+                BadRequest($"No reise at id {reiseId}");
+            }
+
+            return Ok(dbReise);
+        }
     }
 }

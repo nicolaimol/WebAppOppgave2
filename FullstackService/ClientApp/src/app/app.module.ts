@@ -18,6 +18,8 @@ import { BestillComponent } from './components/bestill/bestill.component';
 import { NavAdminComponent } from './components/nav-admin/nav-admin.component';
 import { KontaktPersonComponent } from './components/kontakt-person/kontakt-person.component';
 import { KundeComponent } from './components/kunde/kunde.component';
+import { EndreReiseComponent } from './components/endre-reise/endre-reise.component';
+import { LagReiseComponent } from './components/lag-reise/lag-reise.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { KundeComponent } from './components/kunde/kunde.component';
     BestillComponent,
     NavAdminComponent,
     KontaktPersonComponent,
-    KundeComponent
+    KundeComponent,
+    EndreReiseComponent,
+    LagReiseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -47,6 +51,8 @@ import { KundeComponent } from './components/kunde/kunde.component';
       ]},
       { path: 'admin', component: AdminComponent, children: [
         { path: 'reiser', component: VisreiserComponent},
+        {path: 'reiser/hent/:id', component: EndreReiseComponent},
+        {path: 'reiser/ny', component: LagReiseComponent},
       ]}, 
 
       

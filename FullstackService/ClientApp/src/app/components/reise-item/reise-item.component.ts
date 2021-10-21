@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Reise } from 'src/app/interface/reise';
 
 @Component({
@@ -8,18 +9,15 @@ import { Reise } from 'src/app/interface/reise';
 })
 export class ReiseItemComponent implements OnInit {
 
-  reise: Reise = {
-    id: 0,
-    strekning: "Oslo - Kiel",
-    prisPerGjest: 0,
-    prisBil: 0,
-    bildeLink: "test",
-    info: "her er det masse info om reisen",
-    maLugar: true
-  }
-  constructor() { }
+  @Input() reise: Reise
+  
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  endre() {
+    this.router.navigate([`/admin/reiser/hent/${this.reise.id}`]);
   }
 
 }

@@ -140,7 +140,12 @@
 
                 <!-- Placing some information about the journey here -->
                 
-                <div id="flags"></div>
+                <div id="flags">
+                    <div *ngIf="reiseItem != null">
+                        <img class="boat" src={{reiseItem.bildeLink}} alt="img">
+                        <p >{{reiseItem.info}}</p>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>

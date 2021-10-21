@@ -1,2 +1,9 @@
-<p>visreiser works!</p>
-<app-reise-item></app-reise-item>
+<div class="container">
+    <button type="button" class="btn btn-primary" (click)="ny()">Lag ny reise</button>
+    <div class="kort">
+        <app-reise-item 
+        *ngFor="let reise of reiser"
+        [reise]="reise"></app-reise-item>
+
+    </div>
+</div>

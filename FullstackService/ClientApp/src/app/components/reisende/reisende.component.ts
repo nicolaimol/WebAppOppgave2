@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { BestillingInfo } from 'src/app/interface/bestilling';
+import { BestillingInfo, Bestilling } from 'src/app/interface/bestilling';
 import { KontaktPerson, Kunde, KundeObj, Post } from 'src/app/interface/kunde';
 import { BestillingInfoService } from 'src/app/service/bestilling-info.service';
+import { BestillingService } from 'src/app/service/bestilling.service';
 
 @Component({
   selector: 'app-reisende',
@@ -25,7 +26,9 @@ export class ReisendeComponent implements OnInit, OnDestroy {
 
   validTotal: boolean = false;
 
-  constructor(private bestillingInfoService: BestillingInfoService, private router: Router) { }
+  constructor(private bestillingInfoService: BestillingInfoService,
+    private router: Router,
+    private bestillingService: BestillingService) { }
 
 
   ngOnDestroy(): void {
@@ -48,8 +51,8 @@ export class ReisendeComponent implements OnInit, OnDestroy {
         foedselsdato: "",
         adresse: "",
         post: {
-          postnummer: 0,
-          poststed: ""
+          postNummer: '',
+          postSted: ""
         },
         telefon: "",
         epost: ""
@@ -107,6 +110,22 @@ export class ReisendeComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    let ordre: Bestilling = {
+      utreiseDato: this.bestilling.utreiseDato,
+      hjemreiseDato: this.bestilling.hjemreiseDato,
+      pris: this.bestilling.pris,
+      antallLugarer: this.bestilling.antallLugarer,
+      reiseId: this.bestilling.reiseId,
+      registreringsnummer: this.bestilling.registreringsnummer,
+      lugar: this.bestilling.lugar,
+      kontaktPerson: this.kontaktPerson,
+      voksne: this.voksne,
+      barn: this.barn
+    }
+
+    this.bestillingService.sendBestilling(ordre).subscribe(bestilling => {
+      console.log(bestilling)
+    })
     console.log('nå kan vi bestille')
   }
 }

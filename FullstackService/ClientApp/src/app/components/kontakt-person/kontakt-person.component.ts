@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { KontaktPerson } from 'src/app/interface/kunde';
+import { KontaktPerson, Post } from 'src/app/interface/kunde';
+import { ReiseService } from 'src/app/service/reise.service';
 
 @Component({
   selector: 'app-kontakt-person',
@@ -18,13 +19,19 @@ export class KontaktPersonComponent implements OnInit {
   validEtternavn: boolean = false;
   validFoedselsdato: boolean = false;
   validAdresse: boolean = false;
+  validPost: boolean = false;
   validTelefon: boolean = false;
   validEpost: boolean = false;
 
   validTotal: boolean = false;
   validTotalOut: boolean = false;
 
-  constructor() { }
+  post: Post = {
+    postNummer: '',
+    postSted: ''
+  }
+
+  constructor(private reiseService: ReiseService) { }
 
   ngOnInit() {
     
@@ -73,6 +80,7 @@ export class KontaktPersonComponent implements OnInit {
       this.validFoedselsdato = true;
     } else {
       this.validFoedselsdato = false;
+      console.log(diffYear)
     }
 
     this.validerTotal();
@@ -87,6 +95,26 @@ export class KontaktPersonComponent implements OnInit {
     }
 
     this.validerTotal();
+  }
+
+  validerPostNummer() {
+    const regPostnummer = new RegExp(`^[0-9]{4}$`)
+    if (regPostnummer.test(this.post.postNummer)) {
+      this.reiseService.HentPostByPostnummer(this.post.postNummer).subscribe(data => {
+        this.post = data;
+        this.validPost = true;
+        this.person.post = this.post
+      }, error => {
+        this.validPost = false;
+        this.post.postSted = ''
+      })
+    }
+    else {
+      this.validPost = false;
+      this.post.postSted = ''
+    }
+
+    this.validerTotal()
   }
 
   validerTelefon() {
@@ -113,6 +141,6 @@ export class KontaktPersonComponent implements OnInit {
 
   validerTotal() {
     this.validTotal = this.validFornavn && this.validEtternavn && this.validAdresse
-    && this.validTelefon && this.validEpost;
+    && this.validPost && this.validTelefon && this.validEpost;
   }
 }

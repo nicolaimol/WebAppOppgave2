@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FullstackService.Models
 {
     public class Reise
     {
-        [Key]
         public int Id { get; set; }
         [Required]
         public string Strekning { get; set; }

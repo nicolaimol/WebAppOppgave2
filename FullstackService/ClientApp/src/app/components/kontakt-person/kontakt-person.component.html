@@ -10,7 +10,11 @@
             <input [ngClass]="{'is-valid': validFornavn}" (keyup)="validerFornavn()" type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
             <input [ngClass]="{'is-valid': validEtternavn}" (keyup)="validerEtternavn()" type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
             <input [ngClass]="{'is-valid': validFoedselsdato}" (change)="validerFoedselsdato()" type="date" class="form-control" name="foedselsdato" [(ngModel)]="person.foedselsdato">
-            <input [ngClass]="{'is-valid': validAdresse}" (keyup)="validerAdresse()" type="text" class="form-control" name="adresse" placeholder="Adresse" [(ngModel)]="person.adresse">
+            <div class="input-group" id="adresse-block">
+                <input [(ngModel)]="person.adresse" [ngClass]="{'is-valid': validAdresse}" name=adresse (keyup)="validerAdresse()" class="form-control" type="text" id="adresse">
+                <input [(ngModel)]="post.postNummer" [ngClass]="{'is-valid': validPost}" name="postnummer" (keyup)="validerPostNummer()" class="form-control zip" type="text" id="postnummer" placeholder="postNr." maxlength="4" size="4">
+                <input [(ngModel)]="post.postSted" [ngClass]="{'is-valid': validPost}" name="poststed" disabled class="form-control zip" type="text" id="poststed" placeholder="poststed">
+            </div>
             <input [ngClass]="{'is-valid': validTelefon}" (keyup)="validerTelefon()" type="text" class="form-control" name="telefon" placeholder="Telefon" [(ngModel)]="person.telefon">
             <input [ngClass]="{'is-valid': validEpost}" (keyup)="validerEpost()" type="email" class="form-control" name="epost" placeholder="Epost" [(ngModel)]="person.epost">
             <button [disabled]="!validTotal" type="submit" class="btn btn-primary">Lagre</button>

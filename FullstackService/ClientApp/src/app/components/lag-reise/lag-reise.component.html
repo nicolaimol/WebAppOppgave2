@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <label for="strekning">Strekning</label>
+            <input type="text" class="form-control" placeholder="Strekning" id="strekning" [(ngModel)]="reise.strekning">
+            <label for="info">Info</label>
+            <textarea class="form-control" placeholder="Info" [(ngModel)]="reise.info"></textarea>
+            <input type="checkbox"  [(ngModel)]="reise.maLugar">
+            <label for="flexSwitchCheckDefault">Må ha lugar</label><br>
+
+            <div class="row">
+                <div class="column">
+                    <label for="prisPerGjest">Pris per gjest</label>
+                    <input type="number" class="form-control" [(ngModel)]="reise.prisPerGjest" >
+                </div>
+                <div class="column">
+                    <label for="prisPerBil">Pris bil</label>
+                    <input type="number" class="form-control" [(ngModel)]="reise.prisBil" >
+                </div>
+            </div>
+            
+            <div class="column right">
+                <img src={{reise.bildeLink}} alt="bilde reise">
+                <input #file (change)="updateImage(file.files)" type="file" id="inputGroupFile02">
+                <button type="button" class="btn btn-info" (click)="upload()">Upload</button>
+            </div>
+
+
+            <div class="row right">
+                <button class="btn btn-success" (click)="lagre()">Lagre</button>
+                <button class="btn btn-danger" (click)="avbryt()">Avbryt</button>
+            </div>
+        </div>
+    </div>
+</div>

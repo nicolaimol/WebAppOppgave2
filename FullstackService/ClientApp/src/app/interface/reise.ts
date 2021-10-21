@@ -1,5 +1,5 @@
 export interface Reise {
-    id: number;
+    id?: number;
     strekning: string;
     prisPerGjest: number;
     prisBil: number;

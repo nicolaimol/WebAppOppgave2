@@ -37,3 +37,8 @@
 .flag-sm {
     display: none;
 }
+
+.boat {
+    height: 10em;
+    margin-right: 1em;
+}
