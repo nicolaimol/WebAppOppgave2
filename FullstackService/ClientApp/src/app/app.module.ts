@@ -6,28 +6,26 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { HomeComponent } from './components/home/home.component';
-import { CounterComponent } from './components/counter/counter.component';
-import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
-import { LoginComponent } from './components/login/login.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { VisreiserComponent } from './components/visreiser/visreiser.component';
-import { ReiseItemComponent } from './components/reise-item/reise-item.component';
-import { ReisendeComponent } from './components/reisende/reisende.component';
-import { BestillComponent } from './components/bestill/bestill.component';
+import { HomeComponent } from './components/userUI/home/home.component';
+import { LoginComponent } from './components/adminUI/login/login.component';
+import { AdminComponent } from './components/adminUI/admin/admin.component';
+import { VisreiserComponent } from './components/adminUI/visreiser/visreiser.component';
+import { ReiseItemComponent } from './components/adminUI/reise-item/reise-item.component';
+import { ReisendeComponent } from './components/userUI/reisende/reisende.component';
+import { BestillComponent } from './components/userUI/bestill/bestill.component';
 import { NavAdminComponent } from './components/nav-admin/nav-admin.component';
-import { KontaktPersonComponent } from './components/kontakt-person/kontakt-person.component';
-import { KundeComponent } from './components/kunde/kunde.component';
-import { EndreReiseComponent } from './components/endre-reise/endre-reise.component';
-import { LagReiseComponent } from './components/lag-reise/lag-reise.component';
+import { KontaktPersonComponent } from './components/userUI/kontakt-person/kontakt-person.component';
+import { KundeComponent } from './components/userUI/kunde/kunde.component';
+import { EndreReiseComponent } from './components/adminUI/endre-reise/endre-reise.component';
+import { LagReiseComponent } from './components/adminUI/lag-reise/lag-reise.component';
+import { VisBestillingComponent } from './components/userUI/vis-bestilling/vis-bestilling.component';
+import { HentBestillingComponent } from './components/userUI/hent-bestilling/hent-bestilling.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     LoginComponent,
     AdminComponent,
     VisreiserComponent,
@@ -38,7 +36,9 @@ import { LagReiseComponent } from './components/lag-reise/lag-reise.component';
     KontaktPersonComponent,
     KundeComponent,
     EndreReiseComponent,
-    LagReiseComponent
+    LagReiseComponent,
+    VisBestillingComponent,
+    HentBestillingComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,16 +48,17 @@ import { LagReiseComponent } from './components/lag-reise/lag-reise.component';
       { path: '', component: HomeComponent,  children: [
         { path: '', component: BestillComponent, },
         { path: 'reisende', component: ReisendeComponent },
+        { path: 'bestilling', component: VisBestillingComponent },
       ]},
       { path: 'admin', component: AdminComponent, children: [
         { path: 'reiser', component: VisreiserComponent},
         {path: 'reiser/hent/:id', component: EndreReiseComponent},
         {path: 'reiser/ny', component: LagReiseComponent},
-      ]}, 
+      ]},
 
-      
-      
-      
+
+
+
     ])
   ],
   providers: [],

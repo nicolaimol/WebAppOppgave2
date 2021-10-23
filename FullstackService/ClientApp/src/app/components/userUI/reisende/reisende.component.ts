@@ -117,7 +117,7 @@ export class ReisendeComponent implements OnInit, OnDestroy {
       antallLugarer: this.bestilling.antallLugarer,
       reiseId: this.bestilling.reiseId,
       registreringsnummer: this.bestilling.registreringsnummer,
-      lugar: this.bestilling.lugar,
+      lugarType: this.bestilling.lugar,
       kontaktPerson: this.kontaktPerson,
       voksne: this.voksne,
       barn: this.barn
@@ -125,6 +125,8 @@ export class ReisendeComponent implements OnInit, OnDestroy {
 
     this.bestillingService.sendBestilling(ordre).subscribe(bestilling => {
       console.log(bestilling)
+      sessionStorage.setItem("bestilling", JSON.stringify(bestilling))
+      this.router.navigate(['/bestilling'])
     })
     console.log('nå kan vi bestille')
   }

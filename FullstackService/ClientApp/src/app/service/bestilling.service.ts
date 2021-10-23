@@ -20,4 +20,8 @@ export class BestillingService {
       'headers': this.httpHeaders
     });
   }
+
+  hentBestillingByRef(ref: string): Observable<Bestilling> {
+    return this.httpClient.get<Bestilling>(this.url + "/ref/" + ref)
+  }
 }

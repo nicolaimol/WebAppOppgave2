@@ -1,0 +1,54 @@
+<div *ngIf="bestilling != null" id="harBestilling" class="container">
+    <h1>Takk for din bestilling!</h1>
+    <h4>Her er utskriften til din bestilling med referanse: <span id="ref"></span></h4>
+
+    <!-- A table will be generated here. This table will contain all of the relevant data of the order and will be 
+    displayed neatly -->
+    
+    <div>
+        <table class="table">
+            <tr>
+                <th>Navn på bestilling</th><td>{{bestilling.kontaktPerson.fornavn}} {{bestilling.kontaktPerson.etternavn}}</td>
+                <th>Antall reisende</th><td>{{bestilling.barn.length + bestilling.voksne.length + 1}}</td>
+            </tr>
+            <tr>
+                <th>Rute</th><td>{{bestilling.ferjestrekning}}</td>
+                <th>Luar</th><td>{{bestilling.lugarType == null ? "Ingen": (bestilling.lugarType.type + "x" + bestilling.antallLugarer)}}</td>
+            </tr>
+            <tr>
+                <th>Avreise</th><td>{{bestilling.utreiseDato}}</td>
+                <th>Hjemreise</th><td>{{bestilling.hjemreiseDato == null ? "Ingen": bestilling.hjemreiseDato}}</td>
+            </tr>
+            <tr>
+                <th>Totalpris</th><td>{{bestilling.pris}},- kr</td>
+                <th>Bil</th><td>{{bestilling.registreringsnummer == null ? "Ingen" : bestilling.registreringsnummer}}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <p>Det anbefales å møte opp i god tid før avreise. Selv om pass ikke er nødvendig innenfor Schengen, så er dette sterkt anbefalt.</p>
+    <p>Vi ønsker deg velkommen om bord hos oss, og en god reise til <span id="placeDestinationHere"></span>!</p>
+
+    <app-hent-bestilling (notifyParent)="update($event)"></app-hent-bestilling>
+</div>
+
+<!-- Container if there is no order found that has been completed this session -->
+
+<div *ngIf="bestilling == null" id="harIkkeBestilling" class="container">
+    <div class="rad space-between media-column">
+        <div class="column">
+            <h1>Hei der!</h1>
+            <h4>Det ser ikke ut som at du har noen bestilling enda.</h4>
+            <p>Vennligst gå til forsiden for å bestille.</p>
+
+            <!-- Button to take you to bestilling.html -->
+
+            <button id="btn-retur" (click)="retur()" class="btn btn-primary">Klikk her</button> 
+        </div>
+        
+        <!-- Column for input of reference code to retrieve an order -->
+        
+        <app-hent-bestilling (notifyParent)="update($event)"></app-hent-bestilling>
+    </div>
+    
+</div>

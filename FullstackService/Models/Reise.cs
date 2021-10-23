@@ -13,7 +13,7 @@ namespace FullstackService.Models
         [Required]
         public int PrisBil { get; set; }
         [Required]
-        public string BildeLink { get; set; }
+        public virtual Bilde BildeLink { get; set; }
         [Required]
         public string Info { get; set; }
         [Required]

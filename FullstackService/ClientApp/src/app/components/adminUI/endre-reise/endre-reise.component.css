@@ -8,6 +8,12 @@ button {
     width: 100%;
 }
 
+.column {
+    flex-direction: column;
+    width: fit-content;
+    flex-wrap: wrap;
+}
+
 .right {
     justify-content: flex-end;
 }

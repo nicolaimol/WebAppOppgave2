@@ -128,7 +128,7 @@
                 <!-- Number of children -->
                 
                 <label style="margin-right: 5%" for="barn">Barn</label>
-                <input [ngClass]="{'is-valid': validAntallBarn}" [(ngModel)]="antallBarn" (keyup)="validerBarn()" class="form-control" id="barn" type="number"></td>
+                <input [ngClass]="{'is-valid': validAntallBarn}" [(ngModel)]="antallBarn" (keyup)="validerBarn()" (change)="validerBarn()" class="form-control" id="barn" type="number"></td>
         </tr>
         <tr class="align-under index-media">
 

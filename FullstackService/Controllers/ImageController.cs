@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using FullstackService.DAL;
+using FullstackService.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +16,12 @@ namespace FullstackService.Controllers
     public class ImageController: ControllerBase
     {
         public static IWebHostEnvironment _env;
+        private readonly IReiseRepo _repo;
 
-        public ImageController(IWebHostEnvironment env)
+        public ImageController(IWebHostEnvironment env, IReiseRepo repo)
         {
             _env = env;
+            _repo = repo;
         }
 
         public class FileUploadApi
@@ -44,6 +48,14 @@ namespace FullstackService.Controllers
                     {
                         request[0].CopyTo(fileStream);
                         fileStream.Flush();
+
+                        var bilde = new Bilde
+                        {
+                            Url = "/res/" + request[0].FileName
+                        };
+
+                        await _repo.InsertBilde(bilde);
+                        
                         return Ok(new {url = "/res/" + request[0].FileName});
                     }
                 }
@@ -58,5 +70,13 @@ namespace FullstackService.Controllers
                 return NotFound(e.Message.ToString());
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> HentAlleBilder()
+        {
+            return Ok(await _repo.GetAlleBilder());
+        }
+        
+        
     }
 }

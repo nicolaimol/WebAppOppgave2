@@ -14,13 +14,14 @@ export interface BestillingInfo {
 }
 
 export interface Bestilling {
+    ferjestrekning?: string;
     utreiseDato: string;
     hjemreiseDato?: string;
     pris: number;
     registreringsnummer?: string;
     antallLugarer: number;
     reiseId: number;
-    lugar?: Lugar;
+    lugarType?: Lugar;
     kontaktPerson: KontaktPerson,
     voksne?: Kunde[],
     barn?: Kunde[]

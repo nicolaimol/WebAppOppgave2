@@ -28,7 +28,10 @@ namespace FullstackService.DAL
                     Strekning = "Oslo-Kiel",
                     PrisPerGjest = 700,
                     PrisBil = 700,
-                    BildeLink = "./res/Color_Magic.jpeg",
+                    BildeLink = new Bilde
+                    {
+                        Url = "./res/Color_Magic.jpeg",
+                    },
                     Info = "Opplev herlige måltider i restaurantene, spektakulære show, spa og trening, " +
                            "taxfree-shopping, soldekk og mye mer. Forhåndbestill mat for å unngå fullbooket " +
                            "restaurant og få inntil 25% rabatt.",
@@ -39,7 +42,10 @@ namespace FullstackService.DAL
                     Strekning = "Larvik-Hirtshals",
                     PrisPerGjest = 300,
                     PrisBil = 700,
-                    BildeLink = "./res/SuperSpeed_2.jpg",
+                    BildeLink = new Bilde
+                    {
+                        Url = "./res/SuperSpeed_2.jpg"
+                    },
                     Info = "Overfarten med SuperSpeed" +
                            " fra Larvik tar kun 3 timer og 45 minutter. Det lønner seg å bestille tidlig, da sikrer du deg god pris" +
                            " og plass på ønsket avgang. Medlemmer av Color Club får de beste prisene på bilpakke til Danmark.",
@@ -50,7 +56,10 @@ namespace FullstackService.DAL
                     Strekning = "Kristiansand-Hirtshals",
                     PrisPerGjest = 350,
                     PrisBil = 700,
-                    BildeLink = "./res/SuperSpeed_2.jpg",
+                    BildeLink = new Bilde
+                    {
+                        Url = "./res/SuperSpeed_2.jpg"
+                    },
                     Info = "Det " +
                            "lønner seg å bestille tidlig, da sikrer du deg en god pris og plass på ønsket avgang. Overfarten med " +
                            "SuperSpeed fra Kristiansand tar kun 3 timer og 15 minutter. Medlemmer av Color Club får de beste prisene " +
@@ -62,7 +71,10 @@ namespace FullstackService.DAL
                     Strekning = "Sandefjord-Strömstad",
                     PrisPerGjest = 100,
                     PrisBil = 700,
-                    BildeLink = "./res/Color_Hybrid.jpeg",
+                    BildeLink = new Bilde
+                    {
+                        Url = "./res/Color_Hybrid.jpeg"
+                    },
                     Info = "Kjør " +
                            "bilen om bord og nyt overfarten fra Sandefjord til Strømstad på kun 2 ½ time. Underveis kan du slappe av," +
                            " kose deg med et godt måltid og handle taxfree-varer til svært gunstige priser. TIPS! Det lønner seg å " +

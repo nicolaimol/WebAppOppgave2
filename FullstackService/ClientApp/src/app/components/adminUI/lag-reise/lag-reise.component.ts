@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Bilde } from 'src/app/interface/bilde';
 import { Reise } from 'src/app/interface/reise';
 import { ImageService } from 'src/app/service/image.service';
 import { ReiseService } from 'src/app/service/reise.service';
@@ -12,18 +14,26 @@ export class LagReiseComponent implements OnInit {
 
   image: Blob;
 
+  bilder: Bilde[] = []
+
   reise: Reise = {
     strekning: "",
     prisPerGjest: 0,
     prisBil: 0,
-    bildeLink: "res/Color_Hybrid.jpeg",
+    bildeLink: {
+      url: ""
+    },
     info: "",
     maLugar: false
   };
 
-  constructor(private reiseService: ReiseService, private imageService: ImageService) { }
+  constructor(private reiseService: ReiseService, private imageService: ImageService, private router: Router) { }
 
   ngOnInit() {
+    this.imageService.getAllBilder().subscribe(bilder => {
+      this.bilder = bilder;
+      this.reise.bildeLink.url = "./res/Color_Hybrid.jpeg"
+    })
   }
 
   lagre(): void {
@@ -47,7 +57,12 @@ export class LagReiseComponent implements OnInit {
     this.imageService.uploadImage(formData).subscribe(url => {
       console.log(url.url)
       this.reise.bildeLink = url.url;
+      this.bilder.push({url: url});
     })
+  }
+
+  avbryt() {
+    this.router.navigate(['/admin/reiser'])
   }
 
 }

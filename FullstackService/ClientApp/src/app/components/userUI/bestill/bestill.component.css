@@ -42,3 +42,7 @@
     height: 10em;
     margin-right: 1em;
 }
+
+td{
+    max-width: 50%!important;
+}

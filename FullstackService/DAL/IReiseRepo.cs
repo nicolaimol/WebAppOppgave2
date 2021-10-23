@@ -17,5 +17,8 @@ namespace FullstackService.DAL
         Task<Post> HentPoststedByPostnummer(string postnummer);
 
         Task<Reise> UpdateReise(int reiseId, Reise reise);
+
+        Task<List<Bilde>> GetAlleBilder();
+        Task InsertBilde(Bilde bilde);
     }
 }

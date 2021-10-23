@@ -63,5 +63,16 @@ namespace FullstackService.DAL
 
             return dbReise;
         }
+
+        public async Task<List<Bilde>> GetAlleBilder()
+        {
+            return await _db.Bilder.ToListAsync();
+        }
+
+        public async Task InsertBilde(Bilde bilde)
+        {
+            _db.Bilder.Add(bilde);
+            await _db.SaveChangesAsync();
+        }
     }
 }

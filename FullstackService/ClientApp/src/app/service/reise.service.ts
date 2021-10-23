@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Bilde } from '../interface/bilde';
 import { Post } from '../interface/kunde';
 import { Lugar } from '../interface/lugar';
 import { Reise } from '../interface/reise';
@@ -48,4 +49,5 @@ export class ReiseService {
       "headers": this.httpHeaders
     })
   }
+
 }
