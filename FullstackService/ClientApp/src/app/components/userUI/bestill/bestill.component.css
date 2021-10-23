@@ -44,5 +44,6 @@
 }
 
 td{
+    width: 50%!important;
     max-width: 50%!important;
 }

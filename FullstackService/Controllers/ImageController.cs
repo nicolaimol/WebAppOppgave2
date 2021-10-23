@@ -51,12 +51,12 @@ namespace FullstackService.Controllers
 
                         var bilde = new Bilde
                         {
-                            Url = "/res/" + request[0].FileName
+                            Url = "./res/" + request[0].FileName
                         };
 
                         await _repo.InsertBilde(bilde);
                         
-                        return Ok(new {url = "/res/" + request[0].FileName});
+                        return Ok(bilde);
                     }
                 }
                 else

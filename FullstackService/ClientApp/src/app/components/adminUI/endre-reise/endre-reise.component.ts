@@ -50,6 +50,7 @@ export class EndreReiseComponent implements OnInit {
 
   update():void {
     this.reiseService.updateReise(this.reise).subscribe(reise => {
+      this.router.navigate(['/admin/reiser'])
       this.reise = reise;
     })
   }
@@ -58,16 +59,20 @@ export class EndreReiseComponent implements OnInit {
     this.image = files;
   }
 
+  updateId(id:number) {
+    this.reise.bildeLink.id = id;
+  }
+
   upload() {
 
     let fileToUpload = <File>this.image[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.imageService.uploadImage(formData).subscribe(url => {
-      console.log(url.url)
-      this.reise.bildeLink = url.url;
-      this.bilder.push({url: url});
+    this.imageService.uploadImage(formData).subscribe(bilde => {
+      this.bilder.push(bilde);
+      console.log(bilde)
+      this.reise.bildeLink = bilde;
     })
   }
 

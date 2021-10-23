@@ -21,6 +21,7 @@ export class LagReiseComponent implements OnInit {
     prisPerGjest: 0,
     prisBil: 0,
     bildeLink: {
+      id: 3,
       url: ""
     },
     info: "",
@@ -39,6 +40,7 @@ export class LagReiseComponent implements OnInit {
   lagre(): void {
     this.reiseService.lagreReise(this.reise).subscribe(reise => {
       console.log('lagret')
+      this.router.navigate(['/admin/reiser'])
     }, err => {
       console.log(err)
     })
@@ -54,15 +56,20 @@ export class LagReiseComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.imageService.uploadImage(formData).subscribe(url => {
-      console.log(url.url)
-      this.reise.bildeLink = url.url;
-      this.bilder.push({url: url});
+    this.imageService.uploadImage(formData).subscribe(bilde => {
+      
+      this.reise.bildeLink = bilde;
+      this.bilder.push(bilde);
     })
+  }
+
+  updateId(id: number) {
+    this.reise.bildeLink.id = id;
   }
 
   avbryt() {
     this.router.navigate(['/admin/reiser'])
+    //console.log(this.reise.bildeLink)
   }
 
 }

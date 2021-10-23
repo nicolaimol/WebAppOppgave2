@@ -19,6 +19,11 @@ namespace FullstackService.DAL
 
         public async Task<bool> AddOne(Reise reise)
         {
+            if (_db.Bilder.Any((bilde => bilde.Id == reise.BildeLink.Id)))
+            {
+                reise.BildeLink = await _db.Bilder.FindAsync(reise.BildeLink.Id);
+            }
+            
             _db.Reiser.Add(reise);
             return (await _db.SaveChangesAsync()) > 0;
         }
@@ -57,7 +62,7 @@ namespace FullstackService.DAL
             dbReise.MaLugar = reise.MaLugar;
             dbReise.PrisPerGjest = reise.PrisPerGjest;
             dbReise.PrisBil = reise.PrisBil;
-            dbReise.BildeLink = reise.BildeLink;
+            dbReise.BildeLink = await _db.Bilder.FindAsync(reise.BildeLink.Id);
 
             await _db.SaveChangesAsync();
 

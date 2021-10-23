@@ -15,8 +15,8 @@ export class ImageService {
 
   constructor(private httpClient: HttpClient) { }
 
-  uploadImage(image: any): Observable<any> {
-    return this.httpClient.post<string>(`/api/image`, image)
+  uploadImage(image: any): Observable<Bilde> {
+    return this.httpClient.post<Bilde>(`/api/image`, image)
   }
 
   getAllBilder(): Observable<Bilde[]> {

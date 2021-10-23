@@ -37,15 +37,16 @@ namespace FullstackService.DAL
                            "restaurant og få inntil 25% rabatt.",
                     MaLugar = true
                 };
+                var bilde = new Bilde
+                {
+                    Url = "./res/SuperSpeed_2.jpg"
+                };
                 var reise2 = new Reise
                 {
                     Strekning = "Larvik-Hirtshals",
                     PrisPerGjest = 300,
                     PrisBil = 700,
-                    BildeLink = new Bilde
-                    {
-                        Url = "./res/SuperSpeed_2.jpg"
-                    },
+                    BildeLink = bilde,
                     Info = "Overfarten med SuperSpeed" +
                            " fra Larvik tar kun 3 timer og 45 minutter. Det lønner seg å bestille tidlig, da sikrer du deg god pris" +
                            " og plass på ønsket avgang. Medlemmer av Color Club får de beste prisene på bilpakke til Danmark.",
@@ -58,7 +59,7 @@ namespace FullstackService.DAL
                     PrisBil = 700,
                     BildeLink = new Bilde
                     {
-                        Url = "./res/SuperSpeed_2.jpg"
+                        Url = "./res/SuperSpeed_1.jpeg"
                     },
                     Info = "Det " +
                            "lønner seg å bestille tidlig, da sikrer du deg en god pris og plass på ønsket avgang. Overfarten med " +
