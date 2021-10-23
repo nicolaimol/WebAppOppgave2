@@ -13,6 +13,9 @@ namespace FullstackService.DAL
         Task<List<Reise>> GetAll();
 
         Task<List<Lugar>> HentLugerByReise(int reiseId);
+        Task<Lugar> CreateLugar(Lugar lugar);
+
+        Task<Lugar> UpdateLugar(Lugar lugar);
 
         Task<Post> HentPoststedByPostnummer(string postnummer);
 

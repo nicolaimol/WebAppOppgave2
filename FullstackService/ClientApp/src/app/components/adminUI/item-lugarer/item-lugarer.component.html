@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <label for="type">Type:</label>
+            <input name="type" class="form-control card-title" type=text [(ngModel)]="lugar.type" placeholder="Type">
+            <label for="pris">Pris:</label>
+            <input class="form-control" name=pris [(ngModel)]="lugar.pris">
+            <label for="antall">Antall:</label>
+            <input class="form-control" name=antall [(ngModel)]="lugar.antall">
+            <button class="btn btn-primary mt-2" (click)="lagre()">Lagre</button>
+        </div>    
+    </div>
+</div>

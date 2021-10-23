@@ -1,7 +1,8 @@
 button {
-    max-width: 5rem;
+    max-width: 10rem;
     margin: 1em;
 }
+
 
 .row {
     flex-direction: row;
@@ -15,7 +16,12 @@ button {
 }
 
 .right {
+    display: flex;
     justify-content: flex-end;
+}
+
+.flex1 {
+    flex: 1;
 }
 
 .card-body * {

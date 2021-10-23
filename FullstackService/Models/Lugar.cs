@@ -14,8 +14,8 @@ namespace FullstackService.Models
         public int Pris { get; set; }
         [Required]
         public int Antall { get; set; }
-        public int ReiseId { get; set; }
         [Required]
+        public int ReiseId { get; set; }
         [IgnoreDataMember]
         public virtual Reise Reise { get; set; }
     }

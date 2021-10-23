@@ -44,6 +44,30 @@ namespace FullstackService.DAL
             return await _db.Lugarer.Where(l => l.Reise.Id == reiseId).ToListAsync();
         }
 
+        public async Task<Lugar> CreateLugar(Lugar lugar)
+        {
+            _db.Lugarer.Add(lugar);
+            await _db.SaveChangesAsync();
+
+            return lugar;
+        }
+
+        public async Task<Lugar> UpdateLugar(Lugar lugar)
+        {
+            if (!_db.Lugarer.Any(l => l.Id == lugar.Id))
+            {
+                return null;
+            }
+
+            var dbLugar = _db.Lugarer.Find(lugar.Id);
+            dbLugar.Antall = lugar.Antall;
+            dbLugar.Pris = lugar.Pris;
+            dbLugar.Type = lugar.Type;
+
+            await _db.SaveChangesAsync();
+            return dbLugar;
+        }
+
         public async Task<Post> HentPoststedByPostnummer(string postnummer)
         {
             return await _db.PostSteder.FirstOrDefaultAsync(p => p.PostNummer == postnummer);

@@ -20,6 +20,9 @@ import { EndreReiseComponent } from './components/adminUI/endre-reise/endre-reis
 import { LagReiseComponent } from './components/adminUI/lag-reise/lag-reise.component';
 import { VisBestillingComponent } from './components/userUI/vis-bestilling/vis-bestilling.component';
 import { HentBestillingComponent } from './components/userUI/hent-bestilling/hent-bestilling.component';
+import { ListLugarerComponent } from './components/adminUI/list-lugarer/list-lugarer.component';
+import { ItemLugarerComponent } from './components/adminUI/item-lugarer/item-lugarer.component';
+import { LagLugarComponent } from './components/adminUI/lag-lugar/lag-lugar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { HentBestillingComponent } from './components/userUI/hent-bestilling/hen
     EndreReiseComponent,
     LagReiseComponent,
     VisBestillingComponent,
-    HentBestillingComponent
+    HentBestillingComponent,
+    ListLugarerComponent,
+    ItemLugarerComponent,
+    LagLugarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -54,6 +60,7 @@ import { HentBestillingComponent } from './components/userUI/hent-bestilling/hen
         { path: 'reiser', component: VisreiserComponent},
         {path: 'reiser/hent/:id', component: EndreReiseComponent},
         {path: 'reiser/ny', component: LagReiseComponent},
+        {path: 'lugar/:id', component: ListLugarerComponent},
       ]},
 
 

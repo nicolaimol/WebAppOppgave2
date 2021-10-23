@@ -47,10 +47,28 @@ namespace FullstackService.Controllers
             return BadRequest("No reise created");
         }
 
-        [HttpGet("lugar/{reiseId}")]
+        [HttpGet("lugar/{reiseId}"), ActionName("HentLugerByReise")]
         public async Task<ActionResult> HentLugerByReise(int reiseId)
         {
             return Ok(await _repo.HentLugerByReise(reiseId));
+        }
+
+        [HttpPost("lugar")]
+        public async Task<ActionResult> CreateLugar([FromBody] Lugar lugar)
+        {
+            return Ok(await _repo.CreateLugar(lugar));
+        }
+
+        [HttpPut("lugar")]
+        public async Task<ActionResult> UpdateLugar([FromBody] Lugar lugar)
+        {
+            var dbLugar = _repo.UpdateLugar(lugar);
+            if (dbLugar is null)
+            {
+                return BadRequest("No lugar with id");
+            }
+            
+            return Ok(dbLugar);
         }
 
         [HttpGet("postnummer/{postnummer}")]
