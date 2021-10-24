@@ -50,4 +50,8 @@ export class ListLugarerComponent implements OnInit {
     this.lugarer.push(lugar);
   }
 
+  avbryt() {
+    this.vis = true;
+  }
+
 }

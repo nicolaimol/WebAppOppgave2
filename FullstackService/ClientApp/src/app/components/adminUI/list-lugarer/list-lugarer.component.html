@@ -15,5 +15,6 @@
     <app-lag-lugar [id]="id" (notifyParent)="lagret($event)"></app-lag-lugar>
 </div>
 
-<button type="button" class="btn btn-primary float-right" (click)="ny()">Lag ny lugar</button>
+<button *ngIf="vis" type="button" class="btn btn-primary float-right" (click)="ny()">Lag ny lugar</button>
+<button class="btn btn-danger float-right" *ngIf="!vis" (click)="avbryt()">Avbryt</button>
 <button class="btn btn-secondary float-left" [routerLink]="['/admin/reiser/hent', id]">Tilbake</button>

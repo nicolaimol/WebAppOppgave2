@@ -54,7 +54,7 @@ export class BestillComponent implements OnInit {
   setPris() {
     let pris = 0;
     const rute = this.reiseItem
-    pris += this.reiseItem.prisPerGjest
+    pris += this.reiseItem != null ? this.reiseItem.prisPerGjest: 0
     
     const lugar = this.lugarItem;
     let antall_barn = Number(this.antallBarn);
@@ -69,7 +69,7 @@ export class BestillComponent implements OnInit {
 
     pris += antall_lugarer !== 0 ? Number(antall_lugarer*(lugar.pris)) : 0
 
-    pris += this.skalBil ? rute.prisBil : 0
+    pris += this.skalBil && rute != null ? rute.prisBil : 0
 
     pris *= this.skalHjem ? 2 : 1
     this.pris = pris;
@@ -134,11 +134,21 @@ export class BestillComponent implements OnInit {
     this.setPris()
   }
 
+  setSkalHjem() {
+    this.hjemreise = this.skalHjem ? this.hjemreise: "";
+    this.setPris();
+  }
+
   validerLugar() {
     this.validLugar = true;
     this.lugarItem = this.lugarer.filter(lugarIn => lugarIn.id == this.lugar)[0]
 
     this.setPris()
+  }
+
+  setSkalLugar() {
+    this.validLugar = false;
+    this.lugar = this.skalLugar ? this.lugar: null;
   }
 
   setHjem() {
@@ -154,6 +164,11 @@ export class BestillComponent implements OnInit {
     }
 
     this.setPris()
+  }
+
+  setSkalBil() {
+    this.bil = this.skalBil ? this.bil: "";
+    this.setPris();
   }
 
   validerVoksne() {

@@ -6,6 +6,16 @@
     justify-content: center;
 }
 
+.start {
+    max-width: fit-content!important;
+    flex-shrink: 0;
+    column-gap: auto;
+    display: inline-flex;
+    align-content: stretch;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
 .float {
     position: fixed;
     right: 40px;

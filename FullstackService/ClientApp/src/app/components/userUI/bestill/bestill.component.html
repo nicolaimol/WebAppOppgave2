@@ -88,7 +88,7 @@
             
             <td><label for="hjemDato">Velg hjemreise</label></td>
             <td><input [ngClass]="{'is-valid': validHjemreise && skalHjem}"  [disabled]="!skalHjem" [(ngModel)]="hjemreise" (change)="validerHjemreise()" class="form-control trykkemus" id="hjemDato" type="date">
-            <input [(ngModel)]="skalHjem" class="form-check-input trykkemus" (click)="setHjem()" id="skalHjem" type="checkbox"> Vil ha hjemreise</td>
+            <input (change)="setSkalHjem()" [(ngModel)]="skalHjem" class="form-check-input trykkemus" (click)="setHjem()" id="skalHjem" type="checkbox"> Vil ha hjemreise</td>
         </tr>
         <tr class="index-media">
 
@@ -96,11 +96,11 @@
             
             <td><label for="lugar">Velg lugar</label></td>
             <td>
-                <select [ngClass]="{'is-valid': validLugar}" [(ngModel)]="lugar" (change)="validerLugar()" class="form-control trykkemus" [disabled]="!skalLugar" id="lugar">
+                <select [ngClass]="{'is-valid': validLugar && skalLugar}" [(ngModel)]="lugar" (change)="validerLugar()" class="form-control trykkemus" [disabled]="!skalLugar" id="lugar">
                     <option selected disabled value="VelgLugar">Velg lugar</option>
                     <option *ngFor="let lugar of lugarer" value="{{lugar.id}}">{{lugar.type}}</option>
                 </select>
-                <input [(ngModel)]="skalLugar" class="form-check-input trykkemus" id="lugarCheck" type="checkbox" [disabled]="maLugar"> <label
+                <input (change)="setSkalLugar()" [(ngModel)]="skalLugar" class="form-check-input trykkemus" id="lugarCheck" type="checkbox" [disabled]="maLugar"> <label
                     for="lugarCheck">Skal ha lugar</label>
             </td>
         </tr>
@@ -110,7 +110,7 @@
             
             <td><label for="regNummer">Velg bil</label></td>
             <td><input [disabled]="!skalBil" [ngClass]="{'is-valid': validBil && skalBil}" [(ngModel)]="bil" (keyup)="validerRegnummer()" class="form-control" id="regNummer" disabled type="text" placeholder="regnummer her">
-                <input [(ngModel)]="skalBil" class="form-check-input trykkemus" id="regCheck" type="checkbox"> <label
+                <input (change)="setSkalBil()" [(ngModel)]="skalBil" class="form-check-input trykkemus" id="regCheck" type="checkbox"> <label
                         for="regCheck">Skal ha bil</label></td>
         </tr>
         <tr class="index-media">
