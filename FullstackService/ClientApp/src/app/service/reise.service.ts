@@ -65,7 +65,7 @@ export class ReiseService {
   }
   slettReise(id: number): Observable<Reise> {
     const url = `${this.url}/${id}`
-    return this.httpClient.delete<Reise>(this.url)
+    return this.httpClient.delete<Reise>(url)
   }
 
 }

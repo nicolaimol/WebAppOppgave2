@@ -27,6 +27,7 @@ export class ReiseItemComponent implements OnInit {
     const modalRef = this.modalService.open(ModalSlettComponent)
     modalRef.result.then((result) => {
       if(result === "Lukk"){
+        
 
       }else{
         this.reiseService.slettReise(this.reise.id).subscribe(data => { 

@@ -24,8 +24,11 @@ export class VisreiserComponent implements OnInit {
     this.router.navigate(['/admin/reiser/ny'])
   }
   slett(reise:Reise){
-    this.reiser = this.reiser.filter(r => {
-      r.id != reise.id
-    })
+    for (let i = 0; i < this.reiser.length; i++){
+      if (this.reiser[i].id === reise.id){
+        this.reiser.splice(i, 1);
+        return;
+      }
+    }
   }
 }

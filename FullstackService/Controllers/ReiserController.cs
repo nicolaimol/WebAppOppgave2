@@ -99,6 +99,7 @@ namespace FullstackService.Controllers
         [AcceptVerbs("DELETE")]
         public async Task<ActionResult> DeleteReise(int reiseId)
         {
+            Console.WriteLine(reiseId);
             var reise = await _repo.DeleteReise(reiseId);
             if (reise is null)
             {
