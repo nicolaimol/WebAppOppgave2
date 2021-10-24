@@ -23,6 +23,8 @@ import { HentBestillingComponent } from './components/userUI/hent-bestilling/hen
 import { ListLugarerComponent } from './components/adminUI/list-lugarer/list-lugarer.component';
 import { ItemLugarerComponent } from './components/adminUI/item-lugarer/item-lugarer.component';
 import { LagLugarComponent } from './components/adminUI/lag-lugar/lag-lugar.component';
+import { ModalSlettComponent } from './components/modal-slett/modal-slett.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,12 +46,14 @@ import { LagLugarComponent } from './components/adminUI/lag-lugar/lag-lugar.comp
     HentBestillingComponent,
     ListLugarerComponent,
     ItemLugarerComponent,
-    LagLugarComponent
+    LagLugarComponent,
+    ModalSlettComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    NgbModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent,  children: [
         { path: '', component: BestillComponent, },
@@ -69,6 +73,7 @@ import { LagLugarComponent } from './components/adminUI/lag-lugar/lag-lugar.comp
     ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[ModalSlettComponent]
 })
 export class AppModule { }

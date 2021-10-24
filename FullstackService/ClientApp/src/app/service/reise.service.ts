@@ -63,5 +63,9 @@ export class ReiseService {
       "headers": this.httpHeaders
     })
   }
+  slettReise(id: number): Observable<Reise> {
+    const url = `${this.url}/${id}`
+    return this.httpClient.delete<Reise>(this.url)
+  }
 
 }

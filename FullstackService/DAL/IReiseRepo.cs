@@ -21,6 +21,8 @@ namespace FullstackService.DAL
 
         Task<Reise> UpdateReise(int reiseId, Reise reise);
 
+        Task<Reise> DeleteReise(int reiseId);
+
         Task<List<Bilde>> GetAlleBilder();
         Task InsertBilde(Bilde bilde);
     }

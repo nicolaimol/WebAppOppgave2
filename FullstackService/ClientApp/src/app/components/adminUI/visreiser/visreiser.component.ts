@@ -23,4 +23,9 @@ export class VisreiserComponent implements OnInit {
   ny():void {
     this.router.navigate(['/admin/reiser/ny'])
   }
+  slett(reise:Reise){
+    this.reiser = this.reiser.filter(r => {
+      r.id != reise.id
+    })
+  }
 }

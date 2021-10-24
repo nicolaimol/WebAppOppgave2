@@ -93,6 +93,15 @@ namespace FullstackService.DAL
             return dbReise;
         }
 
+        public async Task<Reise> DeleteReise(int reiseId)
+        {
+            var dbReise = await _db.Reiser.FindAsync(reiseId);
+            if (dbReise is null) return null;
+            _db.Reiser.Remove(dbReise);
+            await _db.SaveChangesAsync();
+            return dbReise;
+        }
+
         public async Task<List<Bilde>> GetAlleBilder()
         {
             return await _db.Bilder.ToListAsync();

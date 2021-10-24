@@ -3,7 +3,8 @@
         <div class="start">
             <app-reise-item 
             *ngFor="let reise of reiser"
-            [reise]="reise"></app-reise-item>
+            [reise]="reise"
+            (notifyParent)="slett($event)"></app-reise-item>
         </div>
     </div>
 </div>

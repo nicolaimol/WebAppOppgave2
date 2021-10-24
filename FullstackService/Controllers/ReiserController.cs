@@ -89,10 +89,23 @@ namespace FullstackService.Controllers
             var dbReise = await _repo.UpdateReise(reiseId, reise);
             if (dbReise is null)
             {
-                BadRequest($"No reise at id {reiseId}");
+                return BadRequest($"No reise at id {reiseId}");
             }
 
             return Ok(dbReise);
+        }
+
+        [HttpDelete("{reiseId}")]
+        [AcceptVerbs("DELETE")]
+        public async Task<ActionResult> DeleteReise(int reiseId)
+        {
+            var reise = await _repo.DeleteReise(reiseId);
+            if (reise is null)
+            {
+                return BadRequest($"No reise found at: {reiseId}");
+            }
+
+            return Ok(reise);
         }
     }
 }
