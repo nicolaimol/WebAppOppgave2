@@ -25,6 +25,7 @@ import { ItemLugarerComponent } from './components/adminUI/item-lugarer/item-lug
 import { LagLugarComponent } from './components/adminUI/lag-lugar/lag-lugar.component';
 import { ModalSlettComponent } from './components/modal-slett/modal-slett.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterUserComponent } from './components/userUI/footer-user/footer-user.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ListLugarerComponent,
     ItemLugarerComponent,
     LagLugarComponent,
-    ModalSlettComponent
+    ModalSlettComponent,
+    FooterUserComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,0 +1,11 @@
+.footer {
+    background-color: black;
+    width: 100%;
+}
+
+.container > * {
+    color: white!important;
+    line-height: 1.5;
+    margin: 0!important;
+    
+}

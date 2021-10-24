@@ -47,3 +47,17 @@ td{
     width: 50%!important;
     max-width: 50%!important;
 }
+
+@media only screen and (max-width: 510px){
+    
+    tr {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    td {
+        max-width: 100%!important;
+        width: 100% !important;
+    }
+} 
