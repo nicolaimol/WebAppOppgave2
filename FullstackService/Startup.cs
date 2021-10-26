@@ -30,6 +30,7 @@ namespace FullstackService
             services.AddDbContext<MyDBContext>(opt => opt.UseSqlite("Data source=Bestillig.db"));
             services.AddScoped<IReiseRepo, ReiseRepo>();
             services.AddScoped<IBestillingRepo, BestillingRepo>();
+            services.AddScoped<IBrukerRepo, BrukerRepo>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
             

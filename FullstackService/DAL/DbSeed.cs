@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using FullstackService.DTO;
 using FullstackService.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ namespace FullstackService.DAL
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 SeedData(serviceScope.ServiceProvider.GetService<MyDBContext>());
+                SeedAdminUser(serviceScope.ServiceProvider.GetService<IBrukerRepo>());
             } 
         }
 
@@ -160,7 +162,16 @@ namespace FullstackService.DAL
                 db.SaveChanges();
                 Console.WriteLine("--> Seeding");
             }
+            
         }
-        
+
+        private async static void SeedAdminUser(IBrukerRepo repo)
+        {
+            if ((await repo.HentAlle()).Count == 0)
+            {
+                Console.WriteLine("--> SEEDING ADMIN USER");
+                await repo.LeggTil(new BrukerDTO {Brukernavn = "admin", Passord = "admin"});
+            }
+        }
     }
 }

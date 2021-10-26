@@ -1,5 +1,5 @@
 <div class="container">
-    <form (submit)="login(username, password)">
+    <form (submit)="login()">
     <input [(ngModel)]="username" type=text name="username" placeholder="Brukernavn" >
     <input [(ngModel)]="password" type=password name="password" placeholder="Passord" >
     <button type="submit"class="btn btn-primary">Logg inn</button>

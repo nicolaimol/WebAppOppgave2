@@ -37,7 +37,7 @@ namespace FullstackService.Controllers
             return NotFound();
         }
 
-        [HttpGet("{id}", Name = "VerifiserBruker")]
+        [HttpPost("auth", Name = "VerifiserBruker")]
         public async Task<ActionResult> VerifiserBruker([FromBody] BrukerDTO bruker)
         {
             var hentetBruker = await _db.VerifiserBruker(bruker);
