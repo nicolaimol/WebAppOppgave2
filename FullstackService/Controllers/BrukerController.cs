@@ -1,5 +1,8 @@
+using System;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using FullstackService.DAL;
+using FullstackService.DTO;
 using FullstackService.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,34 +37,31 @@ namespace FullstackService.Controllers
             return NotFound();
         }
 
+        [HttpGet("{id}", Name = "VerifiserBruker")]
+        public async Task<ActionResult> VerifiserBruker([FromBody] BrukerDTO bruker)
+        {
+            var hentetBruker = await _db.VerifiserBruker(bruker);
+
+            if (hentetBruker is null)
+            {
+                return Unauthorized("Username or password is wrong");
+            }
+
+            return Ok(hentetBruker);
+        }
+
         [HttpPost]
-        public async Task<ActionResult> AddBruker([FromBody] Bruker bruker)
+        public async Task<ActionResult> AddBruker([FromBody] BrukerDTO bruker)
         {
             var returBruker = await _db.LeggTil(bruker);
-            return CreatedAtRoute(nameof(HentBruker), new {Id = returBruker.Id}, returBruker);
+            return CreatedAtRoute(nameof(HentBruker), new {Id = returBruker.Id}, 
+                new Bruker{Id = returBruker.Id, Brukernavn = returBruker.Brukernavn});
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> EndreBruker([FromBody] Bruker bruker, int id)
+        public async Task<ActionResult> EndreBruker([FromBody] BrukerDTO bruker, int id)
         {
-            var brukeren = _db.HentEn(id).Result;
-
-            if (brukeren != null)
-            {
-                brukeren.Id = bruker.Id;
-                brukeren.Brukernavn = bruker.Brukernavn;
-                brukeren.PassordHash = bruker.PassordHash;
-            } else
-            {
-                BadRequest($"No bruker found by id {id}");
-            }
-
-            int lagre = await _db.Lagre();
-            if (lagre > 0)
-            {
-                return Ok(bruker);
-            }
-            return BadRequest("No changes made");
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -74,6 +74,5 @@ namespace FullstackService.Controllers
 
             return BadRequest("No changes made");
         }
-
     }
 }

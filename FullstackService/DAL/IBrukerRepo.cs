@@ -1,21 +1,29 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
+using FullstackService.DTO;
 using FullstackService.Models;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace FullstackService.DAL
 {
     public interface IBrukerRepo
     {
-        Task<List<Bruker>> HentAlle();
+        Task<List<BrukerDTO>> HentAlle();
         
-        Task<Bruker> HentEn(int id);
+        Task<BrukerDTO> HentEn(int id);
 
-        Task<Bruker> LeggTil(Bruker bruker);
+        Task<Bruker> LeggTil(BrukerDTO bruker);
 
-        Task Endre(int id, Bruker bruker);
+        Task<BrukerDTO> VerifiserBruker(BrukerDTO bruker);
+
+        Task Endre(int id, BrukerDTO bruker);
 
         Task<int> Slett(int id);
 
         Task<int> Lagre();
+
+        
     }
 }
