@@ -19,6 +19,8 @@ namespace FullstackService.DAL
         public DbSet<Post> PostSteder { get; set; }
         
         public DbSet<Bilde> Bilder { get; set; }
+        
+        public DbSet<Bruker> Brukere { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
