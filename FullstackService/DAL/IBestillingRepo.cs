@@ -15,7 +15,7 @@ namespace FullstackService.DAL
 
         Task<Bestilling> LeggTil(Bestilling bestilling);
 
-        Task Endre(int id, Kunde kunde);
+        Task<Bestilling> Endre(int id, Bestilling bestilling);
         
         Task<int> Slett(int id);
 

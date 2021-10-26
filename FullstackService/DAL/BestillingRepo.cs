@@ -67,9 +67,14 @@ namespace FullstackService.DAL
             return bestilling;
         }
 
-        public async Task Endre(int id, Kunde kunde)
+        public async Task<Bestilling> Endre(int id, Bestilling bestilling)
         {
-            var besilling = await _db.Bestillinger.FirstOrDefaultAsync(b => b.Id == id);
+            var dbBesilling = await _db.Bestillinger.FindAsync(id);
+            dbBesilling.UtreiseDato = bestilling.UtreiseDato;
+            dbBesilling.HjemreiseDato = bestilling.HjemreiseDato;
+            dbBesilling.Registreringsnummer = bestilling.Registreringsnummer;
+
+            return dbBesilling;
         }
 
         public async Task<int> Lagre()

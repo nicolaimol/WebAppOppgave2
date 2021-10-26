@@ -70,14 +70,11 @@ namespace FullstackService.Controllers
         public async Task<ActionResult> EditBestilling([FromBody] Bestilling bestilling, int id)
         {
             var dbBestilling = _db.HentEn(id).Result;
+
+            var returBestilling = new Bestilling();
             if (dbBestilling != null)
             {
-                dbBestilling.ReiseId = bestilling.ReiseId;
-                dbBestilling.UtreiseDato = bestilling.UtreiseDato;
-                dbBestilling.HjemreiseDato = bestilling.HjemreiseDato;
-                dbBestilling.Registreringsnummer = bestilling.Registreringsnummer;
-                dbBestilling.Barn = bestilling.Barn;
-                dbBestilling.Voksne = bestilling.Voksne;
+                returBestilling = await _db.Endre(id, bestilling);
             }
             else
             {
@@ -87,7 +84,7 @@ namespace FullstackService.Controllers
             int lagre = await _db.Lagre();
             if (lagre > 0)
             {
-                return Ok(bestilling);
+                return Ok(returBestilling);
             }
 
             return BadRequest("No changes made");
