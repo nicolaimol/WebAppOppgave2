@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       sessionStorage.setItem("auth", JSON.stringify(data));
       this.authService.changeAuth(true);
+      localStorage.setItem('loggInn', "true");
     },
     err => console.log(err));
   }
