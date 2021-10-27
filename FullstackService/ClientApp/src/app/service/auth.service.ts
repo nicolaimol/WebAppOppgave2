@@ -20,4 +20,9 @@ export class AuthService {
     const url = "/api/bruker/auth";
     return this.httpClient.get<any>(url);
   }
+
+  loggUt(): Observable<any> {
+    const url = "/api/bruker/out"
+    return this.httpClient.get<any>(url);
+  }
 }
