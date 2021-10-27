@@ -186,7 +186,7 @@ export class BestillComponent implements OnInit {
   videre() {
     const bestilling: BestillingInfo = {
       utreiseDato: this.utreise,
-      hjemreiseDato: this.skalHjem ? null: this.hjemreise,
+      hjemreiseDato: this.skalHjem ? this.hjemreise: null, 
       pris: this.pris,
       registreringsnummer: this.skalBil? this.bil : null,
       antallLugarer: this.antallLugarer,
