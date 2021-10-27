@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bilde } from 'src/app/interface/bilde';
 import { Reise } from 'src/app/interface/reise';
+import { AuthService } from 'src/app/service/auth.service';
 import { ImageService } from 'src/app/service/image.service';
 import { ReiseService } from 'src/app/service/reise.service';
 
@@ -32,9 +33,14 @@ export class EndreReiseComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
     private reiseService: ReiseService,
     private imageService: ImageService,
-    private router: Router) { }
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
+
+    this.authService.auth.subscribe(auth => {
+      if (!auth) this.router.navigate(['/admin'])
+    })
 
     this.imageService.getAllBilder().subscribe(bilder => {
       this.bilder = bilder;

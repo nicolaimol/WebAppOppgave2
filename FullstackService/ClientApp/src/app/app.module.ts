@@ -26,6 +26,7 @@ import { LagLugarComponent } from './components/adminUI/lag-lugar/lag-lugar.comp
 import { ModalSlettComponent } from './components/modal-slett/modal-slett.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterUserComponent } from './components/userUI/footer-user/footer-user.component';
+import { AdminHomeComponent } from './components/adminUI/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { FooterUserComponent } from './components/userUI/footer-user/footer-user
     ItemLugarerComponent,
     LagLugarComponent,
     ModalSlettComponent,
-    FooterUserComponent
+    FooterUserComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -63,10 +65,12 @@ import { FooterUserComponent } from './components/userUI/footer-user/footer-user
         { path: 'bestilling', component: VisBestillingComponent },
       ]},
       { path: 'admin', component: AdminComponent, children: [
+        { path: '', component: AdminHomeComponent},
         { path: 'reiser', component: VisreiserComponent},
-        {path: 'reiser/hent/:id', component: EndreReiseComponent},
-        {path: 'reiser/ny', component: LagReiseComponent},
-        {path: 'lugar/:id', component: ListLugarerComponent},
+        { path: 'reiser/hent/:id', component: EndreReiseComponent},
+        { path: 'reiser/ny', component: LagReiseComponent},
+        { path: 'lugar/:id', component: ListLugarerComponent},
+
       ]},
 
 

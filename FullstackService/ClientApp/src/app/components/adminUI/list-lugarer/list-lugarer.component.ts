@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Lugar } from 'src/app/interface/lugar';
 import { Reise } from 'src/app/interface/reise';
+import { AuthService } from 'src/app/service/auth.service';
 import { ReiseService } from 'src/app/service/reise.service';
 
 @Component({
@@ -27,9 +28,13 @@ export class ListLugarerComponent implements OnInit {
 
   vis: boolean = true;
 
-  constructor(private route: ActivatedRoute, private reiseService: ReiseService) { }
+  constructor(private route: ActivatedRoute, private reiseService: ReiseService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.auth.subscribe(auth => {
+      if (!auth) this.router.navigate(['/admin'])
+    })
+    
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.reiseService.hentAlleLugererById(this.id).subscribe(lugarer => {

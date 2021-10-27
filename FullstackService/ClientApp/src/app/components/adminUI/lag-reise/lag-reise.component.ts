@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Bilde } from 'src/app/interface/bilde';
 import { Reise } from 'src/app/interface/reise';
+import { AuthService } from 'src/app/service/auth.service';
 import { ImageService } from 'src/app/service/image.service';
 import { ReiseService } from 'src/app/service/reise.service';
 
@@ -28,9 +29,15 @@ export class LagReiseComponent implements OnInit {
     maLugar: false
   };
 
-  constructor(private reiseService: ReiseService, private imageService: ImageService, private router: Router) { }
+  constructor(private reiseService: ReiseService,
+    private imageService: ImageService,
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.auth.subscribe(auth => {
+      if (!auth) this.router.navigate(['/admin'])
+    })
     this.imageService.getAllBilder().subscribe(bilder => {
       this.bilder = bilder;
       this.reise.bildeLink.url = "./res/Color_Hybrid.jpeg"

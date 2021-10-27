@@ -1,3 +1,4 @@
+using System;
 using FullstackService.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,15 @@ namespace FullstackService
             services.AddScoped<IReiseRepo, ReiseRepo>();
             services.AddScoped<IBestillingRepo, BestillingRepo>();
             services.AddScoped<IBrukerRepo, BrukerRepo>();
+            
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".AdventureWorks.Session"; 
+                options.IdleTimeout = TimeSpan.FromSeconds(1800); // 30 minutter
+                options.Cookie.IsEssential = true;
+            });
+            services.AddDistributedMemoryCache();
+            
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
             
@@ -45,6 +55,8 @@ namespace FullstackService
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             DbSeed.SeedDb(app);
+            
+            app.UseSession();
             
             if (env.IsDevelopment())
             {

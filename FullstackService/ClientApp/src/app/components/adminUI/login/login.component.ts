@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Bruker } from 'src/app/interface/bruker';
+import { AuthService } from 'src/app/service/auth.service';
 import { BrukerService } from 'src/app/service/bruker.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   username: string = "";
   password: string = "";
 
-  constructor(private brukerService: BrukerService) { }
+  constructor(private brukerService: BrukerService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     this.brukerService.validerBruker(b).subscribe(data => {
       console.log(data);
       sessionStorage.setItem("auth", JSON.stringify(data));
+      this.authService.changeAuth(true);
     },
     err => console.log(err));
   }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FullstackService.DAL;
 using FullstackService.DTO;
 using FullstackService.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FullstackService.Controllers
@@ -14,6 +15,8 @@ namespace FullstackService.Controllers
     {
         private readonly IBrukerRepo _db;
 
+        private const string _loggetInn = "logget inn";
+
         public BrukerController(IBrukerRepo db)
         {
             _db = db;
@@ -22,13 +25,21 @@ namespace FullstackService.Controllers
         [HttpGet]
         public async Task<ActionResult> HentAlle()
         {
-            var brukere = _db.HentAlle();
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            var brukere = await _db.HentAlle();
             return Ok(brukere);
         }
 
         [HttpGet("{id}", Name = "HentBruker")]
         public async Task<ActionResult> HentBruker(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             var bruker = await _db.HentEn(id);
             if (bruker != null)
             {
@@ -44,15 +55,38 @@ namespace FullstackService.Controllers
 
             if (hentetBruker is null)
             {
+                HttpContext.Session.SetString(_loggetInn, "");
                 return Unauthorized("Username or password is wrong");
             }
-
+            HttpContext.Session.SetString(_loggetInn, hentetBruker.Brukernavn);
             return Ok(hentetBruker);
+        }
+
+        [HttpGet("out")]
+        public ActionResult LoggUt()
+        {
+            HttpContext.Session.SetString(_loggetInn, "");
+            return Ok();
+        }
+
+        [HttpGet("auth")]
+        public ActionResult AutoriserBruker()
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult> AddBruker([FromBody] BrukerDTO bruker)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             var returBruker = await _db.LeggTil(bruker);
             return CreatedAtRoute(nameof(HentBruker), new {Id = returBruker.Id}, 
                 new Bruker{Id = returBruker.Id, Brukernavn = returBruker.Brukernavn});
@@ -61,12 +95,20 @@ namespace FullstackService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> EndreBruker([FromBody] BrukerDTO bruker, int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             return Ok();
         }
-
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBruker(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
             if (await _db.Slett(id) >= 0)
             {
                 return NoContent();
@@ -74,5 +116,7 @@ namespace FullstackService.Controllers
 
             return BadRequest("No changes made");
         }
+
+
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Reise } from 'src/app/interface/reise';
+import { AuthService } from 'src/app/service/auth.service';
 import { ReiseService } from 'src/app/service/reise.service';
 
 @Component({
@@ -12,9 +13,12 @@ export class VisreiserComponent implements OnInit {
 
   reiser: Reise[] = [];
 
-  constructor(private reiseService: ReiseService, private router: Router) { }
+  constructor(private reiseService: ReiseService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.auth.subscribe(auth => {
+      if (!auth) this.router.navigate(['/admin'])
+    })
     this.reiseService.hentAlleReiser().subscribe(reiser => {
       this.reiser = reiser;
     })
