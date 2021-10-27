@@ -9,9 +9,14 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class NavAdminComponent implements OnInit {
 
+  hei:boolean = false;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.authService.auth.subscribe(auth => {
+      this.hei = auth;
+    })
   }
 
   isExpanded = false;
