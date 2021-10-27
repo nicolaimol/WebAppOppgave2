@@ -1,0 +1,13 @@
+<div *ngIf="bestilling == null" class="container">
+    <p>Vennligst vent</p>
+</div>
+<div *ngIf="bestilling != null" class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Referanse: {{bestilling.referanse}}</h5>
+            <p>Ferjestrekning: {{bestilling.ferjestrekning}}</p>
+            <p>Utreisedato: <input [(ngModel)]="bestilling.utreiseDato" type="date" class="form-control"></p>
+            <p *ngIf="bestilling.hjemreiseDato != null">Hjemreisedato: <input type="date" class="form-control" [(ngModel)]="bestilling.hjemreiseDato"></p>
+        </div>
+    </div>
+</div>

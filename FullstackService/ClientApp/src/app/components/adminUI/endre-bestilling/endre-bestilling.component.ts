@@ -1,0 +1,31 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Bestilling } from 'src/app/interface/bestilling';
+import { AuthService } from 'src/app/service/auth.service';
+import { BestillingService } from 'src/app/service/bestilling.service';
+
+@Component({
+  selector: 'app-endre-bestilling',
+  templateUrl: './endre-bestilling.component.html',
+  styleUrls: ['./endre-bestilling.component.css']
+})
+export class EndreBestillingComponent implements OnInit {
+
+  id:number = -1;
+  bestilling: Bestilling = null;
+
+  constructor(private bestillingService: BestillingService, 
+    private router: Router, 
+    private authService: AuthService, 
+    private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.id = Number(this.route.snapshot.paramMap.get("id"));
+
+    this.bestillingService.hentBestillingById(this.id).subscribe(b => {
+      this.bestilling = b;
+    })
+
+  }
+
+}

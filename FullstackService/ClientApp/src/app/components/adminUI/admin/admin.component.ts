@@ -26,6 +26,13 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.authService.auth.subscribe(auth => {
+      if (!auth) {
+        this.authService.checkAuth().subscribe(c => {
+          this.authService.changeAuth(true);
+        })
+      }
+    })
   }
 
   ngOnDestroy(){

@@ -27,6 +27,8 @@ import { ModalSlettComponent } from './components/modal-slett/modal-slett.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterUserComponent } from './components/userUI/footer-user/footer-user.component';
 import { AdminHomeComponent } from './components/adminUI/admin-home/admin-home.component';
+import { ListBestillingerComponent } from './components/adminUI/list-bestillinger/list-bestillinger.component';
+import { EndreBestillingComponent } from './components/adminUI/endre-bestilling/endre-bestilling.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { AdminHomeComponent } from './components/adminUI/admin-home/admin-home.c
     LagLugarComponent,
     ModalSlettComponent,
     FooterUserComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    ListBestillingerComponent,
+    EndreBestillingComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -70,6 +74,8 @@ import { AdminHomeComponent } from './components/adminUI/admin-home/admin-home.c
         { path: 'reiser/hent/:id', component: EndreReiseComponent},
         { path: 'reiser/ny', component: LagReiseComponent},
         { path: 'lugar/:id', component: ListLugarerComponent},
+        { path: 'bestillinger', component: ListBestillingerComponent},
+        { path: 'bestillinger/:id', component: EndreBestillingComponent}
 
       ]},
 

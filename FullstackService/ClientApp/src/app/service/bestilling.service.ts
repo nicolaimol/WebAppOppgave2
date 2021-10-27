@@ -24,4 +24,12 @@ export class BestillingService {
   hentBestillingByRef(ref: string): Observable<Bestilling> {
     return this.httpClient.get<Bestilling>(this.url + "/ref/" + ref)
   }
+
+  hentAlleBestillinger(): Observable<Bestilling[]> {
+    return this.httpClient.get<Bestilling[]>(this.url)
+  }
+
+  hentBestillingById(id: number): Observable<Bestilling> {
+    return this.httpClient.get<Bestilling>(this.url + "/" + id);
+  }
 }

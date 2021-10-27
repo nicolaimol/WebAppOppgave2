@@ -14,6 +14,8 @@ export interface BestillingInfo {
 }
 
 export interface Bestilling {
+    id?: number;
+    referanse?: string
     ferjestrekning?: string;
     utreiseDato: string;
     hjemreiseDato?: string;
