@@ -1,6 +1,6 @@
 <div *ngIf="bestilling != null" id="harBestilling" class="container">
     <h1>Takk for din bestilling!</h1>
-    <h4>Her er utskriften til din bestilling med referanse: <span id="ref"></span></h4>
+    <h4>Her er utskriften til din bestilling med referanse: {{bestilling.referanse}}</h4>
 
     <!-- A table will be generated here. This table will contain all of the relevant data of the order and will be 
     displayed neatly -->
@@ -13,7 +13,7 @@
             </tr>
             <tr>
                 <th>Rute</th><td>{{bestilling.ferjestrekning}}</td>
-                <th>Luar</th><td>{{bestilling.lugarType == null ? "Ingen": (bestilling.lugarType.type + "x" + bestilling.antallLugarer)}}</td>
+                <th>Lugar</th><td>{{bestilling.lugarType == null ? "Ingen": (bestilling.lugarType.type + "x" + bestilling.antallLugarer)}}</td>
             </tr>
             <tr>
                 <th>Avreise</th><td>{{bestilling.utreiseDato}}</td>
