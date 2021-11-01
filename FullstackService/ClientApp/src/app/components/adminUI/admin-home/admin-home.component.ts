@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/service/auth.service';
 export class AdminHomeComponent implements OnInit {
 
   validUser: boolean = false;
+  user: string = ""
 
   constructor(private authService: AuthService) { }
 
@@ -23,6 +24,12 @@ export class AdminHomeComponent implements OnInit {
       else {
         this.validUser = auth;
       }
+    })
+
+    this.authService.changeUser(sessionStorage.getItem("user"))
+
+    this.authService.user.subscribe(data => {
+      this.user = data;
     })
   }
 }

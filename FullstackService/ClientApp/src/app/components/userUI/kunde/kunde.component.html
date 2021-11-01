@@ -1,4 +1,4 @@
-<button [ngClass]="{'btn-outline-success': validTotalOut}" (click)="showInput = !showInput" class="btn btn-outline-secondary">{{type}}</button>
+<button [ngClass]="{'btn-outline-success': validTotalOut}" (click)="showInput = !showInput" class="btn btn-outline-secondary">{{type == 'voksen' ? 'Voksen': 'Barn'}} {{(index + 1)}}</button>
 <div [hidden]="!showInput" class="absolute">
     <header>
         <nav class="navbar navbar-expand-md navbar-dark"style="height: 50px;">

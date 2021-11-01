@@ -10,6 +10,9 @@ export class AuthService {
   private authSource = new BehaviorSubject<boolean>(false);
   auth = this.authSource.asObservable();
 
+  private userSource = new BehaviorSubject<string>("");
+  user = this.userSource.asObservable();
+
   constructor(private httpClient: HttpClient) { }
 
   changeAuth(b:boolean) {
@@ -19,6 +22,10 @@ export class AuthService {
   checkAuth(): Observable<any> { 
     const url = "/api/bruker/auth";
     return this.httpClient.get<any>(url);
+  }
+
+  changeUser(user: any) {
+    this.userSource.next(user)
   }
 
   loggUt(): Observable<any> {
