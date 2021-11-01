@@ -34,7 +34,14 @@ export class KontaktPersonComponent implements OnInit {
   constructor(private reiseService: ReiseService) { }
 
   ngOnInit() {
-    
+    this.validTotal = false;
+
+    this.validerFornavn();
+    this.validerEtternavn();
+    this.validerAdresse();
+    this.validerFoedselsdato();
+    this.validerTelefon();
+    this.validerEpost();
   }
 
   avbryt() {
@@ -104,6 +111,7 @@ export class KontaktPersonComponent implements OnInit {
         this.post = data;
         this.validPost = true;
         this.person.post = this.post
+        this.validerTotal();
       }, error => {
         this.validPost = false;
         this.post.postSted = ''

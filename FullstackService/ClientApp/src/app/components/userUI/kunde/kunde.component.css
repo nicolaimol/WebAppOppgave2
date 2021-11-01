@@ -1,6 +1,6 @@
 
 .absolute {
-    position: absolute;
+    position: fixed;
     background-color: white;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     flex-direction: column;
 }
 
-.container * {
+.margin * {
     margin: 1em;
 
 }

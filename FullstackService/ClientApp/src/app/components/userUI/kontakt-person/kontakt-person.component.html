@@ -5,7 +5,7 @@
             <div class="container"><span (click)="avbryt()" class="material-icons">arrow_back_ios_new</span></div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container margin">
         <form class="form-vertical" role="form" (submit)="submit()">
             <input [ngClass]="{'is-valid': validFornavn}" (keyup)="validerFornavn()" type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
             <input [ngClass]="{'is-valid': validEtternavn}" (keyup)="validerEtternavn()" type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
@@ -18,8 +18,7 @@
             <input [ngClass]="{'is-valid': validTelefon}" (keyup)="validerTelefon()" type="text" class="form-control" name="telefon" placeholder="Telefon" [(ngModel)]="person.telefon">
             <input [ngClass]="{'is-valid': validEpost}" (keyup)="validerEpost()" type="email" class="form-control" name="epost" placeholder="Epost" [(ngModel)]="person.epost">
             <button [disabled]="!validTotal" type="submit" class="btn btn-primary">Lagre</button>
+            <button class="btn btn-danger" type="button" (click)="avbryt()">Avbryt</button>
         </form>
-
-        <button class="btn btn-danger" (click)="avbryt()">Avbryt</button>
     </div>
 </div>

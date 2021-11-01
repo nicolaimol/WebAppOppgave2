@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bestilling } from 'src/app/interface/bestilling';
+import { KontaktPerson, KundeObj } from 'src/app/interface/kunde';
 import { AuthService } from 'src/app/service/auth.service';
 import { BestillingService } from 'src/app/service/bestilling.service';
+import { ReisendeService } from 'src/app/service/reisende.service';
 
 @Component({
   selector: 'app-endre-bestilling',
@@ -17,7 +19,8 @@ export class EndreBestillingComponent implements OnInit {
   constructor(private bestillingService: BestillingService, 
     private router: Router, 
     private authService: AuthService, 
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, 
+    private reisendeService: ReisendeService) { }
 
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get("id"));
@@ -25,7 +28,18 @@ export class EndreBestillingComponent implements OnInit {
     this.bestillingService.hentBestillingById(this.id).subscribe(b => {
       this.bestilling = b;
     })
+  }
 
+  changeKontaktPerson(kp: KontaktPerson) {
+    this.reisendeService.ChangeKontaktPerson(kp).subscribe(k => {
+      console.log(k)
+    }, err => console.log(err))
+  }
+
+  changeVoksen(kunde: KundeObj) {
+    this.reisendeService.ChangeVoksen(kunde.kunde).subscribe(k => {
+      console.log(k)
+    }, err => console.log(err))
   }
 
 }

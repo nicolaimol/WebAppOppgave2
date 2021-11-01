@@ -26,6 +26,9 @@ export class KundeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.validerFornavn();
+    this.validerEtternavn();
+    this.validerFoedselsdato();
   }
 
   submit() {
@@ -62,6 +65,7 @@ export class KundeComponent implements OnInit {
   }
 
   validerFoedselsdato() {
+
     let date = this.person.foedselsdato;
     let dateObj = new Date(this.avreise).getTime() - new Date(date).getTime()
     let diff = new Date(dateObj)
@@ -90,7 +94,7 @@ export class KundeComponent implements OnInit {
   }
 
   validerTotal() {
-    this.validTotal = this.validFornavn && this.validEtternavn;
+    this.validTotal = this.validFornavn && this.validEtternavn && this.validFoedselsdato;
   }
 
 }

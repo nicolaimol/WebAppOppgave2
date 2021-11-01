@@ -26,22 +26,15 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   constructor(private authService: AuthService) {
-    this.funcListener = this.func.bind(this);
-    window.addEventListener("storage", this.funcListener);
+    
   }
 
   ngOnInit() {
-    this.authService.auth.subscribe(auth => {
-      if (!auth) {
-        this.authService.checkAuth().subscribe(c => {
-          this.authService.changeAuth(true);
-        })
-      }
-    })
+    
   }
 
   ngOnDestroy(){
-    window.removeEventListener("storage", this.funcListener);
+    
   }
 }
 

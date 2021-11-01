@@ -8,6 +8,25 @@
             <p>Ferjestrekning: {{bestilling.ferjestrekning}}</p>
             <p>Utreisedato: <input [(ngModel)]="bestilling.utreiseDato" type="date" class="form-control"></p>
             <p *ngIf="bestilling.hjemreiseDato != null">Hjemreisedato: <input type="date" class="form-control" [(ngModel)]="bestilling.hjemreiseDato"></p>
+            <p *ngIf="bestilling.registreringsnummer != null">Registreringsnummer: 
+                <input type="text" class="form-control" [(ngModel)]="bestilling.registreringsnummer">
+            </p>
+            <app-kontakt-person (notifyParent)="changeKontaktPerson($event)" [avreise]="bestilling.utreiseDato" [person]="bestilling.kontaktPerson"></app-kontakt-person>
+            <app-kunde 
+                *ngFor="let kunde of bestilling.voksne; index as i" 
+                [person]="kunde" 
+                [index]="i"
+                [avreise]="bestilling.utreiseDato"
+                type="voksen"
+                (notifyParent)="changeVoksen($event)"></app-kunde>
+            <app-kunde 
+                *ngFor="let kunde of bestilling.barn; index as i" 
+                [person]="kunde" 
+                [index]="i"
+                [avreise]="bestilling.utreiseDato"
+                type="barn"
+                (notifyParent)="changeVoksen($event)"></app-kunde>
         </div>
     </div>
 </div>
+

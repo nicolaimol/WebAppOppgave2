@@ -1,17 +1,17 @@
 
 .absolute {
-    position: absolute;
+    position: fixed;
     background-color: white;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 1;
     display: flex;
     flex-direction: column;
 }
 
-.container * {
+.margin * {
     margin: 1em;
 
 }
@@ -22,4 +22,8 @@ nav {
 
 .input-group * {
     margin: 0!important;
+}
+
+span {
+    cursor: pointer;
 }
