@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using FullstackService.DAL;
 using FullstackService.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FullstackService.Controllers
@@ -10,6 +11,7 @@ namespace FullstackService.Controllers
     public class ReisendeController: ControllerBase
     {
         private readonly IReisendeRepo _repo;
+        private const string _loggetInn = "logget inn";
 
         public ReisendeController(IReisendeRepo repo)
         {
@@ -19,6 +21,11 @@ namespace FullstackService.Controllers
         [HttpPut("kontaktperson/{id}")]
         public async Task<ActionResult> ChangeKontaktPerson(int id, KontaktPerson kontaktPerson)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             var returPerson = await _repo.ChangeKontaktPersonAsync(id, kontaktPerson);
 
             if (returPerson is null)
@@ -32,6 +39,11 @@ namespace FullstackService.Controllers
         [HttpPut("voksen/{id}")]
         public async Task<ActionResult> ChangeVoksen(int id, Voksen voksen)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             var returPerson = await _repo.ChangeVoksenAsync(id, voksen);
 
             if (returPerson is null)
@@ -45,6 +57,11 @@ namespace FullstackService.Controllers
         [HttpPut("barn/{id}")]
         public async Task<ActionResult> ChangeBarn(int id, Barn barn)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             var returPerson = await _repo.ChangeBarnAsync(id, barn);
 
             if (returPerson is null)

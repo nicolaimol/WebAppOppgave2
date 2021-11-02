@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using FullstackService.DAL;
 using FullstackService.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FullstackService.Controllers
@@ -11,6 +12,7 @@ namespace FullstackService.Controllers
     public class ReiserController: ControllerBase
     {
         private readonly IReiseRepo _repo;
+        private const string _loggetInn = "logget inn";
         
         public ReiserController(IReiseRepo repo)
         {
@@ -27,6 +29,11 @@ namespace FullstackService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetReiseById(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             var reise = await _repo.GetOneById(id);
             if (reise == null)
             {
@@ -56,13 +63,23 @@ namespace FullstackService.Controllers
         [HttpPost("lugar")]
         public async Task<ActionResult> CreateLugar([FromBody] Lugar lugar)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             return Ok(await _repo.CreateLugar(lugar));
         }
 
         [HttpPut("lugar")]
         public async Task<ActionResult> UpdateLugar([FromBody] Lugar lugar)
         {
-            var dbLugar = _repo.UpdateLugar(lugar);
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
+            var dbLugar = await _repo.UpdateLugar(lugar);
             if (dbLugar is null)
             {
                 return BadRequest("No lugar with id");
@@ -86,6 +103,11 @@ namespace FullstackService.Controllers
         [HttpPut("{reiseId}")]
         public async Task<ActionResult> UpdateReise(int reiseId, [FromBody] Reise reise)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             var dbReise = await _repo.UpdateReise(reiseId, reise);
             if (dbReise is null)
             {
@@ -99,7 +121,11 @@ namespace FullstackService.Controllers
         [AcceptVerbs("DELETE")]
         public async Task<ActionResult> DeleteReise(int reiseId)
         {
-            Console.WriteLine(reiseId);
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             var reise = await _repo.DeleteReise(reiseId);
             if (reise is null)
             {
