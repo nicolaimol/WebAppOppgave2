@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/UnitTest/UnitTest.csproj": {}
+    "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\UnitTest\\UnitTest.csproj": {}
   },
   "projects": {
-    "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/FullstackService/FullstackService.csproj": {
+    "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\FullstackService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/FullstackService/FullstackService.csproj",
+        "projectUniqueName": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\FullstackService.csproj",
         "projectName": "FullstackService",
-        "projectPath": "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/FullstackService/FullstackService.csproj",
-        "packagesPath": "/Users/nicolaimolstad/.nuget/packages/",
-        "outputPath": "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/FullstackService/obj/",
+        "projectPath": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\FullstackService.csproj",
+        "packagesPath": "C:\\Users\\Bruker\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/nicolaimolstad/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Bruker\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,35 +83,36 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/UnitTest/UnitTest.csproj": {
+    "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\UnitTest\\UnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/UnitTest/UnitTest.csproj",
+        "projectUniqueName": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\UnitTest\\UnitTest.csproj",
         "projectName": "UnitTest",
-        "projectPath": "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/UnitTest/UnitTest.csproj",
-        "packagesPath": "/Users/nicolaimolstad/.nuget/packages/",
-        "outputPath": "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/UnitTest/obj/",
+        "projectPath": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\UnitTest\\UnitTest.csproj",
+        "packagesPath": "C:\\Users\\Bruker\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\UnitTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/nicolaimolstad/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Bruker\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/FullstackService/FullstackService.csproj": {
-                "projectPath": "/Users/nicolaimolstad/Desktop/ITPE3200 Webapplikasjoner/Projects/WebAppOppgave2/FullstackService/FullstackService.csproj"
+              "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\FullstackService.csproj": {
+                "projectPath": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\FullstackService.csproj"
               }
             }
           }
@@ -168,7 +170,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

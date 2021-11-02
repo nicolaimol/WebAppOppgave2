@@ -1,6 +1,9 @@
-namespace unitTest
+using System.Threading.Tasks;
+using Xunit;
+
+namespace UnitTest
 {
-    public class BrukerTest
+    public class ReisendeTest
     {
         [Fact]
         public async Task testmetode()

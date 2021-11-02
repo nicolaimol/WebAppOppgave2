@@ -1,6 +1,10 @@
-namespace unitTest
+using System;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace UnitTest
 {
-    public class BrukerTest
+    public class ImageTest
     {
         [Fact]
         public async Task testmetode()
