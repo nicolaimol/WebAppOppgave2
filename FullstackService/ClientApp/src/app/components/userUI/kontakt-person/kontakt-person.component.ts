@@ -39,6 +39,7 @@ export class KontaktPersonComponent implements OnInit {
     this.validerFornavn();
     this.validerEtternavn();
     this.validerAdresse();
+    this.validerPostNummer();
     this.validerFoedselsdato();
     this.validerTelefon();
     this.validerEpost();
@@ -106,14 +107,15 @@ export class KontaktPersonComponent implements OnInit {
 
   validerPostNummer() {
     const regPostnummer = new RegExp(`^[0-9]{4}$`)
-    if (regPostnummer.test(this.post.postNummer)) {
-      this.reiseService.HentPostByPostnummer(this.post.postNummer).subscribe(data => {
+    if (regPostnummer.test(this.person.post.postNummer)) {
+      this.reiseService.HentPostByPostnummer(this.person.post.postNummer).subscribe(data => {
         this.post = data;
         this.validPost = true;
         this.person.post = this.post
         this.validerTotal();
       }, error => {
         this.validPost = false;
+        this.person.post.postSted = ""
         this.post.postSted = ''
       })
     }
