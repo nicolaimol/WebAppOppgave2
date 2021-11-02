@@ -15,6 +15,7 @@ namespace FullstackService.Controllers
         
         private readonly IBestillingRepo _db;
         private readonly ILogger<BestillingsController> _log;
+        private const string _loggetInn = "logget inn";
 
         public BestillingsController(IBestillingRepo db, ILogger<BestillingsController> log)
         {
@@ -25,6 +26,11 @@ namespace FullstackService.Controllers
         [HttpGet]
         public async Task<ActionResult> HentAlleBestillingerAsync()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             _log.LogInformation("HentAlle()");
             var bestillinger = await _db.HentAlleBestillingerAsync();
             return Ok(bestillinger);
@@ -33,6 +39,11 @@ namespace FullstackService.Controllers
         [HttpGet("{id}", Name ="HentBestillingByIdAsync")]
         public async Task<ActionResult> HentBestillingByIdAsync(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             _log.LogInformation($"HentEn({id})");
             var bestilling = await _db.HentEnBestillingAsync(id);
             if (bestilling != null)
@@ -71,6 +82,11 @@ namespace FullstackService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> EditBestillingAsync([FromBody] Bestilling bestilling, int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             var dbBestilling = _db.HentEnBestillingAsync(id).Result;
 
             var returBestilling = new Bestilling();
@@ -96,9 +112,14 @@ namespace FullstackService.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBestillingAsync(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             if (await _db.SlettBestillingAsync(id) >= 0)
             {
-                return NoContent();
+                return Ok();
             }
 
             return BadRequest("No changes made");

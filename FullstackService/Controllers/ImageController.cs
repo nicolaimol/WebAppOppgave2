@@ -24,11 +24,6 @@ namespace FullstackService.Controllers
             _repo = repo;
         }
 
-        public class FileUploadApi
-        {
-            public IFormFile files { get; set; }
-        }
-        
         [HttpPost, DisableRequestSizeLimit]
         public async Task<ActionResult> Post()
         {
