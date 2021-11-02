@@ -7,7 +7,7 @@ using Xunit;
 
 namespace UnitTest
 {
-    public class UnitTest1
+    public class BestillingsTest
     {
         [Fact]
         public async Task Test1()
