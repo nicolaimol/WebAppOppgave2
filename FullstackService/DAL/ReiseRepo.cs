@@ -17,7 +17,7 @@ namespace FullstackService.DAL
         }
 
 
-        public async Task<bool> AddOne(Reise reise)
+        public async Task<bool> AddOneReiseAsync(Reise reise)
         {
             if (_db.Bilder.Any((bilde => bilde.Id == reise.BildeLink.Id)))
             {
@@ -28,44 +28,15 @@ namespace FullstackService.DAL
             return (await _db.SaveChangesAsync()) > 0;
         }
 
-        public async Task<List<Reise>> GetAll()
+        public async Task<List<Reise>> GetAllReiseAsync()
         {
 
             return await _db.Reiser.ToListAsync();
         }
 
-        public async Task<Reise> GetOneById(int id)
+        public async Task<Reise> GetReiseByIdAsync(int id)
         {
             return await _db.Reiser.FindAsync(id);
-        }
-
-        public async Task<List<Lugar>> HentLugerByReise(int reiseId)
-        {
-            return await _db.Lugarer.Where(l => l.Reise.Id == reiseId).ToListAsync();
-        }
-
-        public async Task<Lugar> CreateLugar(Lugar lugar)
-        {
-            _db.Lugarer.Add(lugar);
-            await _db.SaveChangesAsync();
-
-            return lugar;
-        }
-
-        public async Task<Lugar> UpdateLugar(Lugar lugar)
-        {
-            if (!_db.Lugarer.Any(l => l.Id == lugar.Id))
-            {
-                return null;
-            }
-
-            var dbLugar = _db.Lugarer.Find(lugar.Id);
-            dbLugar.Antall = lugar.Antall;
-            dbLugar.Pris = lugar.Pris;
-            dbLugar.Type = lugar.Type;
-
-            await _db.SaveChangesAsync();
-            return dbLugar;
         }
 
         public async Task<Post> HentPoststedByPostnummer(string postnummer)
@@ -73,7 +44,7 @@ namespace FullstackService.DAL
             return await _db.PostSteder.FirstOrDefaultAsync(p => p.PostNummer == postnummer);
         }
 
-        public async Task<Reise> UpdateReise(int reiseId, Reise reise)
+        public async Task<Reise> UpdateReiseAsync(int reiseId, Reise reise)
         {
             var dbReise = await _db.Reiser.FindAsync(reiseId);
             if (dbReise is null)
@@ -93,7 +64,7 @@ namespace FullstackService.DAL
             return dbReise;
         }
 
-        public async Task<Reise> DeleteReise(int reiseId)
+        public async Task<Reise> DeleteReiseAsync(int reiseId)
         {
             var dbReise = await _db.Reiser.FindAsync(reiseId);
             if (dbReise is null) return null;

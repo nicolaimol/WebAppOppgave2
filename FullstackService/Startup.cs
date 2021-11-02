@@ -33,6 +33,7 @@ namespace FullstackService
             services.AddScoped<IBestillingRepo, BestillingRepo>();
             services.AddScoped<IBrukerRepo, BrukerRepo>();
             services.AddScoped<IReisendeRepo, ReisendeRepo>();
+            services.AddScoped<ILugarRepo, LugarRepo>();
             
             services.AddSession(options =>
             {

@@ -10,19 +10,19 @@ namespace FullstackService.DAL
 {
     public interface IBrukerRepo
     {
-        Task<List<BrukerDTO>> HentAlle();
+        Task<List<BrukerDTO>> HentAlleBrukereAsync();
         
-        Task<BrukerDTO> HentEn(int id);
+        Task<BrukerDTO> HentEnBrukerByIdAsync(int id);
 
-        Task<Bruker> LeggTil(BrukerDTO bruker);
+        Task<Bruker> LeggTilBrukerAsync(BrukerDTO bruker);
 
-        Task<BrukerDTO> VerifiserBruker(BrukerDTO bruker);
+        Task<BrukerDTO> VerifiserBrukerAsync(BrukerDTO bruker);
 
-        Task Endre(int id, BrukerDTO bruker);
+        Task EndreBrukerAsync(int id, BrukerDTO bruker);
 
-        Task<int> Slett(int id);
+        Task<int> SlettBrukerAsync(int id);
 
-        Task<int> Lagre();
+        Task<int> LagreAsync();
 
         
     }

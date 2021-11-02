@@ -20,21 +20,21 @@ namespace FullstackService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAllReiserAsynx()
         {
-            var reiser = await _repo.GetAll();
+            var reiser = await _repo.GetAllReiseAsync();
             return Ok(reiser);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetReiseById(int id)
+        public async Task<ActionResult> GetReiseByIdAsync(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
                 return Unauthorized("Ikke logget inn");
             }
             
-            var reise = await _repo.GetOneById(id);
+            var reise = await _repo.GetReiseByIdAsync(id);
             if (reise == null)
             {
                 return BadRequest("Ingen reise funnet");
@@ -44,48 +44,14 @@ namespace FullstackService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateOne([FromBody] Reise reise)
+        public async Task<ActionResult> CreateOneReiseAsync([FromBody] Reise reise)
         {
             
-            if ( await _repo.AddOne(reise))
+            if ( await _repo.AddOneReiseAsync(reise))
             {
                 return Ok(reise);
             }
             return BadRequest("No reise created");
-        }
-
-        [HttpGet("lugar/{reiseId}"), ActionName("HentLugerByReise")]
-        public async Task<ActionResult> HentLugerByReise(int reiseId)
-        {
-            return Ok(await _repo.HentLugerByReise(reiseId));
-        }
-
-        [HttpPost("lugar")]
-        public async Task<ActionResult> CreateLugar([FromBody] Lugar lugar)
-        {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
-            
-            return Ok(await _repo.CreateLugar(lugar));
-        }
-
-        [HttpPut("lugar")]
-        public async Task<ActionResult> UpdateLugar([FromBody] Lugar lugar)
-        {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
-            
-            var dbLugar = await _repo.UpdateLugar(lugar);
-            if (dbLugar is null)
-            {
-                return BadRequest("No lugar with id");
-            }
-            
-            return Ok(dbLugar);
         }
 
         [HttpGet("postnummer/{postnummer}")]
@@ -108,7 +74,7 @@ namespace FullstackService.Controllers
                 return Unauthorized("Ikke logget inn");
             }
             
-            var dbReise = await _repo.UpdateReise(reiseId, reise);
+            var dbReise = await _repo.UpdateReiseAsync(reiseId, reise);
             if (dbReise is null)
             {
                 return BadRequest($"No reise at id {reiseId}");
@@ -126,7 +92,7 @@ namespace FullstackService.Controllers
                 return Unauthorized("Ikke logget inn");
             }
             
-            var reise = await _repo.DeleteReise(reiseId);
+            var reise = await _repo.DeleteReiseAsync(reiseId);
             if (reise is null)
             {
                 return BadRequest($"No reise found at: {reiseId}");

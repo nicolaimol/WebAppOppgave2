@@ -15,19 +15,19 @@ namespace FullstackService.DAL
             _db = db;
         }
         
-        public async Task<List<Bestilling>> HentAlle()
+        public async Task<List<Bestilling>> HentAlleBestillingerAsync()
         {
             return await _db.Bestillinger.ToListAsync();
         }
 
-        public async Task<Bestilling> HentEn(int id)
+        public async Task<Bestilling> HentEnBestillingAsync(int id)
         {
             var bestilling = await _db.Bestillinger.FirstOrDefaultAsync(k => k.Id == id);
 
             return bestilling;
         }
 
-        public async Task<Bestilling> HentEnByRef(string referanse)
+        public async Task<Bestilling> HentEnBestillingByRefAsync(string referanse)
         {
             var bestilling = await _db.Bestillinger
                 .FirstOrDefaultAsync(b => b.Referanse == referanse);
@@ -36,7 +36,7 @@ namespace FullstackService.DAL
 
         }
         
-        public async Task<Bestilling> LeggTil(Bestilling bestilling)
+        public async Task<Bestilling> LeggTilBestillingAsync(Bestilling bestilling)
         {
             // teste for unik Refereanse
             bool uniq = false;
@@ -67,7 +67,7 @@ namespace FullstackService.DAL
             return bestilling;
         }
 
-        public async Task<Bestilling> Endre(int id, Bestilling bestilling)
+        public async Task<Bestilling> EndreBestillingAsync(int id, Bestilling bestilling)
         {
             var dbBesilling = await _db.Bestillinger.FindAsync(id);
             dbBesilling.UtreiseDato = bestilling.UtreiseDato;
@@ -77,12 +77,12 @@ namespace FullstackService.DAL
             return dbBesilling;
         }
 
-        public async Task<int> Lagre()
+        public async Task<int> LagreBestillingAsync()
         {
             return await _db.SaveChangesAsync();
         }
 
-        public async Task<int> Slett(int id)
+        public async Task<int> SlettBestillingAsync(int id)
         {
             var bestilling = await _db.Bestillinger.FirstOrDefaultAsync(b => b.Id == id);
             _db.Bestillinger.Remove(bestilling);

@@ -7,19 +7,19 @@ namespace FullstackService.DAL
     public interface IBestillingRepo
     {
 
-        Task<List<Bestilling>> HentAlle();
+        Task<List<Bestilling>> HentAlleBestillingerAsync();
 
-        Task<Bestilling> HentEn(int id);
+        Task<Bestilling> HentEnBestillingAsync(int id);
 
-        Task<Bestilling> HentEnByRef(string referanse);
+        Task<Bestilling> HentEnBestillingByRefAsync(string referanse);
 
-        Task<Bestilling> LeggTil(Bestilling bestilling);
+        Task<Bestilling> LeggTilBestillingAsync(Bestilling bestilling);
 
-        Task<Bestilling> Endre(int id, Bestilling bestilling);
+        Task<Bestilling> EndreBestillingAsync(int id, Bestilling bestilling);
         
-        Task<int> Slett(int id);
+        Task<int> SlettBestillingAsync(int id);
 
-        Task<int> Lagre();
+        Task<int> LagreBestillingAsync();
 
     }
 }

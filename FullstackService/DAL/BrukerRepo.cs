@@ -19,12 +19,12 @@ namespace FullstackService.DAL
         }
 
 
-        public async Task<List<BrukerDTO>> HentAlle()
+        public async Task<List<BrukerDTO>> HentAlleBrukereAsync()
         {
             return (await _db.Brukere.ToListAsync()).Select(b => new BrukerDTO{Id = b.Id, Brukernavn = b.Brukernavn}).ToList();
         }
 
-        public async Task<BrukerDTO> HentEn(int id)
+        public async Task<BrukerDTO> HentEnBrukerByIdAsync(int id)
         {
             var bruker = await _db.Brukere.FirstOrDefaultAsync(b => b.Id == id);
             if (bruker is null)
@@ -34,7 +34,7 @@ namespace FullstackService.DAL
             return new BrukerDTO{Id = bruker.Id, Brukernavn = bruker.Brukernavn};
         }
 
-        public async Task<Bruker> LeggTil(BrukerDTO bruker)
+        public async Task<Bruker> LeggTilBrukerAsync(BrukerDTO bruker)
         {
             var salt = LagSalt();
             var hash = HashPassord(bruker.Passord, salt);
@@ -53,7 +53,7 @@ namespace FullstackService.DAL
             return b;
         }
 
-        public async Task<BrukerDTO> VerifiserBruker(BrukerDTO bruker)
+        public async Task<BrukerDTO> VerifiserBrukerAsync(BrukerDTO bruker)
         {
             var dbBruker = await _db.Brukere.FirstOrDefaultAsync(b => b.Brukernavn == bruker.Brukernavn);
             if (dbBruker is null)
@@ -72,12 +72,12 @@ namespace FullstackService.DAL
             return null;
         }
 
-        public async Task Endre(int id, BrukerDTO bruker)
+        public async Task EndreBrukerAsync(int id, BrukerDTO bruker)
         {
             var brukeren = await _db.Bestillinger.FirstOrDefaultAsync(b => b.Id == id);
         }
 
-        public async Task<int> Slett(int id)
+        public async Task<int> SlettBrukerAsync(int id)
         {
             var bruker = await _db.Brukere.FirstOrDefaultAsync(b => b.Id == id);
             _db.Brukere.Remove(bruker);
@@ -85,7 +85,7 @@ namespace FullstackService.DAL
             return await _db.SaveChangesAsync();
         }
 
-        public async Task<int> Lagre()
+        public async Task<int> LagreAsync()
         {
             return await _db.SaveChangesAsync();
         }

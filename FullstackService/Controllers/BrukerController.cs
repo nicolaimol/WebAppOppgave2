@@ -29,7 +29,7 @@ namespace FullstackService.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            var brukere = await _db.HentAlle();
+            var brukere = await _db.HentAlleBrukereAsync();
             return Ok(brukere);
         }
 
@@ -40,7 +40,7 @@ namespace FullstackService.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            var bruker = await _db.HentEn(id);
+            var bruker = await _db.HentEnBrukerByIdAsync(id);
             if (bruker != null)
             {
                 return Ok(bruker);
@@ -51,7 +51,7 @@ namespace FullstackService.Controllers
         [HttpPost("auth", Name = "VerifiserBruker")]
         public async Task<ActionResult> VerifiserBruker([FromBody] BrukerDTO bruker)
         {
-            var hentetBruker = await _db.VerifiserBruker(bruker);
+            var hentetBruker = await _db.VerifiserBrukerAsync(bruker);
 
             if (hentetBruker is null)
             {
@@ -87,7 +87,7 @@ namespace FullstackService.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            var returBruker = await _db.LeggTil(bruker);
+            var returBruker = await _db.LeggTilBrukerAsync(bruker);
             return CreatedAtRoute(nameof(HentBruker), new {Id = returBruker.Id}, 
                 new Bruker{Id = returBruker.Id, Brukernavn = returBruker.Brukernavn});
         }
@@ -109,7 +109,7 @@ namespace FullstackService.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            if (await _db.Slett(id) >= 0)
+            if (await _db.SlettBrukerAsync(id) >= 0)
             {
                 return NoContent();
             }

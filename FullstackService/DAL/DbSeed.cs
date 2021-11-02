@@ -167,10 +167,10 @@ namespace FullstackService.DAL
 
         private async static void SeedAdminUser(IBrukerRepo repo)
         {
-            if ((await repo.HentAlle()).Count == 0)
+            if ((await repo.HentAlleBrukereAsync()).Count == 0)
             {
                 Console.WriteLine("--> SEEDING ADMIN USER");
-                await repo.LeggTil(new BrukerDTO {Brukernavn = "admin", Passord = "admin"});
+                await repo.LeggTilBrukerAsync(new BrukerDTO {Brukernavn = "admin", Passord = "admin"});
             }
         }
     }

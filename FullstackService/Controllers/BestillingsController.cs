@@ -26,7 +26,7 @@ namespace FullstackService.Controllers
         public async Task<ActionResult> HentAlleBestillingerAsync()
         {
             _log.LogInformation("HentAlle()");
-            var bestillinger = await _db.HentAlle();
+            var bestillinger = await _db.HentAlleBestillingerAsync();
             return Ok(bestillinger);
         }
 
@@ -34,7 +34,7 @@ namespace FullstackService.Controllers
         public async Task<ActionResult> HentBestillingByIdAsync(int id)
         {
             _log.LogInformation($"HentEn({id})");
-            var bestilling = await _db.HentEn(id);
+            var bestilling = await _db.HentEnBestillingAsync(id);
             if (bestilling != null)
             {
                 return Ok(bestilling);
@@ -46,7 +46,7 @@ namespace FullstackService.Controllers
         [HttpGet("ref/{referanse}", Name = "HentBestillingByRefAsync")]
         public async Task<ActionResult> HentBestillingByRefAsync(string referanse)
         {
-            var bestilling = await _db.HentEnByRef(referanse);
+            var bestilling = await _db.HentEnBestillingByRefAsync(referanse);
             if (bestilling != null)
             {
                 _log.LogInformation($"HentBestillingByRef({referanse})");
@@ -57,31 +57,33 @@ namespace FullstackService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddBestilling([FromBody]Bestilling bestilling)
+        public async Task<ActionResult> AddBestillingAsync([FromBody]Bestilling bestilling)
         {
             _log.LogInformation($"AddBestilling({bestilling})");
             bestilling.Referanse = Guid.NewGuid().ToString().Split("-")[0];
-            var returBestilling = await _db.LeggTil(bestilling);
+            var returBestilling = await _db.LeggTilBestillingAsync(bestilling);
 
-            return CreatedAtRoute(nameof(HentBestillingByRefAsync), new {Referan = returBestilling.Id}, returBestilling);
+            return CreatedAtRoute(nameof(HentBestillingByRefAsync), 
+                new {Referanse = returBestilling.Referanse}, 
+                returBestilling);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> EditBestilling([FromBody] Bestilling bestilling, int id)
+        public async Task<ActionResult> EditBestillingAsync([FromBody] Bestilling bestilling, int id)
         {
-            var dbBestilling = _db.HentEn(id).Result;
+            var dbBestilling = _db.HentEnBestillingAsync(id).Result;
 
             var returBestilling = new Bestilling();
             if (dbBestilling != null)
             {
-                returBestilling = await _db.Endre(id, bestilling);
+                returBestilling = await _db.EndreBestillingAsync(id, bestilling);
             }
             else
             {
                 return BadRequest($"No bestilling found with id {id}");
             }
 
-            int lagre = await _db.Lagre();
+            int lagre = await _db.LagreBestillingAsync();
             if (lagre > 0)
             {
                 return Ok(returBestilling);
@@ -92,9 +94,9 @@ namespace FullstackService.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteBestilling(int id)
+        public async Task<ActionResult> DeleteBestillingAsync(int id)
         {
-            if (await _db.Slett(id) >= 0)
+            if (await _db.SlettBestillingAsync(id) >= 0)
             {
                 return NoContent();
             }

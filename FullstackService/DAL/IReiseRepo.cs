@@ -6,22 +6,17 @@ namespace FullstackService.DAL
 {
     public interface IReiseRepo
     {
-        Task<bool> AddOne(Reise reise);
+        Task<bool> AddOneReiseAsync(Reise reise);
 
-        Task<Reise> GetOneById(int id);
+        Task<Reise> GetReiseByIdAsync(int id);
 
-        Task<List<Reise>> GetAll();
-
-        Task<List<Lugar>> HentLugerByReise(int reiseId);
-        Task<Lugar> CreateLugar(Lugar lugar);
-
-        Task<Lugar> UpdateLugar(Lugar lugar);
+        Task<List<Reise>> GetAllReiseAsync();
 
         Task<Post> HentPoststedByPostnummer(string postnummer);
 
-        Task<Reise> UpdateReise(int reiseId, Reise reise);
+        Task<Reise> UpdateReiseAsync(int reiseId, Reise reise);
 
-        Task<Reise> DeleteReise(int reiseId);
+        Task<Reise> DeleteReiseAsync(int reiseId);
 
         Task<List<Bilde>> GetAlleBilder();
         Task InsertBilde(Bilde bilde);
