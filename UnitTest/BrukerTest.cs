@@ -143,6 +143,7 @@ namespace UnitTest
             Assert.Equal<BrukerDTO>(bruker1, (BrukerDTO)resultat.Value);
 
         }
+        
         [Fact]
         public async Task VerifiserBrukerTestFail()
         {
@@ -220,7 +221,7 @@ namespace UnitTest
             Assert.Equal((int)HttpStatusCode.Created, resultat.StatusCode);
             Assert.Equal<Bruker>(bruker, (Bruker)resultat.Value); // fungerer ikke
 
-        }
+        } // feiler
         
         [Fact]
         public async Task AddBrukerTestFail()
