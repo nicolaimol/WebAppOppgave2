@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -66,6 +67,14 @@ namespace FullstackService.DAL
             if (hash.SequenceEqual(dbBruker.PassordHash))
             {
                 bruker.Passord = "";
+                _db.Logs.Add(new Log
+                {
+                    Beskrivelse = "Bruker logget inn",
+                    Bruker = dbBruker,
+                    DatoEndret = DateTime.Now
+                });
+                await _db.SaveChangesAsync();
+                Console.WriteLine("--> logget login");
                 return bruker;
             }
 

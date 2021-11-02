@@ -9,10 +9,12 @@ namespace FullstackService.DAL
     public class BestillingRepo: IBestillingRepo
     {
         private readonly MyDBContext _db;
+        private readonly ILogRepo _log;
 
-        public BestillingRepo(MyDBContext db)
+        public BestillingRepo(MyDBContext db, ILogRepo log)
         {
             _db = db;
+            _log = log;
         }
         
         public async Task<List<Bestilling>> HentAlleBestillingerAsync()
@@ -23,6 +25,8 @@ namespace FullstackService.DAL
         public async Task<Bestilling> HentEnBestillingAsync(int id)
         {
             var bestilling = await _db.Bestillinger.FirstOrDefaultAsync(k => k.Id == id);
+
+            //await _log.LogAsync($"Hentet bestilling på id: {id}");
 
             return bestilling;
         }
@@ -74,6 +78,8 @@ namespace FullstackService.DAL
             dbBesilling.HjemreiseDato = bestilling.HjemreiseDato;
             dbBesilling.Registreringsnummer = bestilling.Registreringsnummer;
 
+            await _log.LogAsync($"endret bestilling med id: {id}");
+
             return dbBesilling;
         }
 
@@ -86,6 +92,8 @@ namespace FullstackService.DAL
         {
             var bestilling = await _db.Bestillinger.FirstOrDefaultAsync(b => b.Id == id);
             _db.Bestillinger.Remove(bestilling);
+
+            await _log.LogAsync($"SLettet bestilling med id: {id}");
 
             return await _db.SaveChangesAsync();
         }

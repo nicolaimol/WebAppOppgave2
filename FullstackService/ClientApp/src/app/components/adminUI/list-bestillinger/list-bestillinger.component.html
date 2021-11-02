@@ -20,7 +20,7 @@
                     <td>{{bestilling.kontaktPerson.fornavn + " " + bestilling.kontaktPerson.etternavn}}</td>
                     <td>{{bestilling.utreiseDato}}</td>
                     <td><button [routerLink]="['/admin/bestillinger', bestilling.id]" class="btn btn-outline-info"><span class="material-icons">edit</span></button></td>
-                    <td><button class="btn btn-outline-danger"><span class="material-icons">delete</span></button></td>
+                    <td><button (click)="slett(bestilling.id)" class="btn btn-outline-danger"><span class="material-icons">delete</span></button></td>
                 </tr>
             </tbody>
         </table>

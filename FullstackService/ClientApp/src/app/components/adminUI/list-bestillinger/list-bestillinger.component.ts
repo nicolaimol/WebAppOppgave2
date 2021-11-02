@@ -26,6 +26,14 @@ export class ListBestillingerComponent implements OnInit {
 
   }
 
+  slett(id: number) {
+    
+    this.bestillingService.slettBestillingById(id).subscribe(b => {
+      this.bestillinger = this.bestillinger.filter(b => b.id != id)
+    })
+    
+  }
+
 
 
 }

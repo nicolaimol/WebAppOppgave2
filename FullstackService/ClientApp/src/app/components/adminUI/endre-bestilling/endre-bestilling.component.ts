@@ -16,10 +16,10 @@ export class EndreBestillingComponent implements OnInit {
   id:number = -1;
   bestilling: Bestilling = null;
 
-  constructor(private bestillingService: BestillingService, 
-    private router: Router, 
-    private authService: AuthService, 
-    private route: ActivatedRoute, 
+  constructor(private bestillingService: BestillingService,
+    private router: Router,
+    private authService: AuthService,
+    private route: ActivatedRoute,
     private reisendeService: ReisendeService) { }
 
   ngOnInit() {
@@ -27,6 +27,13 @@ export class EndreBestillingComponent implements OnInit {
 
     this.bestillingService.hentBestillingById(this.id).subscribe(b => {
       this.bestilling = b;
+    }, error => {
+      if (error.status === 401) {
+        this.router.navigate(['/admin'])
+      }
+      else {
+        console.log(error)
+      }
     })
   }
 

@@ -1,15 +1,18 @@
 using System.Threading.Tasks;
 using FullstackService.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FullstackService.DAL
 {
     public class ReisendeRepo: IReisendeRepo
     {
         private readonly MyDBContext _db;
+        private readonly ILogRepo _log;
 
-        public ReisendeRepo(MyDBContext db)
+        public ReisendeRepo(MyDBContext db, ILogRepo log)
         {
             _db = db;
+            _log = log;
         }
         
         public async Task<KontaktPerson> ChangeKontaktPersonAsync(int id, KontaktPerson kontaktPerson)
@@ -30,6 +33,9 @@ namespace FullstackService.DAL
 
             var antall = await _db.SaveChangesAsync();
 
+            await _log.LogAsync($"Endret kontaktperson til bestilling: " +
+                                $"{await _db.Bestillinger.FirstOrDefaultAsync(b => b.KontaktPerson == dbKontaktPerson)}");
+
             return antall > 0 ? dbKontaktPerson : null;
         }
 
@@ -47,6 +53,8 @@ namespace FullstackService.DAL
 
             var antall = await _db.SaveChangesAsync();
 
+            await _log.LogAsync($"Endret voksen med id: {voksen.Id}, med antall: {antall}");
+
             return antall > 0 ? dbVoksen : null;
         }
         
@@ -63,6 +71,8 @@ namespace FullstackService.DAL
             dbBarn.Foedselsdato = barn.Foedselsdato;
 
             var antall = await _db.SaveChangesAsync();
+
+            await _log.LogAsync($"Endret barn med id: {barn.Id}, endringer: {antall}");
 
             return antall > 0 ? dbBarn : null;
         }

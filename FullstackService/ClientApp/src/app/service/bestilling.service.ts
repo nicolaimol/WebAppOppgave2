@@ -32,4 +32,8 @@ export class BestillingService {
   hentBestillingById(id: number): Observable<Bestilling> {
     return this.httpClient.get<Bestilling>(this.url + "/" + id);
   }
+
+  slettBestillingById(id: number): Observable<Bestilling> {
+    return this.httpClient.delete<Bestilling>(this.url + "/" + id);
+  }
 }

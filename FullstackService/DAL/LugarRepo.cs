@@ -9,10 +9,12 @@ namespace FullstackService.DAL
     public class LugarRepo: ILugarRepo
     {
         private readonly MyDBContext _db;
+        private readonly ILogRepo _log;
 
-        public LugarRepo(MyDBContext db)
+        public LugarRepo(MyDBContext db, ILogRepo log)
         {
             _db = db;
+            _log = log;
         }
         
         public async Task<List<Lugar>> HentLugerByReiseAsync(int reiseId)
@@ -24,6 +26,8 @@ namespace FullstackService.DAL
         {
             _db.Lugarer.Add(lugar);
             await _db.SaveChangesAsync();
+
+            await _log.LogAsync($"Laget ny lugar til id: {lugar.ReiseId}");
 
             return lugar;
         }
@@ -40,6 +44,8 @@ namespace FullstackService.DAL
             dbLugar.Pris = lugar.Pris;
             dbLugar.Type = lugar.Type;
 
+            await _log.LogAsync($"Endret lugar med id: {lugar.Id}");
+
             await _db.SaveChangesAsync();
             return dbLugar;
         }
@@ -54,6 +60,8 @@ namespace FullstackService.DAL
 
             var lugar = _db.Lugarer.Remove(dbLugar);
             await _db.SaveChangesAsync();
+
+            await _log.LogAsync($"Slettet lugar med id: {id}");
             
             return lugar.Entity;
         }

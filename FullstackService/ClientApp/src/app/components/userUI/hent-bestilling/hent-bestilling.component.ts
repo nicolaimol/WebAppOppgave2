@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { Bestilling } from 'src/app/interface/bestilling';
 import { BestillingService } from 'src/app/service/bestilling.service';
 
@@ -22,6 +23,8 @@ export class HentBestillingComponent implements OnInit {
     this.bestillingService.hentBestillingByRef(this.ref)
     .subscribe(bestilling => {
       this.notifyParent.emit(bestilling)
+    }, err => {
+      this.notifyParent.emit(null)
     })
   }
 

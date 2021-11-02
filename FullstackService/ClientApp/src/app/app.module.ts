@@ -29,6 +29,7 @@ import { FooterUserComponent } from './components/userUI/footer-user/footer-user
 import { AdminHomeComponent } from './components/adminUI/admin-home/admin-home.component';
 import { ListBestillingerComponent } from './components/adminUI/list-bestillinger/list-bestillinger.component';
 import { EndreBestillingComponent } from './components/adminUI/endre-bestilling/endre-bestilling.component';
+import { ListLogComponent } from './components/adminUI/list-log/list-log.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { EndreBestillingComponent } from './components/adminUI/endre-bestilling/
     FooterUserComponent,
     AdminHomeComponent,
     ListBestillingerComponent,
-    EndreBestillingComponent
+    EndreBestillingComponent,
+    ListLogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -75,8 +77,8 @@ import { EndreBestillingComponent } from './components/adminUI/endre-bestilling/
         { path: 'reiser/ny', component: LagReiseComponent},
         { path: 'lugar/:id', component: ListLugarerComponent},
         { path: 'bestillinger', component: ListBestillingerComponent},
-        { path: 'bestillinger/:id', component: EndreBestillingComponent}
-
+        { path: 'bestillinger/:id', component: EndreBestillingComponent},
+        { path: 'log', component: ListLogComponent},
       ]},
 
 

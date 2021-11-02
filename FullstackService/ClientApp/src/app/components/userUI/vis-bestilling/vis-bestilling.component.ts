@@ -24,7 +24,12 @@ export class VisBestillingComponent implements OnInit {
 
   update(bestilling: Bestilling) {
     this.bestilling = bestilling;
-    sessionStorage.setItem("bestilling", JSON.stringify(bestilling));
+    if (bestilling != null) {
+      sessionStorage.setItem("bestilling", JSON.stringify(bestilling));
+    } else {
+      sessionStorage.removeItem("bestilling")
+    }
+    
   }
 
 }
