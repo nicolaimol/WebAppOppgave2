@@ -24,7 +24,7 @@ namespace UnitTest
             };
 
             var mock = new Mock<IReiseRepo>();
-            mock.Setup(r => r.AddOneReiseAsync(reise));
+            //mock.Setup(r => r.AddOneReiseAsync())
         }
     }
 }
