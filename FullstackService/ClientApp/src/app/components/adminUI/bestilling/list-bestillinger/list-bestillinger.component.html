@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="tabell">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Referanse</th>
+                    <th>Strekning</th>
+                    <th>Kontaktperson</th>
+                    <th>Utreise</th>
+                    <th>Endre</th>
+                    <th>Slette</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bestilling of bestillinger">
+                    <td>{{bestilling.id}}</td>
+                    <td>{{bestilling.referanse}}</td>
+                    <td>{{bestilling.ferjestrekning}}</td>
+                    <td>{{bestilling.kontaktPerson.fornavn + " " + bestilling.kontaktPerson.etternavn}}</td>
+                    <td>{{bestilling.utreiseDato}}</td>
+                    <td><button [routerLink]="['/admin/bestillinger', bestilling.id]" class="btn btn-outline-info"><span class="material-icons">edit</span></button></td>
+                    <td><button (click)="slett(bestilling.id)" class="btn btn-outline-danger"><span class="material-icons">delete</span></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
