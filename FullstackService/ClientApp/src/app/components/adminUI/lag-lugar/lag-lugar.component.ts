@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Lugar } from 'src/app/interface/lugar';
+import { LugarService } from 'src/app/service/lugar.service';
 import { ReiseService } from 'src/app/service/reise.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class LagLugarComponent implements OnInit {
       antall: 0
     };
 
-  constructor(private reiseService: ReiseService) { }
+  constructor(private lugarService: LugarService) { }
 
   ngOnInit() {
     this.lugar = {
@@ -34,7 +35,7 @@ export class LagLugarComponent implements OnInit {
 
   lagre() {
     console.log(this.lugar);
-    this.reiseService.lagreLugar(this.lugar).subscribe(lugar => {
+    this.lugarService.lagreLugar(this.lugar).subscribe(lugar => {
       this.notifyParent.emit(lugar);
     }, err => {
       console.log(err);

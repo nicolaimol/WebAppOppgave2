@@ -17,10 +17,9 @@ namespace FullstackService.DAL
         public DbSet<Reise> Reiser { get; set; }
         public DbSet<Lugar> Lugarer { get; set; }
         public DbSet<Post> PostSteder { get; set; }
-        
         public DbSet<Bilde> Bilder { get; set; }
-        
         public DbSet<Bruker> Brukere { get; set; }
+        public DbSet<Log> Logs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

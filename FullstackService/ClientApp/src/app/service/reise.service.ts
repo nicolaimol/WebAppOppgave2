@@ -26,25 +26,7 @@ export class ReiseService {
     const url = `${this.url}/${id}`
     return this.httpClient.get<Reise>(url);
   }
-
-  hentAlleLugererById(id: number): Observable<Lugar[]> {
-    const url = `${this.url}/lugar/${id}`
-    return this.httpClient.get<Lugar[]>(url)
-  }
-
-  lagreLugar(lugar: Lugar): Observable<Lugar> {
-    const url = `${this.url}/lugar/`
-    return this.httpClient.post<Lugar>(url, lugar, {
-      'headers': this.httpHeaders
-    })
-  }
-
-  updateLugar(lugar: Lugar): Observable<Lugar> {
-    const url = `${this.url}/lugar/`
-    return this.httpClient.put<Lugar>(url, lugar, {
-      headers: this.httpHeaders
-    })
-  }
+  
 
   HentPostByPostnummer(postnummer: string): Observable<Post> {
     const url = `${this.url}/postnummer/${postnummer}`

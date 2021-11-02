@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Lugar } from 'src/app/interface/lugar';
+import { LugarService } from 'src/app/service/lugar.service';
 import { ReiseService } from 'src/app/service/reise.service';
 
 @Component({
@@ -10,18 +11,23 @@ import { ReiseService } from 'src/app/service/reise.service';
 export class ItemLugarerComponent implements OnInit {
 
   @Input() lugar: Lugar;
+  @Output() notifyParent = new EventEmitter<number>();
 
-  constructor(private reiseService: ReiseService) { }
+  constructor(private lugarService: LugarService) { }
 
   ngOnInit() {
   }
 
   lagre() {
-    this.reiseService.updateLugar(this.lugar).subscribe(lugar => {
+    this.lugarService.updateLugar(this.lugar).subscribe(lugar => {
       console.log(lugar)
     }, err => {
       console.log(err)
     })
+  }
+
+  slett() {
+    this.notifyParent.emit(this.lugar.id);
   }
 
 }

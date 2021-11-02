@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FullstackService.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace FullstackService.DAL
@@ -10,10 +11,12 @@ namespace FullstackService.DAL
     public class ReiseRepo: IReiseRepo
     {
         private readonly MyDBContext _db;
-        
-        public ReiseRepo(MyDBContext db)
+        private readonly ILogRepo _log;
+
+        public ReiseRepo(MyDBContext db, ILogRepo log)
         {
             _db = db;
+            _log = log;
         }
 
 
@@ -23,6 +26,8 @@ namespace FullstackService.DAL
             {
                 reise.BildeLink = await _db.Bilder.FindAsync(reise.BildeLink.Id);
             }
+
+            await _log.LogAsync($"Ny reise laget, rute: {reise.Strekning}");
             
             _db.Reiser.Add(reise);
             return (await _db.SaveChangesAsync()) > 0;
@@ -36,6 +41,8 @@ namespace FullstackService.DAL
 
         public async Task<Reise> GetReiseByIdAsync(int id)
         {
+            //await _log.LogAsync($"Henter reise med id: {id}");
+            
             return await _db.Reiser.FindAsync(id);
         }
 
@@ -61,6 +68,8 @@ namespace FullstackService.DAL
 
             await _db.SaveChangesAsync();
 
+            await _log.LogAsync($"Endrer reise med id: {dbReise.Id}");
+
             return dbReise;
         }
 
@@ -70,6 +79,9 @@ namespace FullstackService.DAL
             if (dbReise is null) return null;
             _db.Reiser.Remove(dbReise);
             await _db.SaveChangesAsync();
+
+            await _log.LogAsync($"Slettet reise, streknomg: {dbReise.Strekning}");
+                
             return dbReise;
         }
 

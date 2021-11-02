@@ -2,6 +2,7 @@ using System;
 using FullstackService.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -34,6 +35,8 @@ namespace FullstackService
             services.AddScoped<IBrukerRepo, BrukerRepo>();
             services.AddScoped<IReisendeRepo, ReisendeRepo>();
             services.AddScoped<ILugarRepo, LugarRepo>();
+            services.AddScoped<ILogRepo, LogRepo>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
             services.AddSession(options =>
             {

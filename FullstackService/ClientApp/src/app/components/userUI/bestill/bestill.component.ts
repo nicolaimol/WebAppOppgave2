@@ -4,6 +4,7 @@ import { BestillingInfo } from 'src/app/interface/bestilling';
 import { Lugar } from 'src/app/interface/lugar';
 import { Reise } from 'src/app/interface/reise';
 import { BestillingInfoService } from 'src/app/service/bestilling-info.service';
+import { LugarService } from 'src/app/service/lugar.service';
 import { ReiseService } from 'src/app/service/reise.service';
 
 @Component({
@@ -43,7 +44,10 @@ export class BestillComponent implements OnInit {
   antallVoksen: number = 1;
   pris = 0;
 
-  constructor(private reiseService: ReiseService, private bestillingInfoService: BestillingInfoService, private router: Router) {}
+  constructor(private reiseService: ReiseService, 
+              private bestillingInfoService: BestillingInfoService, 
+              private lugarService: LugarService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.reiseService.hentAlleReiser().subscribe(reiser => {
@@ -82,7 +86,7 @@ export class BestillComponent implements OnInit {
   }
 
   validerStrekning() {
-    this.reiseService.hentAlleLugererById(this.strekning).subscribe(lugarer => {
+    this.lugarService.hentAlleLugererById(this.strekning).subscribe(lugarer => {
       this.lugarer = lugarer;
     })
 
