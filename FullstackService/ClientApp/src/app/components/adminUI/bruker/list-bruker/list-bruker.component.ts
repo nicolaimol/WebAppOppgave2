@@ -19,4 +19,13 @@ export class ListBrukerComponent implements OnInit {
     })
   }
 
+  slett(id: number) {
+    this.brukerService.slettBruker(id).subscribe(data => {
+        this.brukere = this.brukere.filter(b => b.id !== id);
+    }, error => {
+      console.log(error);
+    })
+    
+  }
+
 }

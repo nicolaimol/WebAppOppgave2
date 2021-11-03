@@ -28,4 +28,8 @@ export class BrukerService {
   hentAlleBRukere(): Observable<Bruker[]> {
     return this.httpClient.get<Bruker[]>(`api/bruker`)
   }
+
+  slettBruker(id: number): Observable<Bruker> {
+    return this.httpClient.delete<Bruker>(`apu/bruker/${id}`);
+  }
 }

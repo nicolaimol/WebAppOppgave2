@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Bruker, BrukerUpdate } from 'src/app/interface/bruker';
 import { BrukerService } from 'src/app/service/bruker.service';
 
@@ -15,6 +15,8 @@ export class ItemBrukerComponent implements OnInit {
 
   constructor(private brukerService: BrukerService) { }
 
+  @Output() notifyParent = new EventEmitter<number>();
+
   ngOnInit() {
   }
 
@@ -29,6 +31,10 @@ export class ItemBrukerComponent implements OnInit {
     }, error => {
       console.log(error)
     })
+  }
+
+  slett() {
+    this.notifyParent.emit(this.bruker.id);
   }
 
 }

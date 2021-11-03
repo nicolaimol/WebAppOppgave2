@@ -23,6 +23,7 @@ li {
     line-height: 40pxem;
     font-size: 20px;
     cursor: pointer;
+    margin-top: 1em;
 }
 
 li span {
