@@ -20,7 +20,7 @@ namespace FullstackService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAllReiserAsynx()
+        public async Task<ActionResult> GetAllReiserAsync()
         {
             var reiser = await _repo.GetAllReiseAsync();
             return Ok(reiser);
