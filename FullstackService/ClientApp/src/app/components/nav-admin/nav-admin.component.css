@@ -14,3 +14,7 @@ nav {
 #navmenu {
     justify-content: flex-end;
 }
+
+p {
+    cursor: pointer;
+}

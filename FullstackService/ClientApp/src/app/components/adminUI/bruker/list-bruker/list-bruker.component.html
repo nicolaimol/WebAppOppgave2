@@ -1,6 +1,6 @@
 <div class="container">
     <div class="column">
-        <app-item-bruker *ngFor="let item of brukere"  [bruker]="item" ></app-item-bruker>
+        <app-item-bruker *ngFor="let item of brukere" (notifyParent)="slett($event)" [bruker]="item" ></app-item-bruker>
     </div>
     <div class="column">
         <app-lag-bruker></app-lag-bruker>
