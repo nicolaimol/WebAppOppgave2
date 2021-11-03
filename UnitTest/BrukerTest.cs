@@ -165,7 +165,7 @@ namespace UnitTest
         }
 
         [Fact]
-        public void LoggUtTestOk() // nei helt ærlig bare tull
+        public void LoggUtTestOk()
         {
             // Arrange
             var brukerController = new BrukerController(mockRep.Object);
@@ -174,7 +174,7 @@ namespace UnitTest
             brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
             
             // Act
-            var resultat = brukerController.LoggUt() as OkObjectResult;
+            var resultat = brukerController.LoggUt() as OkResult;
             
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
@@ -182,7 +182,7 @@ namespace UnitTest
         
 
         [Fact]
-        public void AutoriserTest() // fuck this shit da
+        public void AutoriserTest()
         {
             // Arrange
             var brukerController = new BrukerController(mockRep.Object);
@@ -191,7 +191,7 @@ namespace UnitTest
             brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
             
             // Act
-            var resultat = brukerController.AutoriserBruker() as OkObjectResult;
+            var resultat = brukerController.AutoriserBruker() as OkResult;
             
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
@@ -221,7 +221,7 @@ namespace UnitTest
             Assert.Equal((int)HttpStatusCode.Created, resultat.StatusCode);
             Assert.Equal<Bruker>(bruker, (Bruker)resultat.Value); // fungerer ikke
 
-        } // feiler
+        }
         
         [Fact]
         public async Task AddBrukerTestFail()
