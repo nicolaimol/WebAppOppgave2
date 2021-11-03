@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Bruker } from '../interface/bruker';
+import { Bruker, BrukerUpdate } from '../interface/bruker';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,13 @@ export class BrukerService {
 
   lagBruker(b: Bruker): Observable<Bruker> {
     return this.httpClient.post<Bruker>(`api/bruker`, b, {headers: this.httpHeaders});
+  }
+
+  updateBruker(b: BrukerUpdate, id: number): Observable<Bruker> {
+    return this.httpClient.put<Bruker>(`api/bruker/${id}`, b, {headers: this.httpHeaders})
+  }
+
+  hentAlleBRukere(): Observable<Bruker[]> {
+    return this.httpClient.get<Bruker[]>(`api/bruker`)
   }
 }

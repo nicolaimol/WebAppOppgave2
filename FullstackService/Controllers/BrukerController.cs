@@ -93,13 +93,24 @@ namespace FullstackService.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> EndreBruker([FromBody] BrukerDTO bruker, int id)
+        public async Task<ActionResult> EndreBruker([FromBody] BrukerUpdateDTO bruker, int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
                 return Unauthorized("Ikke logget inn");
             }
-            return Ok();
+
+            try
+            {
+                var returBruker = await _db.EndreBrukerAsync(id, bruker);
+
+                return returBruker is null ? BadRequest("Brukernavn eller passord er feil") : Ok(returBruker);
+            }
+            catch
+            {
+                return NotFound();
+            }
+            
         }
         
         [HttpDelete("{id}")]

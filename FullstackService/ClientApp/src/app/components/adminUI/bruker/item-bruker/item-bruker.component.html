@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-body">
+        <p>{{bruker.brukernavn}}</p>
+
+        <button type="button" (click)="toggle()" class="btn btn-primary">Endre</button>
+
+        <div class="mt-2" *ngIf="endre">
+            <p>Passord: <input type="password" class="form-control" placeholder="passord" [(ngModel)]="bruker.passord"></p>
+            <p>Nytt Password: <input type="password" class="form-control" placeholder="nytt passord" [(ngModel)]="bruker.NyttPassord"></p>
+            <button class="btn btn-success" (click)="update()">Lagre</button>
+        </div>
+    </div>
+</div>
+

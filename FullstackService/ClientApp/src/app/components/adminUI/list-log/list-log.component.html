@@ -1,0 +1,20 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Brukernavn</th>
+                <th>Beskrivelse</th>
+                <th>Dato</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of logs">
+                <td>{{log.id}}</td>
+                <td>{{log.bruker.brukernavn}}</td>
+                <td>{{log.beskrivelse}}</td>
+                <td>{{log.datoEndret | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

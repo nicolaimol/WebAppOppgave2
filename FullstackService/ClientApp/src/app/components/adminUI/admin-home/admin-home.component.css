@@ -12,3 +12,20 @@ button {
     justify-content: flex-end;
     width: 100%;
 }
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    line-height: 40pxem;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+li span {
+
+    margin-right: 1em;
+}
