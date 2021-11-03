@@ -39,6 +39,7 @@
 
     <ItemGroup>
       <Folder Include="ClientApp\src\app\components\adminUI" />
+      <Folder Include="ClientApp\src\app\components\adminUI\lag-bruker" />
       <Folder Include="ClientApp\src\app\components\userUI" />
     </ItemGroup>
 

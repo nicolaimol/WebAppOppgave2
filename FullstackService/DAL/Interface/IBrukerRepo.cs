@@ -18,7 +18,7 @@ namespace FullstackService.DAL
 
         Task<BrukerDTO> VerifiserBrukerAsync(BrukerDTO bruker);
 
-        Task EndreBrukerAsync(int id, BrukerDTO bruker);
+        Task<BrukerDTO> EndreBrukerAsync(int id, BrukerUpdateDTO bruker);
 
         Task<int> SlettBrukerAsync(int id);
 

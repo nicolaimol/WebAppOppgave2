@@ -2,9 +2,13 @@
     <app-login></app-login>
 </div>
 <div *ngIf="validUser" class="container">
-    <h3>Velkommen {{user}}</h3>
+    <h3 class="mb-2">Velkommen {{user}}</h3>
 
-    <div class="right">
-        <app-lag-bruker></app-lag-bruker>
-    </div>
+
+    <ul>
+        <li [routerLink]="['reiser']"><span class="material-icons-outlined">directions_boat</span>Reiser</li>
+        <li [routerLink]="['bestillinger']"><span class="material-icons-outlined">toc</span>Bestillinger</li>
+        <li [routerLink]="['bruker']"><span class="material-icons-outlined">account_box</span>Brukere</li>
+        <li [routerLink]="['log']"><span class="material-icons-outlined">analytics</span>Log</li>
+    </ul>
 </div>

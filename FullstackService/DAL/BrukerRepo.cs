@@ -81,9 +81,27 @@ namespace FullstackService.DAL
             return null;
         }
 
-        public async Task EndreBrukerAsync(int id, BrukerDTO bruker)
+        public async Task<BrukerDTO> EndreBrukerAsync(int id, BrukerUpdateDTO innBruker)
         {
-            var brukeren = await _db.Bestillinger.FirstOrDefaultAsync(b => b.Id == id);
+            var dbBruker = await _db.Brukere.FindAsync(id);
+
+            if (dbBruker is null)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            var hash = HashPassord(innBruker.Passord, dbBruker.Salt);
+
+            if (hash.SequenceEqual(dbBruker.PassordHash))
+            {
+                dbBruker.PassordHash = HashPassord(innBruker.NyttPassord, dbBruker.Salt);
+                await _db.SaveChangesAsync();
+
+                return new BrukerDTO {Id = dbBruker.Id, Brukernavn = dbBruker.Brukernavn};
+            }
+
+            return null;
+
         }
 
         public async Task<int> SlettBrukerAsync(int id)
