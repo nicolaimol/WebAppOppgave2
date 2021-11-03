@@ -1,0 +1,7 @@
+.card > * {
+    margin: 1rem;
+}
+
+.card {
+    max-width: 20rem;
+}

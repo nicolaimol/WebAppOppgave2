@@ -2,8 +2,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Reise } from 'src/app/interface/reise';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { ModalSlettComponent } from '../../modal-slett/modal-slett.component';
-import {ReiseService} from '../../../service/reise.service';
+import { ModalSlettComponent } from '../../../modal-slett/modal-slett.component';
+import {ReiseService} from '../../../../service/reise.service';
 
 @Component({
   selector: 'app-reise-item',

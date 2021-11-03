@@ -16,4 +16,8 @@ export class BrukerService {
     const url = "api/bruker/auth";
     return this.httpClient.post<Bruker>(url, b, {headers:this.httpHeaders});
   }
+
+  lagBruker(b: Bruker): Observable<Bruker> {
+    return this.httpClient.post<Bruker>(`api/bruker`, b, {headers: this.httpHeaders});
+  }
 }

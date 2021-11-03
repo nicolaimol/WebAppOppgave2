@@ -9,27 +9,28 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/userUI/home/home.component';
 import { LoginComponent } from './components/adminUI/login/login.component';
 import { AdminComponent } from './components/adminUI/admin/admin.component';
-import { VisreiserComponent } from './components/adminUI/visreiser/visreiser.component';
-import { ReiseItemComponent } from './components/adminUI/reise-item/reise-item.component';
+import { VisreiserComponent } from './components/adminUI/reise/visreiser/visreiser.component';
+import { ReiseItemComponent } from './components/adminUI/reise/reise-item/reise-item.component';
 import { ReisendeComponent } from './components/userUI/reisende/reisende.component';
 import { BestillComponent } from './components/userUI/bestill/bestill.component';
 import { NavAdminComponent } from './components/nav-admin/nav-admin.component';
 import { KontaktPersonComponent } from './components/userUI/kontakt-person/kontakt-person.component';
 import { KundeComponent } from './components/userUI/kunde/kunde.component';
-import { EndreReiseComponent } from './components/adminUI/endre-reise/endre-reise.component';
-import { LagReiseComponent } from './components/adminUI/lag-reise/lag-reise.component';
+import { EndreReiseComponent } from './components/adminUI/reise/endre-reise/endre-reise.component';
+import { LagReiseComponent } from './components/adminUI/reise/lag-reise/lag-reise.component';
 import { VisBestillingComponent } from './components/userUI/vis-bestilling/vis-bestilling.component';
 import { HentBestillingComponent } from './components/userUI/hent-bestilling/hent-bestilling.component';
-import { ListLugarerComponent } from './components/adminUI/list-lugarer/list-lugarer.component';
-import { ItemLugarerComponent } from './components/adminUI/item-lugarer/item-lugarer.component';
-import { LagLugarComponent } from './components/adminUI/lag-lugar/lag-lugar.component';
+import { ListLugarerComponent } from './components/adminUI/lugar/list-lugarer/list-lugarer.component';
+import { ItemLugarerComponent } from './components/adminUI/lugar/item-lugarer/item-lugarer.component';
+import { LagLugarComponent } from './components/adminUI/lugar/lag-lugar/lag-lugar.component';
 import { ModalSlettComponent } from './components/modal-slett/modal-slett.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterUserComponent } from './components/userUI/footer-user/footer-user.component';
 import { AdminHomeComponent } from './components/adminUI/admin-home/admin-home.component';
-import { ListBestillingerComponent } from './components/adminUI/list-bestillinger/list-bestillinger.component';
-import { EndreBestillingComponent } from './components/adminUI/endre-bestilling/endre-bestilling.component';
+import { ListBestillingerComponent } from './components/adminUI/bestilling/list-bestillinger/list-bestillinger.component';
+import { EndreBestillingComponent } from './components/adminUI/bestilling/endre-bestilling/endre-bestilling.component';
 import { ListLogComponent } from './components/adminUI/list-log/list-log.component';
+import { LagBrukerComponent } from './components/adminUI/lag-bruker/lag-bruker.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ListLogComponent } from './components/adminUI/list-log/list-log.compone
     AdminHomeComponent,
     ListBestillingerComponent,
     EndreBestillingComponent,
-    ListLogComponent
+    ListLogComponent,
+    LagBrukerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
