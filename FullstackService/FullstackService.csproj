@@ -35,7 +35,6 @@
         <None Include="wwwroot\res\Flag_of_Sweden.svg" />
         <None Include="wwwroot\res\nets_logo.png" />
         <None Include="wwwroot\res\SuperSpeed_2.jpg" />
-        <None Remove="Bestillig.db" />
     </ItemGroup>
 
     <ItemGroup>
