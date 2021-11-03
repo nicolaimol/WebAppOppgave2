@@ -12,6 +12,9 @@ import { LogService } from 'src/app/service/log.service';
 export class ListLogComponent implements OnInit {
 
   logs: Log[] = [];
+  logView: Log[] = [];
+  sok: string = "";
+  filterValg: string = "brukernavn";
 
   constructor(private logService: LogService, 
               private authService: AuthService, 
@@ -29,8 +32,38 @@ export class ListLogComponent implements OnInit {
     })
 
     this.logService.hentAlleLog().subscribe(logs => {
+      console.log(logs)
       this.logs = logs;
+      this.filter();
     })
+  }
+
+  filter() {
+    if(this.sok === "") {
+      this.logView = this.logs;
+    }
+    else {
+        switch (this.filterValg) {
+          case "brukernavn": 
+              this.logView = this.logs.filter(l => {
+                  return l.bruker.brukernavn.toLocaleLowerCase().startsWith(this.sok.toLocaleLowerCase(), 0)
+              })
+              break;
+          case "beskrivelse":
+              this.logView = this.logs.filter(l => {
+                  return l.beskrivelse.toLocaleLowerCase().includes(this.sok.toLocaleLowerCase())
+              })
+              break;
+          case "tid":
+              this.logView = this.logs.filter(l => {
+                  return (l.datoEndret.toLocaleString("dd:MM:yyyy HH:mm:ss").includes(this.sok) )
+              })
+              break;
+          default:
+              this.logView = this.logs;
+              break;
+        }
+    }
   }
 
 }

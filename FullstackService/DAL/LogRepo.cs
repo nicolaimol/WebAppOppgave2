@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FullstackService.Models;
 using Microsoft.AspNetCore.Http;
@@ -48,7 +49,17 @@ namespace FullstackService.DAL
 
         public async Task<List<Log>> HentLogAsync()
         {
-            return await _db.Logs.ToListAsync();
+            return (await _db.Logs.ToListAsync()).Select(l => new Log
+            {
+                Id = l.Id,
+                Bruker = new Bruker
+                {
+                    Brukernavn = l.Bruker.Brukernavn,
+                    Id = l.Bruker.Id
+                },
+                Beskrivelse = l.Beskrivelse,
+                DatoEndret = l.DatoEndret
+            }).ToList();
         }
     }
 }

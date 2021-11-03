@@ -29,10 +29,10 @@
                     <a [routerLink]="['bestillinger']" class="nav-link">Bestillinger</a>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['log']" class="nav-link">Log</a>
+                    <a [routerLink]="['log']" class="nav-link">Logg</a>
                 </li>
-                <li *ngIf="hei" class="nav-item">
-                    <button (click)="loggUt()" type="button" class="btn btn-outline-warning">Logg ut</button>
+                <li *ngIf="hei" class="nav-item ml-4">
+                    <button (click)="loggUt()" type="button" class="btn btn-outline-light">Logg ut</button>
                 </li>
             </ul>
         </div>

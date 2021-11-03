@@ -15,15 +15,7 @@ export class AdminHomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.auth.subscribe(auth => {
-      if (!auth) {
-        this.authService.checkAuth().subscribe(c => {
-          this.validUser = true;
-          this.authService.changeAuth(true);
-        }, err => {this.validUser = false})
-      }
-      else {
         this.validUser = auth;
-      }
     })
 
     this.authService.changeUser(sessionStorage.getItem("user"))

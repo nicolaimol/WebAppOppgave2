@@ -1,6 +1,9 @@
-.container {
+.center {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
 }
 
 button {
@@ -46,6 +49,10 @@ li:hover {
 
 
 li:hover span {
-    color: greenyellow;
+    color: white;
     margin-right: 1em;
+}
+
+p {
+    text-align: center;
 }

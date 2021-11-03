@@ -13,10 +13,12 @@ namespace FullstackService.DAL
     public class BrukerRepo: IBrukerRepo
     {
         private readonly MyDBContext _db;
+        private readonly ILogRepo _log;
 
-        public BrukerRepo(MyDBContext db)
+        public BrukerRepo(MyDBContext db, ILogRepo log)
         {
             _db = db;
+            _log = log;
         }
 
 
@@ -48,6 +50,8 @@ namespace FullstackService.DAL
             };
 
             bruker.Passord = "";
+
+            await _log.LogAsync($"Ny bruker opprettet med brukernavn; {bruker.Brukernavn}");
 
             _db.Brukere.Add(b);
             await _db.SaveChangesAsync();
@@ -97,6 +101,8 @@ namespace FullstackService.DAL
                 dbBruker.Salt = LagSalt();
                 dbBruker.PassordHash = HashPassord(innBruker.NyttPassord, dbBruker.Salt);
                 await _db.SaveChangesAsync();
+                
+                await _log.LogAsync($"Endret passord for bruker: {dbBruker.Brukernavn}");
 
                 return new BrukerDTO {Id = dbBruker.Id, Brukernavn = dbBruker.Brukernavn};
             }

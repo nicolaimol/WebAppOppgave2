@@ -1,14 +1,23 @@
 <div *ngIf="!validUser" class="container">
+
+    <h5 class="ml-4">Vennligst logg inn for å få administrator-tilgang</h5>
+
+
+
     <app-login></app-login>
 </div>
-<div *ngIf="validUser" class="container">
-    <h3 class="mb-2">Velkommen {{user}}</h3>
+<div *ngIf="validUser" class="container center">
+    <h3 class="mb-4">Velkommen {{user}}</h3>
 
+    <p>
+        Her kan du endre reiser, bestillinger og brukere<br>
+        I tillegg har du en logg med oversikt over endringer i databasen
+    </p>
 
     <ul>
         <li [routerLink]="['reiser']"><span class="material-icons-outlined">directions_boat</span>Reiser</li>
         <li [routerLink]="['bestillinger']"><span class="material-icons-outlined">toc</span>Bestillinger</li>
         <li [routerLink]="['bruker']"><span class="material-icons-outlined">account_box</span>Brukere</li>
-        <li [routerLink]="['log']"><span class="material-icons-outlined">analytics</span>Log</li>
+        <li [routerLink]="['log']"><span class="material-icons-outlined">analytics</span>Logg</li>
     </ul>
 </div>

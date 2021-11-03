@@ -1,15 +1,26 @@
 <div class="container">
+    <div class="right">
+        <p>Søk i logg</p>
+        <div class="sok input-group mb-2">
+            <select class="form-control" [(ngModel)]="filterValg" (change)="filter()">
+                <option selected value="brukernavn">Brukernavn</option>
+                <option value="beskrivelse">Beskrivelse</option>
+                <option value="tid">Tid</option>
+            </select>
+            <input class="form-control" (keyup)="filter()" type="text" placeholder="søk" [(ngModel)]="sok">
+        </div>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+                <th class="id">Id</th>
                 <th>Brukernavn</th>
                 <th>Beskrivelse</th>
                 <th>Dato</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let log of logs">
+            <tr *ngFor="let log of logView">
                 <td>{{log.id}}</td>
                 <td>{{log.bruker.brukernavn}}</td>
                 <td>{{log.beskrivelse}}</td>
