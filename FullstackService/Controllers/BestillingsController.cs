@@ -86,26 +86,16 @@ namespace FullstackService.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            
-            var dbBestilling = _db.HentEnBestillingAsync(id).Result;
 
-            var returBestilling = new Bestilling();
-            if (dbBestilling != null)
+            var endretBestilling = await _db.EndreBestillingAsync(id, bestilling);
+            if (endretBestilling is not null)
             {
-                returBestilling = await _db.EndreBestillingAsync(id, bestilling);
+                return Ok(endretBestilling);
             }
             else
             {
                 return BadRequest($"No bestilling found with id {id}");
             }
-
-            int lagre = await _db.LagreBestillingAsync();
-            if (lagre > 0)
-            {
-                return Ok(returBestilling);
-            }
-
-            return BadRequest("No changes made");
 
         }
 

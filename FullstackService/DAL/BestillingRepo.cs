@@ -74,6 +74,11 @@ namespace FullstackService.DAL
         public async Task<Bestilling> EndreBestillingAsync(int id, Bestilling bestilling)
         {
             var dbBesilling = await _db.Bestillinger.FindAsync(id);
+            if (dbBesilling is null)
+            {
+                return null;
+            }
+            
             dbBesilling.UtreiseDato = bestilling.UtreiseDato;
             dbBesilling.HjemreiseDato = bestilling.HjemreiseDato;
             dbBesilling.Registreringsnummer = bestilling.Registreringsnummer;
