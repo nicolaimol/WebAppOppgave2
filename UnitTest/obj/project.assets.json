@@ -7793,6 +7793,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "FullstackService >= 1.0.0",
+      "Microsoft.EntityFrameworkCore.Analyzers >= 5.0.11",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "Moq.EntityFrameworkCore >= 5.0.0.2",
       "coverlet.collector >= 3.0.2",
@@ -7843,6 +7844,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[5.0.11, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[16.9.4, )"

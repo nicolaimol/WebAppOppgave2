@@ -9,6 +9,7 @@
       "UnitTest/1.0.0": {
         "dependencies": {
           "FullstackService": "1.0.0",
+          "Microsoft.EntityFrameworkCore.Analyzers": "5.0.11",
           "Microsoft.NET.Test.Sdk": "16.9.4",
           "Moq.EntityFrameworkCore": "5.0.0.2",
           "coverlet.collector": "3.0.2",

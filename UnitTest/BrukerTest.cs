@@ -32,7 +32,7 @@ namespace UnitTest
         [Fact]
         public async Task HentAlleTestOk()
         {
-            
+            // Arrange
             var bruker1 = new BrukerDTO {Id = 1, Brukernavn = "Per", Passord = "Askeladden"};
             var bruker2 = new BrukerDTO {Id = 2, Brukernavn = "Pål", Passord = "Askeladden"};
             var bruker3 = new BrukerDTO {Id = 3, Brukernavn = "Espen", Passord = "Askeladden"};
@@ -50,8 +50,10 @@ namespace UnitTest
             mockHttpContext.Setup(s => s.Session).Returns(mockSession);
             brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
 
+            // Act
             var resultat = await brukerController.HentAlle() as OkObjectResult;
             
+            // Assert
             Assert.Equal((int)HttpStatusCode.OK,resultat.StatusCode);
             Assert.Equal<List<BrukerDTO>>(brukerListe,(List<BrukerDTO>)resultat.Value);
         }
