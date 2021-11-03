@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Security.Cryptography;
+using System.Text.Json;
 using System.Threading.Tasks;
 using FullstackService.Controllers;
 using FullstackService.DAL;
@@ -198,12 +199,30 @@ namespace UnitTest
 
         }
         
+        public byte[] HashPassord(string uhashet, byte[] salt)
+        {
+            return KeyDerivation.Pbkdf2(password: uhashet, salt: salt, prf: KeyDerivationPrf.HMACSHA512,
+                iterationCount: 1000, numBytesRequested: 32);
+        }
+
+        public byte[] LagSalt()
+        {
+            var csp = new RNGCryptoServiceProvider();
+            var salt = new byte[24];
+            csp.GetBytes(salt);
+            return salt;
+        }
+        
         [Fact]
         public async Task AddBrukerTestOk()
         {
+
+            Byte[] salt = LagSalt();
+            Byte[] hash = HashPassord("Askeladden", salt);
+            
             // Arrange
             var bruker1 = new BrukerDTO() {Id = 1, Brukernavn = "Per", Passord = "Askeladden"};
-            var bruker = new Bruker() {Id = 1, Brukernavn = "Per", Salt = null, PassordHash = null};
+            var bruker = new Bruker() {Id = 1, Brukernavn = "Per", Salt = salt, PassordHash = hash};
             
             mockRep.Setup(b => b.LeggTilBrukerAsync(bruker1)).ReturnsAsync(bruker);
             
@@ -218,8 +237,12 @@ namespace UnitTest
             var resultat = await brukerController.AddBruker(bruker1) as CreatedAtRouteResult;
             
             // Assert
+
+            var string1 = JsonSerializer.Serialize((Bruker)resultat.Value);
+            var string2 = JsonSerializer.Serialize(new Bruker {Id = 1, Brukernavn = "Per"});
+            
             Assert.Equal((int)HttpStatusCode.Created, resultat.StatusCode);
-            Assert.Equal<Bruker>(bruker, (Bruker)resultat.Value); // fungerer ikke
+            Assert.Equal(string2,string1); 
 
         }
         
@@ -251,7 +274,73 @@ namespace UnitTest
         [Fact]
         public async Task EndreBrukerTestOk()
         {
-            // Ikke vits siden den ikke er implementert
+            // Arrange
+            var bruker1 = new BrukerUpdateDTO {Brukernavn = "Per", NyttPassord = "Askeladden", Passord = "Passord123"};
+            var bruker = new BrukerDTO() {Id = 1, Brukernavn = "Per"};
+
+            mockRep.Setup(b => b.EndreBrukerAsync(1, bruker1)).ReturnsAsync(bruker);
+
+            var brukerController = new BrukerController(mockRep.Object);
+            
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            
+            brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
+            
+            // Act
+            var resultat = await brukerController.EndreBruker(bruker1, 1) as OkObjectResult;
+            
+            // Assert
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<BrukerDTO>(bruker, (BrukerDTO)resultat.Value);
+        }
+        
+        [Fact]
+        public async Task EndreBrukerTestFail()
+        {
+            // Arrange
+            var bruker1 = new BrukerUpdateDTO {Brukernavn = "Per", NyttPassord = "Askeladden", Passord = "Passord123"};
+            var bruker = new BrukerDTO() {Id = 1, Brukernavn = "Per"};
+
+            mockRep.Setup(b => b.EndreBrukerAsync(1, bruker1)).ReturnsAsync(bruker);
+
+            var brukerController = new BrukerController(mockRep.Object);
+            
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            
+            brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
+            
+            // Act
+            var resultat = await brukerController.EndreBruker(bruker1, 1) as UnauthorizedObjectResult;
+            
+            // Assert
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+        
+        [Fact]
+        public async Task EndreBrukerTestBad()
+        {
+            // Arrange
+            var bruker1 = new BrukerUpdateDTO {Brukernavn = "Per", NyttPassord = "Askeladden", Passord = "Passord123"};
+            var bruker = new BrukerDTO() {Id = 1, Brukernavn = "Per"};
+
+            mockRep.Setup(b => b.EndreBrukerAsync(1, bruker1)).ReturnsAsync(()=>null);
+
+            var brukerController = new BrukerController(mockRep.Object);
+            
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            
+            brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
+            
+            // Act
+            var resultat = await brukerController.EndreBruker(bruker1, 1) as BadRequestObjectResult;
+            
+            // Assert
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Brukernavn eller passord er feil", resultat.Value);
         }
 
         [Fact]
