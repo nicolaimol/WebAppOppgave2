@@ -22,44 +22,59 @@ namespace UnitTest
 
         private readonly Mock<IBestillingRepo> mockRep = new Mock<IBestillingRepo>();
         private readonly Mock<ILogger<BestillingsController>> mockLog = new Mock<ILogger<BestillingsController>>();
-        
+
 
         private readonly Mock<HttpContext> mockHttpContext = new Mock<HttpContext>();
         private readonly MockHTTPSession mockSession = new MockHTTPSession();
-        
+
         [Fact]
         public async Task HentAlleTestOk()
         {
             // Arrange
-            var bestilling1 = new Bestilling
+            var reise = new Reise
             {
-                Id = 1, Pris = 10, Referanse = "hei", Registreringsnummer = null,
-                AntallLugarer = 1, UtreiseDato = "12-12-2021", ReiseId = 1, 
-                LugarType = {Id = 1}, Barn = new List<Barn>(), Reise = {Id = 1}, HjemreiseDato = null, 
-                Voksne = new List<Voksen>(), KontaktPerson = {Id = 1}
+                Id = 1, Info = "Heisann", Strekning = "Larvik-Hirtshals", MaLugar = false,
+                PrisBil = 200, PrisPerGjest = 200, BildeLink = new Bilde {Id = 1, Url = "res/bild.jpg"}
             };
+            var kontaktPerson = new KontaktPerson
+            {
+                Id = 1, Adresse = "Tulleveien 9", Epost = "eksempel@post.com",
+                Etternavn = "Etternavnsen", Fornavn = "Fornavn", Foedselsdato = "05-05-2000",
+                Post = new Post {PostNummer = "6457", PostSted = "Bolsøya"}, Telefon = "91234567"
+            };
+            var enLugar = new Lugar {Antall = 1, Id = 1, Pris = 200, Reise = reise, ReiseId = 1, Type = "***"};
+
+            var bestilling = new Bestilling
+            {
+                Id = 5, Pris = 2000, Referanse = "ab12cd34", Registreringsnummer = "EL 11777", AntallLugarer = 1,
+                UtreiseDato = "10-10-2021", HjemreiseDato = "10-11-2021", ReiseId = 1,
+                Voksne = new List<Voksen>(), Barn = new List<Barn>(),
+                Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+
             var bestilling2 = new Bestilling
             {
-                Id = 2, Pris = 10, Referanse = "hellu", Registreringsnummer = null,
-                AntallLugarer = 1, UtreiseDato = "11-12-2021", ReiseId = 2, 
-                LugarType = {Id = 2}, Barn = new List<Barn>(), Reise = {Id = 2}, HjemreiseDato = null, 
-                Voksne = new List<Voksen>(), KontaktPerson = {Id = 2}
+                Id = 6, Pris = 3000, Referanse = "abc123df", Registreringsnummer = "UR 34234", AntallLugarer = 1,
+                UtreiseDato = "11-10-2021", HjemreiseDato = "12-10-2021", ReiseId = 1, Voksne = new List<Voksen>(),
+                Barn = new List<Barn>(), Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
             };
             var bestilling3 = new Bestilling
             {
-                Id = 3, Pris = 10, Referanse = "wallah", Registreringsnummer = null,
-                AntallLugarer = 0, UtreiseDato = "10-12-2021", ReiseId = 3, 
-                LugarType = null, Barn = new List<Barn>(), Reise = {Id = 3}, HjemreiseDato = null, 
-                Voksne = new List<Voksen>(), KontaktPerson = {Id = 3}
+                Id = 7, Pris = 4000, Referanse = "12ab34cd", Registreringsnummer = "UR 32234", AntallLugarer = 1,
+                UtreiseDato = "09-09-2021", HjemreiseDato = "10-11-2021", ReiseId = 1, Voksne = new List<Voksen>(),
+                Barn = new List<Barn>(), Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
             };
 
+
+
             var bestillingsListe = new List<Bestilling>();
-            bestillingsListe.Add(bestilling1);
+            bestillingsListe.Add(bestilling);
             bestillingsListe.Add(bestilling2);
             bestillingsListe.Add(bestilling3);
 
+
             mockRep.Setup(b => b.HentAlleBestillingerAsync()).ReturnsAsync(bestillingsListe);
-            
+
             var bestillingController = new BestillingsController(mockRep.Object, mockLog.Object);
 
             mockSession[_loggetInn] = _loggetInn;
@@ -68,10 +83,278 @@ namespace UnitTest
 
             // Act
             var resultat = await bestillingController.HentAlleBestillingerAsync() as OkObjectResult;
+
+            // Assert
+            Assert.Equal((int) HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<List<Bestilling>>(bestillingsListe, (List<Bestilling>) resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentAlleTestFail()
+        {
+            // Arrange
+            var reise = new Reise
+            {
+                Id = 1, Info = "Heisann", Strekning = "Larvik-Hirtshals", MaLugar = false,
+                PrisBil = 200, PrisPerGjest = 200, BildeLink = new Bilde {Id = 1, Url = "res/bild.jpg"}
+            };
+            var kontaktPerson = new KontaktPerson
+            {
+                Id = 1, Adresse = "Tulleveien 9", Epost = "eksempel@post.com",
+                Etternavn = "Etternavnsen", Fornavn = "Fornavn", Foedselsdato = "05-05-2000",
+                Post = new Post {PostNummer = "6457", PostSted = "Bolsøya"}, Telefon = "91234567"
+            };
+            var enLugar = new Lugar {Antall = 1, Id = 1, Pris = 200, Reise = reise, ReiseId = 1, Type = "***"};
+
+            var bestilling = new Bestilling
+            {
+                Id = 5, Pris = 2000, Referanse = "ab12cd34", Registreringsnummer = "EL 11777", AntallLugarer = 1,
+                UtreiseDato = "10-10-2021", HjemreiseDato = "10-11-2021", ReiseId = 1,
+                Voksne = new List<Voksen>(), Barn = new List<Barn>(),
+                Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+
+            var bestilling2 = new Bestilling
+            {
+                Id = 6, Pris = 3000, Referanse = "abc123df", Registreringsnummer = "UR 34234", AntallLugarer = 1,
+                UtreiseDato = "11-10-2021", HjemreiseDato = "12-10-2021", ReiseId = 1, Voksne = new List<Voksen>(),
+                Barn = new List<Barn>(), Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+            var bestilling3 = new Bestilling
+            {
+                Id = 7, Pris = 4000, Referanse = "12ab34cd", Registreringsnummer = "UR 32234", AntallLugarer = 1,
+                UtreiseDato = "09-09-2021", HjemreiseDato = "10-11-2021", ReiseId = 1, Voksne = new List<Voksen>(),
+                Barn = new List<Barn>(), Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+
+
+
+            var bestillingsListe = new List<Bestilling>();
+            bestillingsListe.Add(bestilling);
+            bestillingsListe.Add(bestilling2);
+            bestillingsListe.Add(bestilling3);
+
+
+            mockRep.Setup(b => b.HentAlleBestillingerAsync()).ReturnsAsync(bestillingsListe);
+
+            var bestillingController = new BestillingsController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            bestillingController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await bestillingController.HentAlleBestillingerAsync() as UnauthorizedObjectResult;
+
+            // Assert
+            Assert.Equal((int) HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentByIdOk()
+        {
+            // Arrange
+            var reise = new Reise
+            {
+                Id = 1, Info = "Heisann", Strekning = "Larvik-Hirtshals", MaLugar = false,
+                PrisBil = 200, PrisPerGjest = 200, BildeLink = new Bilde {Id = 1, Url = "res/bild.jpg"}
+            };
+            var kontaktPerson = new KontaktPerson
+            {
+                Id = 1, Adresse = "Tulleveien 9", Epost = "eksempel@post.com",
+                Etternavn = "Etternavnsen", Fornavn = "Fornavn", Foedselsdato = "05-05-2000",
+                Post = new Post {PostNummer = "6457", PostSted = "Bolsøya"}, Telefon = "91234567"
+            };
+            var enLugar = new Lugar {Antall = 1, Id = 1, Pris = 200, Reise = reise, ReiseId = 1, Type = "***"};
+
+            var bestilling = new Bestilling
+            {
+                Id = 5, Pris = 2000, Referanse = "ab12cd34", Registreringsnummer = "EL 11777", AntallLugarer = 1,
+                UtreiseDato = "10-10-2021", HjemreiseDato = "10-11-2021", ReiseId = 1,
+                Voksne = new List<Voksen>(), Barn = new List<Barn>(),
+                Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+
+            mockRep.Setup(b => b.HentEnBestillingAsync(bestilling.Id)).ReturnsAsync(bestilling);
+
+            var bestillingController = new BestillingsController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            bestillingController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await bestillingController.HentBestillingByIdAsync(bestilling.Id) as OkObjectResult;
+
+            // Assert
+            Assert.Equal((int) HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<Bestilling>(bestilling, (Bestilling) resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentByIdFail()
+        {
+            // Arrange
+            var reise = new Reise
+            {
+                Id = 1, Info = "Heisann", Strekning = "Larvik-Hirtshals", MaLugar = false,
+                PrisBil = 200, PrisPerGjest = 200, BildeLink = new Bilde {Id = 1, Url = "res/bild.jpg"}
+            };
+            var kontaktPerson = new KontaktPerson
+            {
+                Id = 1, Adresse = "Tulleveien 9", Epost = "eksempel@post.com",
+                Etternavn = "Etternavnsen", Fornavn = "Fornavn", Foedselsdato = "05-05-2000",
+                Post = new Post {PostNummer = "6457", PostSted = "Bolsøya"}, Telefon = "91234567"
+            };
+            var enLugar = new Lugar {Antall = 1, Id = 1, Pris = 200, Reise = reise, ReiseId = 1, Type = "***"};
+
+            var bestilling = new Bestilling
+            {
+                Id = 5, Pris = 2000, Referanse = "ab12cd34", Registreringsnummer = "EL 11777", AntallLugarer = 1,
+                UtreiseDato = "10-10-2021", HjemreiseDato = "10-11-2021", ReiseId = 1,
+                Voksne = new List<Voksen>(), Barn = new List<Barn>(),
+                Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+
+            mockRep.Setup(b => b.HentEnBestillingAsync(bestilling.Id)).ReturnsAsync(bestilling);
+
+            var bestillingController = new BestillingsController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            bestillingController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat =
+                await bestillingController.HentBestillingByIdAsync(bestilling.Id) as UnauthorizedObjectResult;
+
+            // Assert
+            Assert.Equal((int) HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentByRefOk()
+        {
+            // Arrange
+            var reise = new Reise
+            {
+                Id = 1, Info = "Heisann", Strekning = "Larvik-Hirtshals", MaLugar = false,
+                PrisBil = 200, PrisPerGjest = 200, BildeLink = new Bilde {Id = 1, Url = "res/bild.jpg"}
+            };
+            var kontaktPerson = new KontaktPerson
+            {
+                Id = 1, Adresse = "Tulleveien 9", Epost = "eksempel@post.com",
+                Etternavn = "Etternavnsen", Fornavn = "Fornavn", Foedselsdato = "05-05-2000",
+                Post = new Post {PostNummer = "6457", PostSted = "Bolsøya"}, Telefon = "91234567"
+            };
+            var enLugar = new Lugar {Antall = 1, Id = 1, Pris = 200, Reise = reise, ReiseId = 1, Type = "***"};
+
+            var bestilling = new Bestilling
+            {
+                Id = 5, Pris = 2000, Referanse = "ab12cd34", Registreringsnummer = "EL 11777", AntallLugarer = 1,
+                UtreiseDato = "10-10-2021", HjemreiseDato = "10-11-2021", ReiseId = 1,
+                Voksne = new List<Voksen>(), Barn = new List<Barn>(),
+                Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+
+            mockRep.Setup(b => b.HentEnBestillingByRefAsync(bestilling.Referanse)).ReturnsAsync(bestilling);
+            var bestillingController = new BestillingsController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            bestillingController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await bestillingController.HentBestillingByRefAsync(bestilling.Referanse) as OkObjectResult;
+
+            // Assert
+            Assert.Equal((int) HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<Bestilling>(bestilling, (Bestilling) resultat.Value);
+        }
+        
+        [Fact]
+        public async Task HentByRefFail()
+        {
+            // Arrange
+            var reise = new Reise
+            {
+                Id = 1, Info = "Heisann", Strekning = "Larvik-Hirtshals", MaLugar = false,
+                PrisBil = 200, PrisPerGjest = 200, BildeLink = new Bilde {Id = 1, Url = "res/bild.jpg"}
+            };
+            var kontaktPerson = new KontaktPerson
+            {
+                Id = 1, Adresse = "Tulleveien 9", Epost = "eksempel@post.com",
+                Etternavn = "Etternavnsen", Fornavn = "Fornavn", Foedselsdato = "05-05-2000",
+                Post = new Post {PostNummer = "6457", PostSted = "Bolsøya"}, Telefon = "91234567"
+            };
+            var enLugar = new Lugar {Antall = 1, Id = 1, Pris = 200, Reise = reise, ReiseId = 1, Type = "***"};
+
+            var bestilling = new Bestilling
+            {
+                Id = 5, Pris = 2000, Referanse = "ab12cd34", Registreringsnummer = "EL 11777", AntallLugarer = 1,
+                UtreiseDato = "10-10-2021", HjemreiseDato = "10-11-2021", ReiseId = 1,
+                Voksne = new List<Voksen>(), Barn = new List<Barn>(),
+                Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+
+            mockRep.Setup(b => b.HentEnBestillingByRefAsync(bestilling.Referanse)).ReturnsAsync(()=>null);
+            
+            var bestillingController = new BestillingsController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            bestillingController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat =
+                await bestillingController.HentBestillingByRefAsync("abcd1234") as NotFoundObjectResult;
+
+            // Assert
+            Assert.Equal((int)HttpStatusCode.NotFound,resultat.StatusCode);
+            Assert.Equal("Bestilling ikke funnet på referanse: abcd1234",resultat.Value);
+        }
+
+        [Fact]
+        public async Task EditBestilling()
+        {
+            // Arrange
+            var reise = new Reise
+            {
+                Id = 1, Info = "Heisann", Strekning = "Larvik-Hirtshals", MaLugar = false,
+                PrisBil = 200, PrisPerGjest = 200, BildeLink = new Bilde {Id = 1, Url = "res/bild.jpg"}
+            };
+            var kontaktPerson = new KontaktPerson
+            {
+                Id = 1, Adresse = "Tulleveien 9", Epost = "eksempel@post.com",
+                Etternavn = "Etternavnsen", Fornavn = "Fornavn", Foedselsdato = "05-05-2000",
+                Post = new Post {PostNummer = "6457", PostSted = "Bolsøya"}, Telefon = "91234567"
+            };
+            var enLugar = new Lugar {Antall = 1, Id = 1, Pris = 200, Reise = reise, ReiseId = 1, Type = "***"};
+
+            var bestilling = new Bestilling
+            {
+                Id = 5, Pris = 2000, Referanse = "ab12cd34", Registreringsnummer = "EL 11777", AntallLugarer = 1,
+                UtreiseDato = "10-10-2021", HjemreiseDato = "10-11-2021", ReiseId = 1,
+                Voksne = new List<Voksen>(), Barn = new List<Barn>(),
+                Reise = reise, KontaktPerson = kontaktPerson, LugarType = enLugar
+            };
+
+            mockRep.Setup(b => b.EndreBestillingAsync(bestilling.Id, bestilling)).ReturnsAsync(bestilling);
+            
+            var bestillingController = new BestillingsController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            bestillingController.ControllerContext.HttpContext = mockHttpContext.Object;
+            
+            // Act
+            var resultat = await bestillingController.EditBestillingAsync(bestilling, bestilling.Id) as OkObjectResult;
             
             // Assert
-            Assert.Equal((int)HttpStatusCode.OK,resultat.StatusCode);
-            Assert.Equal<List<Bestilling>>(bestillingsListe,(List<Bestilling>)resultat.Value);
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<Bestilling>(bestilling, (Bestilling)resultat.Value);
         }
     }
 }
