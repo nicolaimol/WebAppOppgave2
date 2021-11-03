@@ -57,6 +57,7 @@ namespace FullstackService.Controllers
         [HttpGet("postnummer/{postnummer}")]
         public async Task<ActionResult> HentPostByPostnummer(string postnummer)
         {
+            Console.WriteLine($"--> {postnummer}");
             var poststed = await _repo.HentPoststedByPostnummer(postnummer);
             if (poststed != null)
             {

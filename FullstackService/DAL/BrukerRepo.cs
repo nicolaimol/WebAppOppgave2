@@ -94,6 +94,7 @@ namespace FullstackService.DAL
 
             if (hash.SequenceEqual(dbBruker.PassordHash))
             {
+                dbBruker.Salt = LagSalt();
                 dbBruker.PassordHash = HashPassord(innBruker.NyttPassord, dbBruker.Salt);
                 await _db.SaveChangesAsync();
 

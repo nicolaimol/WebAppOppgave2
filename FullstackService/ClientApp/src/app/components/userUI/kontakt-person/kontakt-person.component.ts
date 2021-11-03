@@ -36,6 +36,8 @@ export class KontaktPersonComponent implements OnInit {
   ngOnInit() {
     this.validTotal = false;
 
+    this.person.post = this.post;
+
     this.validerFornavn();
     this.validerEtternavn();
     this.validerAdresse();
@@ -107,6 +109,7 @@ export class KontaktPersonComponent implements OnInit {
 
   validerPostNummer() {
     const regPostnummer = new RegExp(`^[0-9]{4}$`)
+    console.log(this.person.post)
     if (regPostnummer.test(this.person.post.postNummer)) {
       this.reiseService.HentPostByPostnummer(this.person.post.postNummer).subscribe(data => {
         this.post = data;
