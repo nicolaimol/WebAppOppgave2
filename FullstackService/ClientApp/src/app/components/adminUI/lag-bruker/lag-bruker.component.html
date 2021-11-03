@@ -1,0 +1,7 @@
+<div class="card">
+    <form (submit)="registrer()">
+        <p>Brukernavn: <input name="burkernavn" type="text" class="form-control" placeholder="Brukernavn"[(ngModel)]="bruker.brukernavn"></p>
+        <p>Passord: <input name="brukernavn" type="password" class="form-control" placeholder="Passord"[(ngModel)]="bruker.passord"></p>
+        <button  type="submit" class="btn btn-primary">Registrer</button>
+    </form>
+</div>
