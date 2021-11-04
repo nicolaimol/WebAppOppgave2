@@ -124,7 +124,7 @@ namespace FullstackService.Controllers
 
             if (bruker is null)
             {
-                return BadRequest($"No user ayt id: {id}");
+                return BadRequest($"No user med id: {id}");
             }
 
             return Ok(new BrukerDTO{Brukernavn = bruker.Brukernavn});
