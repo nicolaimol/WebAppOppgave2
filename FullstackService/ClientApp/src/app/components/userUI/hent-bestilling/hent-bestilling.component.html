@@ -1,10 +1,17 @@
+<!-- Page showing your orders or to fetch an order with a reference code -->
+
 <div class="column mt-5">
-    <h4>Har du en bestillingsreferanse?</h4>
-    <p>sett den inn her for å se din bestilling</p>
-    <div class="input-group referanse-media2">
-        <label for="refereansekode"></label><input [(ngModel)]="ref" class="form-control" type="text" id="refereansekode">
-        <button (click)="hent()" class="btn btn-success" id="btnReferanse">Hent bestilling</button>
-    </div>
-    <p id="feil" style="color: red"></p>
-    
+  <h4>Har du en bestillingsreferanse?</h4>
+  <p>Sett den inn her for å se din bestilling</p>
+  <div class="input-group referanse-media2">
+
+    <!-- Column for input reference code to retrieve the order -->
+
+    <label for="referansekode"></label><input [(ngModel)]="ref" class="form-control" type="text" id="referansekode">
+
+    <!-- Button - takes you to the order of the reference code -->
+
+    <button (click)="hent()" class="btn btn-success" id="btnReferanse">Hent bestilling</button>
+  </div>
+  <p id="feil" style="color: red"></p>
 </div>

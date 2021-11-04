@@ -1,19 +1,28 @@
+
+<!-- Footer with content -->
+
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="left column">
-                <h6>Kontakt oss</h6>
-                <p>Email: post@colorline.com</p>
-                <p>Tlf: 12345678</p>
-                <p>Adresse: Osloveien 82 0532 OSLO</p>
-                
-            </div>
-            <div class="right column">
-                <h6>For administrator</h6>
-                <p [routerLink]="['/admin/']">Admin</p>
-                <p [routerLink]="['/admin/reiser']">Reiser</p>
-                <p [routerLink]="['/admin/bestillinger']">Bestilling</p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="left column">
+
+        <!-- Contact info-->
+
+        <h6>Kontakt oss</h6>
+        <p>Email: post@colorline.com</p>
+        <p>Tlf: 12345678</p>
+        <p>Adresse: Osloveien 82 0532 OSLO</p>
+
+      </div>
+      <div class="right column">
+
+        <!-- Shortcut links for admin -->
+
+        <h6>For administrator</h6>
+        <p [routerLink]="['/admin/']">Admin</p>
+        <p [routerLink]="['/admin/reiser']">Reiser</p>
+        <p [routerLink]="['/admin/bestillinger']">Bestilling</p>
+      </div>
     </div>
+  </div>
 </footer>
