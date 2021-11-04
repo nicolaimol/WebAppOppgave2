@@ -30,6 +30,6 @@ export class BrukerService {
   }
 
   slettBruker(id: number): Observable<Bruker> {
-    return this.httpClient.delete<Bruker>(`apu/bruker/${id}`);
+    return this.httpClient.delete<Bruker>(`api/bruker/${id}`);
   }
 }
