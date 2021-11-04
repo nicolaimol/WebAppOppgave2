@@ -122,12 +122,7 @@ export class ReisendeComponent implements OnInit, OnDestroy {
       voksne: this.voksne,
       barn: this.barn
     }
-
-    this.bestillingService.sendBestilling(ordre).subscribe(bestilling => {
-      console.log(bestilling)
-      sessionStorage.setItem("bestilling", JSON.stringify(bestilling))
-      this.router.navigate(['/bestilling'])
-    })
-    console.log('nå kan vi bestille')
+    sessionStorage.setItem("ordre", JSON.stringify(ordre));
+    this.router.navigate(["betal"])
   }
 }

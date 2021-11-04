@@ -7,9 +7,9 @@ namespace FullstackService.Models
     public class Log
     {
         public int Id { get; set; }
+        [ForeignKey("BrukerId")]
         public virtual Bruker Bruker { get; set; }
-        [Required]
-        public int BrukerId { get; set; }
+        public int? BrukerId { get; set; }
         [Required]
         public string Beskrivelse { get; set; }
         [Required]

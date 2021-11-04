@@ -15,12 +15,17 @@ export class ItemBrukerComponent implements OnInit {
   endre: boolean = false;
 
   @Input() bruker: BrukerUpdate
+  validSlett = false;
 
   constructor(private brukerService: BrukerService, private modalService: NgbModal, private authService: AuthService) { }
 
   @Output() notifyParent = new EventEmitter<number>();
 
   ngOnInit() {
+
+    this.authService.user.subscribe(data => {
+      this.validSlett = this.bruker.brukernavn == data;
+    })
   }
 
   toggle() {

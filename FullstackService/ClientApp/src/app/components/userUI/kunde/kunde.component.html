@@ -1,17 +1,28 @@
+<!-- Button to input page of the additional passenger -->
+
 <button [ngClass]="{'btn-outline-success': validTotalOut}" (click)="showInput = !showInput" class="btn btn-outline-secondary">{{type == 'voksen' ? 'Voksen': 'Barn'}} {{(index + 1)}}</button>
 <div [hidden]="!showInput" class="absolute">
     <header>
         <nav class="navbar navbar-expand-md navbar-dark"style="height: 50px;">
-            <div class="container"><span (click)="avbryt()" class="material-icons">arrow_back_ios_new</span></div>
+            <div class="container"><span (click)="avbryt()" class="material-icons">arrow_back_ios_new</span>{{type == 'voksen' ? 'Voksen': 'Barn'}} {{(index + 1)}}</div>
         </nav>
     </header>
     <div class="container margin">
+
+      <!-- Checking if input content is valid, adding a green checkmark on input field if content is valid-->
+
         <form class="form-vertical" role="form" (submit)="submit()">
             <input [ngClass]="{'is-valid': validFornavn}" (keyup)="validerFornavn()" type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
             <input [ngClass]="{'is-valid': validEtternavn}" (keyup)="validerEtternavn()" type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
             <input [ngClass]="{'is-valid': validFoedselsdato}" (change)="validerFoedselsdato()" type="date" class="form-control" name="foedselsdato" [(ngModel)]="person.foedselsdato">
-            <button [disabled]="!validTotal" type="submit" class="btn btn-primary">Lagre</button>
-            <button class="btn btn-danger" type="button" (click)="avbryt()">Avbryt</button>
+
+          <!-- Save button - sending you back to to list of passengers on the trip-->
+
+          <button [disabled]="!validTotal" type="submit" class="btn btn-primary">Lagre</button>
+
+          <!-- Cancel button - sending you back to to list of passengers on the trip-->
+
+          <button class="btn btn-danger" type="button" (click)="avbryt()">Avbryt</button>
         </form>
     </div>
 </div>

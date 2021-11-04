@@ -13,15 +13,20 @@ export class VisBestillingComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  // init 'bestilling' values
   ngOnInit() {
     this.bestilling = JSON.parse(sessionStorage.getItem('bestilling'));
 
   }
-
+   // nav back to root
   retur() {
     this.router.navigate(['/'])
   }
 
+  /*
+   * showing order
+   * content depends if the order exist
+   */
   update(bestilling: Bestilling) {
     this.bestilling = bestilling;
     if (bestilling != null) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Bruker } from 'src/app/interface/bruker';
 import { BrukerService } from 'src/app/service/bruker.service';
 
@@ -8,6 +8,8 @@ import { BrukerService } from 'src/app/service/bruker.service';
   styleUrls: ['./lag-bruker.component.css']
 })
 export class LagBrukerComponent implements OnInit {
+
+  @Output() notifyParent = new EventEmitter<Bruker>()
 
   bruker: Bruker = {
     brukernavn: "",
@@ -21,7 +23,9 @@ export class LagBrukerComponent implements OnInit {
 
   registrer() {
     this.brukerService.lagBruker(this.bruker).subscribe(bruker => {
-      console.log(bruker)
+      this.notifyParent.emit(bruker)
+      this.bruker.brukernavn = "";
+      this.bruker.passord = "";
     }, err => console.log(err))
   }
 
