@@ -120,12 +120,15 @@ namespace FullstackService.Controllers
             {
                 return Unauthorized("Ikke logget inn");
             }
-            if (await _db.SlettBrukerAsync(id) >= 0)
+
+            var bruker = _db.SlettBrukerAsync(id);
+
+            if (bruker is null)
             {
-                return NoContent();
+                return BadRequest($"No user ayt id: {id}");
             }
 
-            return BadRequest("No changes made");
+            return Ok(bruker);
         }
 
 

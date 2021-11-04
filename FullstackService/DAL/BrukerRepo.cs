@@ -111,12 +111,17 @@ namespace FullstackService.DAL
 
         }
 
-        public async Task<int> SlettBrukerAsync(int id)
+        public async Task<Bruker> SlettBrukerAsync(int id)
         {
             var bruker = await _db.Brukere.FirstOrDefaultAsync(b => b.Id == id);
+            if (bruker is null)
+            {
+                return null;
+            }
             _db.Brukere.Remove(bruker);
 
-            return await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
+            return bruker;
         }
 
         public async Task<int> LagreAsync()
