@@ -351,7 +351,7 @@ namespace UnitTest
             // Arrange
             var bruker = new Bruker() {Id = 1, Brukernavn = "Per", Salt = null, PassordHash = null};
 
-            mockRep.Setup(b => b.SlettBrukerAsync(bruker.Id)).ReturnsAsync(1);
+            mockRep.Setup(b => b.SlettBrukerAsync(bruker.Id)).ReturnsAsync(bruker);
             
             var brukerController = new BrukerController(mockRep.Object);
             
@@ -361,10 +361,11 @@ namespace UnitTest
             brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
             
             // Act
-            var resultat = await brukerController.DeleteBruker(bruker.Id) as NoContentResult;
+            var resultat = await brukerController.DeleteBruker(bruker.Id) as OkObjectResult;
             
             // Assert
-            Assert.Equal((int)HttpStatusCode.NoContent, resultat.StatusCode);
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal<BrukerDTO>(new BrukerDTO{Brukernavn = bruker.Brukernavn}, (BrukerDTO)resultat.Value);
             
         }
         
@@ -374,7 +375,7 @@ namespace UnitTest
             // Arrange
             var bruker = new Bruker() {Id = 1, Brukernavn = "Per", Salt = null, PassordHash = null};
 
-            mockRep.Setup(b => b.SlettBrukerAsync(bruker.Id)).ReturnsAsync(1);
+            mockRep.Setup(b => b.SlettBrukerAsync(bruker.Id)).ReturnsAsync(bruker);
             
             var brukerController = new BrukerController(mockRep.Object);
             

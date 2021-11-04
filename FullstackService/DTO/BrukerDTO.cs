@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using FullstackService.Models;
 
 namespace FullstackService.DTO
 {
@@ -11,7 +12,11 @@ namespace FullstackService.DTO
         
         [Required]
         public string Passord { get; set; }
-        
-        
+
+        public override bool Equals(object? obj)
+        {
+            var objB = (BrukerDTO) obj;
+            return Id == objB.Id && Brukernavn == objB.Brukernavn;
+        }
     }
 }
