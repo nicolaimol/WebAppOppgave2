@@ -35,15 +35,20 @@ export class LagReiseComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
+    // sender bruker til /admin om ikke logget inn, henter alle bilder ellers
     this.authService.auth.subscribe(auth => {
       if (!auth) this.router.navigate(['/admin'])
+      else {
+        this.imageService.getAllBilder().subscribe(bilder => {
+          this.bilder = bilder;
+          this.reise.bildeLink.url = "./res/Color_Hybrid.jpeg"
+        })
+      }
     })
-    this.imageService.getAllBilder().subscribe(bilder => {
-      this.bilder = bilder;
-      this.reise.bildeLink.url = "./res/Color_Hybrid.jpeg"
-    })
+    
   }
 
+  // poster ny reise til server
   lagre(): void {
     this.reiseService.lagreReise(this.reise).subscribe(reise => {
       console.log('lagret')
@@ -57,6 +62,7 @@ export class LagReiseComponent implements OnInit {
     this.image = files;
   }
 
+  // sender bilde til server, og legger til i listen ved retur og settes aktivt
   upload() {
 
     let fileToUpload = <File>this.image[0];
@@ -76,7 +82,6 @@ export class LagReiseComponent implements OnInit {
 
   avbryt() {
     this.router.navigate(['/admin/reiser'])
-    //console.log(this.reise.bildeLink)
   }
 
 }
