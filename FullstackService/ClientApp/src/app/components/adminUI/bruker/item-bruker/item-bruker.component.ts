@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Bruker, BrukerUpdate } from 'src/app/interface/bruker';
+import { AuthService } from 'src/app/service/auth.service';
 import { BrukerService } from 'src/app/service/bruker.service';
 import { ModalSlettComponent } from '../../../modal-slett/modal-slett.component';
 
@@ -15,7 +16,7 @@ export class ItemBrukerComponent implements OnInit {
 
   @Input() bruker: BrukerUpdate
 
-  constructor(private brukerService: BrukerService, private modalService: NgbModal) { }
+  constructor(private brukerService: BrukerService, private modalService: NgbModal, private authService: AuthService) { }
 
   @Output() notifyParent = new EventEmitter<number>();
 

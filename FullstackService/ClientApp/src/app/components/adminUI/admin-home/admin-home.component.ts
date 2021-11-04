@@ -18,7 +18,7 @@ export class AdminHomeComponent implements OnInit {
         this.validUser = auth;
     })
 
-    this.authService.changeUser(sessionStorage.getItem("user"))
+    this.authService.changeUser(localStorage.getItem("user"))
 
     this.authService.user.subscribe(data => {
       this.user = data;

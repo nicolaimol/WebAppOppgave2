@@ -113,7 +113,7 @@ namespace FullstackService.DAL
 
         public async Task<Bruker> SlettBrukerAsync(int id)
         {
-            var bruker = await _db.Brukere.FirstOrDefaultAsync(b => b.Id == id);
+            var bruker = await _db.Brukere.FindAsync(id);
             if (bruker is null)
             {
                 return null;

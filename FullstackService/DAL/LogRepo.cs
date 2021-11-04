@@ -26,12 +26,14 @@ namespace FullstackService.DAL
 
             if (bruker is null)
             {
+                /*
                 _db.Logs.Add(new Log
                 {
                     Beskrivelse = "ENDRING UTEN SESSION!!!!",
                     DatoEndret = DateTime.Now,
                     Bruker = await _db.Brukere.FindAsync(1)
                 });
+                */
             }
             else
             {
