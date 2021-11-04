@@ -1,9 +1,11 @@
+
 .homepage {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
+/*  Style of container to the router */
 .container {
     flex-grow: 1;
 }

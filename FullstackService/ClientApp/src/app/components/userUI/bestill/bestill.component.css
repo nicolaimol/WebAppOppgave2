@@ -1,3 +1,4 @@
+/*  Styling content of the information of the journey */
 #flags {
     margin: 1rem;
     display: flex;
@@ -11,7 +12,7 @@
     border-radius: 50%;
     margin: auto;
 }
-
+/*  Styling div with 'pris' inside */
 #reise{
     display: flex;
     flex-direction: row;
@@ -23,13 +24,13 @@
 .reise {
     width: 200px;
 }
-
+/*  Styling total price */
 #pris {
     text-align: right;
     max-width: 100%;
     width: 100%;
 }
-
+/*  Type of mouse cursor */
 .trykkemus{
     cursor: pointer;
 }
@@ -37,19 +38,20 @@
 .flag-sm {
     display: none;
 }
-
+/*Styling image in the information of the journey*/
 .boat {
     height: 10em;
     margin-right: 1em;
 }
-
+/* Size of data cells */
 td{
     width: 50%!important;
     max-width: 50%!important;
 }
 
+/*Styles for browsers with defined definition or less*/
 @media only screen and (max-width: 510px){
-    
+
     tr {
         display: flex;
         flex-wrap: wrap;
@@ -64,4 +66,4 @@ td{
     td:last-child {
         border-top: 0;
     }
-} 
+}
