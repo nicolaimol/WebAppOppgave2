@@ -95,7 +95,7 @@ innlogginger.
 
 ## Enhetstester
 
-Er ikke så mye å fortelle annet enn at det har blitt laget nærmere XXX tester som tester 
+Er ikke så mye å fortelle annet enn at det har blitt laget 55 enhetstester som tester 
 alle metoder fra controllerene. De fleste metoder testes fra 2-3 ganger ettersom vi ikke 
 bare sjekker der OK sendes, men også ved Unauthorized og BadRequest. Alle testene får Success.
 
@@ -128,6 +128,8 @@ sett det nødvendig.
 Vi har tester som alle går igjennom.
 
 ## Skjermbilder
+
+
 
 ## Kommentarer om valg vi har tatt
 

@@ -13,6 +13,7 @@ export class LagLugarComponent implements OnInit {
   @Input() id: number;
   @Output() notifyParent = new EventEmitter<Lugar>();
 
+  // Denne er her fram til den hentes fra database
   lugar: Lugar = {
       id: 0,
       reiseId: 0,
@@ -33,6 +34,7 @@ export class LagLugarComponent implements OnInit {
     };
   }
 
+  // lagrer ny lugar til databasen
   lagre() {
     console.log(this.lugar);
     this.lugarService.lagreLugar(this.lugar).subscribe(lugar => {
