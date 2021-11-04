@@ -32,7 +32,8 @@ export class ListBrukerComponent implements OnInit {
     }, error => {
       console.log(error);
     })
-    
   }
-
+  leggTil(b: Bruker) {
+    this.brukere.push(b);
+  }  
 }

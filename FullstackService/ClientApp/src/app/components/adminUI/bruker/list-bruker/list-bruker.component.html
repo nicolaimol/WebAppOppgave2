@@ -3,6 +3,6 @@
         <app-item-bruker *ngFor="let item of brukere" (notifyParent)="slett($event)" [bruker]="item" ></app-item-bruker>
     </div>
     <div class="column">
-        <app-lag-bruker></app-lag-bruker>
+        <app-lag-bruker (notifyParent)="leggTil($event)"></app-lag-bruker>
     </div>
 </div>
