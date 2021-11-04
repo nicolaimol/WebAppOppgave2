@@ -33,6 +33,7 @@ import { ListLogComponent } from './components/adminUI/list-log/list-log.compone
 import { LagBrukerComponent } from './components/adminUI/bruker/lag-bruker/lag-bruker.component';
 import { ListBrukerComponent } from './components/adminUI/bruker/list-bruker/list-bruker.component';
 import { ItemBrukerComponent } from './components/adminUI/bruker/item-bruker/item-bruker.component';
+import { BetalComponent } from './components/userUI/betal/betal.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ItemBrukerComponent } from './components/adminUI/bruker/item-bruker/ite
     ListLogComponent,
     LagBrukerComponent,
     ListBrukerComponent,
-    ItemBrukerComponent
+    ItemBrukerComponent,
+    BetalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -75,6 +77,7 @@ import { ItemBrukerComponent } from './components/adminUI/bruker/item-bruker/ite
         { path: '', component: BestillComponent, },
         { path: 'reisende', component: ReisendeComponent },
         { path: 'bestilling', component: VisBestillingComponent },
+        { path: 'betal', component: BetalComponent}
       ]},
       { path: 'admin', component: AdminComponent, children: [
         { path: '', component: AdminHomeComponent},

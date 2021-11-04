@@ -30,7 +30,7 @@ namespace FullstackService.Models
         public string Ferjestrekning => $"{Reise?.Strekning}";
         [ValidateNever]
         public virtual Lugar LugarType { get; set; }
-        public int LugarTypeId { get; set; }
+        public int? LugarTypeId { get; set; }
         [Required] 
         public virtual KontaktPerson KontaktPerson { get; set; }
         public virtual List<Voksen> Voksne { get; set; }
