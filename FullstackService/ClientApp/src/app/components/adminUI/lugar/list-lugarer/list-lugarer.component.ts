@@ -66,12 +66,11 @@ export class ListLugarerComponent implements OnInit {
 
   slett(id: number) {
     console.log(id)
-    this.lugarer = this.lugarer.filter(l => l.id != id)
-    /*
+    //this.lugarer = this.lugarer.filter(l => l.id != id)
     this.lugarService.slettLugar(id).subscribe(lugar => {
       this.lugarer = this.lugarer.filter(l => l.id != lugar.id)
     })
-    */
+    
   }
 
   
