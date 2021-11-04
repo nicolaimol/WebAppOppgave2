@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Lugar } from 'src/app/interface/lugar';
 import { LugarService } from 'src/app/service/lugar.service';
 import { ReiseService } from 'src/app/service/reise.service';
+import { ModalSlettComponent } from '../../../modal-slett/modal-slett.component';
 
 @Component({
   selector: 'app-item-lugarer',
@@ -13,7 +15,7 @@ export class ItemLugarerComponent implements OnInit {
   @Input() lugar: Lugar;
   @Output() notifyParent = new EventEmitter<number>();
 
-  constructor(private lugarService: LugarService) { }
+  constructor(private lugarService: LugarService, private modalService: NgbModal) { }
 
   ngOnInit() {
   }
@@ -27,7 +29,18 @@ export class ItemLugarerComponent implements OnInit {
   }
 
   slett() {
-    this.notifyParent.emit(this.lugar.id);
+    const modalRef = this.modalService.open(ModalSlettComponent);
+    modalRef.componentInstance.message = "Slett lugar " + this.lugar.type
+
+    modalRef.result.then((result) => {
+      if (result == "Lukk"){
+
+      } else {
+        this.notifyParent.emit(this.lugar.id);
+      }
+    })
+
+    
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Bruker, BrukerUpdate } from 'src/app/interface/bruker';
 import { BrukerService } from 'src/app/service/bruker.service';
+import { ModalSlettComponent } from '../../../modal-slett/modal-slett.component';
 
 @Component({
   selector: 'app-item-bruker',
@@ -13,7 +15,7 @@ export class ItemBrukerComponent implements OnInit {
 
   @Input() bruker: BrukerUpdate
 
-  constructor(private brukerService: BrukerService) { }
+  constructor(private brukerService: BrukerService, private modalService: NgbModal) { }
 
   @Output() notifyParent = new EventEmitter<number>();
 
@@ -34,7 +36,17 @@ export class ItemBrukerComponent implements OnInit {
   }
 
   slett() {
-    this.notifyParent.emit(this.bruker.id);
+    const modalRef = this.modalService.open(ModalSlettComponent);
+    modalRef.componentInstance.message = "Slett brukeren " + this.bruker.brukernavn + "?"
+
+    modalRef.result.then((result) => {
+      if (result == "Lukk"){
+
+      } else {
+        this.notifyParent.emit(this.bruker.id);
+      }
+    })
+    
   }
 
 }
