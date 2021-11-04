@@ -19,15 +19,19 @@ p {
     cursor: pointer;
 }
 
-.nav-link{
-    text-align: center;
+@media only screen and (max-width: 767px) {
+
+    .nav-link{
+        text-align: center;
+    }
+
+    .nav-item {
+        text-align: center;
+        margin-left: 0!important;
+    }
+
+    .nav-item button {
+        margin-bottom: 1em
+    }
 }
 
-.nav-item {
-    text-align: center;
-    margin-left: 0!important;
-}
-
-.nav-item button {
-    margin-bottom: 1em
-}

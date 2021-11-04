@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.SignalR;
 using Moq;
 using Xunit;
 
@@ -194,10 +195,15 @@ namespace UnitTest
             brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
             
             // Act
-            var resultat = brukerController.AutoriserBruker() as OkResult;
+            var resultat = brukerController.AutoriserBruker() as OkObjectResult;
             
             // Assert
+            
+            var string1 = JsonSerializer.Serialize(resultat.Value);
+            var string2 = JsonSerializer.Serialize(new {Brukernavn = _loggetInn});
+            
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal( string2, string1);
 
         }
         
