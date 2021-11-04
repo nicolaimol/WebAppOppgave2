@@ -55,8 +55,13 @@ namespace FullstackService.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteLugarAsync(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            
             var lugar = await _repo.DeleteLugarAsync(id);
-            if (lugar is null) return NotFound();
+            if (lugar is null) return BadRequest();
 
             return Ok(lugar);
         }
