@@ -77,8 +77,8 @@ import { BetalComponent } from './components/userUI/betal/betal.component';
         { path: '', component: BestillComponent, },
         { path: 'reisende', component: ReisendeComponent },
         { path: 'bestilling', component: VisBestillingComponent },
-        { path: 'betal', component: BetalComponent}
       ]},
+      { path: 'betal', component: BetalComponent},
       { path: 'admin', component: AdminComponent, children: [
         { path: '', component: AdminHomeComponent},
         { path: 'reiser', component: VisreiserComponent},

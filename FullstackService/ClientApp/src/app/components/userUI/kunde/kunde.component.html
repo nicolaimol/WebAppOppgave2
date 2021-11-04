@@ -2,7 +2,7 @@
 <div [hidden]="!showInput" class="absolute">
     <header>
         <nav class="navbar navbar-expand-md navbar-dark"style="height: 50px;">
-            <div class="container"><span (click)="avbryt()" class="material-icons">arrow_back_ios_new</span></div>
+            <div class="container"><span (click)="avbryt()" class="material-icons">arrow_back_ios_new</span>{{type == 'voksen' ? 'Voksen': 'Barn'}} {{(index + 1)}}</div>
         </nav>
     </header>
     <div class="container margin">
