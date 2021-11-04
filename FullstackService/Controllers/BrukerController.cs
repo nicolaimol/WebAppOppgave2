@@ -121,14 +121,14 @@ namespace FullstackService.Controllers
                 return Unauthorized("Ikke logget inn");
             }
 
-            var bruker = _db.SlettBrukerAsync(id);
+            var bruker = await _db.SlettBrukerAsync(id);
 
             if (bruker is null)
             {
                 return BadRequest($"No user ayt id: {id}");
             }
 
-            return Ok(bruker);
+            return Ok(new BrukerDTO{Brukernavn = bruker.Brukernavn});
         }
 
 
