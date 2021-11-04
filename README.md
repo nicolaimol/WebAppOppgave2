@@ -188,9 +188,21 @@ Vi har tester som alle går igjennom.
 ![søk eksempel](./res/logg-sok.JPG)
 
 
-
 ## Kommentarer om valg vi har tatt
+
+- Vi valgte Angular over React av flere grunner.
+    - Fordi det undervises i faget
+    - Det har routing og httpclient innebygd
+    - Vi har brukt React tidligere, men ikke Angular
+- Vi har brukt ikoner som søppelkasse og blyant ettersom dette er ganske universelt forstått og
+brukervennlig, selvfølgelig også i kombinasjon med farge til bakgrunnen.
+- Vi har valgt å logge til database for å vise i admin-modulen vår. Dette tenkte vi var mye
+penere og nyttigere
+- I logge siden har vi søke funksjon som da også en "quality of life" funksjon som gjør ting
+mye lettere
 
 ## Kilder
 
+- Color line
+- bootstrap
 - https://code-maze.com/upload-files-dot-net-core-angular/
