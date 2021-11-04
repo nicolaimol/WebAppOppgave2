@@ -8,6 +8,12 @@ JavaScript. Det er ikke gjort så mye med en vanlig brukers opplevelse av applik
 som er nytt er tilføyelsen av administrator tilgang. Her har administrator full kontroll og
 kan enkelt endre på reiser, bestillinger og alt vedkommende kunne ville endre på.
 
+## Påloggingsinformasjon
+
+Du kommer til innlogging ved https://localhost:5001/admin
+- Brukernavn: admin
+- Passord: admin
+
 ## Implementasjon av administrator (backend)
 
 I motsetning til frontend så måtte vi ikke omstrukturere hele prosjektet, og vi trodde det var
@@ -20,7 +26,13 @@ informasjon.
 Metoden for å lage salt og hashe passsord, samt generelt håndtere passord er gjort slikt som
 videoen på canvas sier det skal være gjort.
 
-FORKLARING AV BILDER HER  <----------
+For å laste opp bilder fra frontend til backend og server, måtte vi lage en egen controller.
+Denne controlleren tar i mot et request av typen multipart/form-data. Når denne filen blir
+mottatt åpnes det en filestream til en bestemt mappe med filnavnet til innkommende fil.
+Filestreamen blir flushet når filen er ferdig opplastet og url-en til bildet legges til i
+databasen. Til slutt returneres linken til bruker. Mye av inspirasjonen til denne spesifikke
+koden er hentet fra https://code-maze.com/upload-files-dot-net-core-angular/. Også kildet
+nederst under Kilder seksjonen.
 
 ## Implementasjon og interaksjon til administrator (frontend)
 
@@ -74,12 +86,51 @@ tilgjengelig logg-ut-knapp.
 
 ## Logg
 
+Logging har fått et eget repo som injectes i alle andres repository. Når en logg lages, så tar
+den inn en beskjed. Brukeren den logges på hentes fra session. Tiden settes ved insert i
+databasen.
+
+Dette kalles ved publisering, endring og sletting av administrativ art i tillegg til alle
+innlogginger.
+
 ## Enhetstester
 
+Er ikke så mye å fortelle annet enn at det har blitt laget nærmere XXX tester som tester 
+alle metoder fra controllerene. De fleste metoder testes fra 2-3 ganger ettersom vi ikke 
+bare sjekker der OK sendes, men også ved Unauthorized og BadRequest. Alle testene får Success.
+
 ## Mål og krav oppgaven spør etter (som vi mener er implementert)
+
+### Funksjonalitet
+
+#### Innhold
+
+- Administrasjon av de entitetene vi hadde fra oppgave 1
+- Innloggingsmekaninsme for admin-brukere
+- Logging av endringer til database
+
+#### Veklegging
+
+- Design
+
+Her har vi beholdt det grunnleggende design, tema og layout fra oppgave 1 som vi mente fungerte
+godt.
+
+- Ryddig og forståelig kode
+
+Backend er så å si det samme med unntak av koden for bruker og logging. Frontend har jo blitt
+omgjort til Angular. Når det er komponentbasert slik så ligger jo alt i sine respektive
+undermapper. Da er det lett å se hva som er hva, men vi har lagt til kommentarer det vi har
+sett det nødvendig. 
+
+- Kompletthet av enhetstester
+
+Vi har tester som alle går igjennom.
 
 ## Skjermbilder
 
 ## Kommentarer om valg vi har tatt
 
 ## Kilder
+
+- https://code-maze.com/upload-files-dot-net-core-angular/
