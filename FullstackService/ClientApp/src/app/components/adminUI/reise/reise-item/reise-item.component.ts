@@ -26,7 +26,7 @@ export class ReiseItemComponent implements OnInit {
   fjern() {
     const modalRef = this.modalService.open(ModalSlettComponent)
 
-    modalRef.componentInstance.me
+    modalRef.componentInstance.message = this.reise.strekning;
 
     modalRef.result.then((result) => {
       if(result === "Lukk"){
