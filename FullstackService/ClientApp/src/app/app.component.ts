@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
       }
       else if (event.newValue == "true"){
         this.authService.changeAuth(true);
+        this.authService.changeUser(localStorage.getItem("user"));
       }
     }
   }
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
       if (!auth) {
         this.authService.checkAuth().subscribe(c => {
           this.authService.changeAuth(true);
+          this.authService.changeUser(c.brukernavn)
+          localStorage.setItem("user", c.brukernavn)
         })
       }
     })

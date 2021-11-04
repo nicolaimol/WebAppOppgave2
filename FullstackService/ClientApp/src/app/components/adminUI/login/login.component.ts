@@ -24,13 +24,11 @@ export class LoginComponent implements OnInit {
     };
     
     this.brukerService.validerBruker(b).subscribe(data => {
-      console.log(data);
-      sessionStorage.setItem("auth", JSON.stringify(data));
+      //sessionStorage.setItem("auth", JSON.stringify(data));
       this.authService.changeAuth(true);
-      localStorage.setItem('loggInn', "true");
-      sessionStorage.setItem('user', data.brukernavn)
       this.authService.changeUser(data.brukernavn);
-
+      localStorage.setItem('user', data.brukernavn)
+      localStorage.setItem('loggInn', "true");
     },
     err => console.log(err));
   }

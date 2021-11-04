@@ -77,7 +77,7 @@ namespace FullstackService.Controllers
                 return Unauthorized("Ikke logget inn");
             }
 
-            return Ok();
+            return Ok(new {Brukernavn = HttpContext.Session.GetString(_loggetInn)});
         }
 
         [HttpPost]
