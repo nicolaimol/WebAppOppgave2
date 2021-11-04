@@ -30,6 +30,10 @@ namespace FullstackService.Controllers
             
             try
             {
+                /***
+                 * henter ut fil fra request
+                 * sjekker om res mappen finnes, hvis ikke lages den
+                 */
                 var request = HttpContext.Request.Form.Files;
                 if (request.Count > 0)
                 {
@@ -37,7 +41,11 @@ namespace FullstackService.Controllers
                     {
                         Directory.CreateDirectory(_env.WebRootPath + "/res/");
                     }
-
+                    /***
+                     * lager en stream på mappe og nytt filnavn
+                     * filen hentet fra request sendes med stream og socketen flushes
+                     * linken til bildet lagres i databasen og returneres til bruker
+                     */
                     using (FileStream fileStream =
                         System.IO.File.Create(_env.WebRootPath + "/res/" + request[0].FileName))
                     {

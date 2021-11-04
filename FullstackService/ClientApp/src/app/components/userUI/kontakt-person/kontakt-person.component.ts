@@ -35,8 +35,11 @@ export class KontaktPersonComponent implements OnInit {
 
   ngOnInit() {
     this.validTotal = false;
-
-    this.person.post = this.post;
+    
+    if (this.person.post == undefined || this.person.post == null) {
+      this.person.post = this.post;
+    }
+    
 
     this.validerFornavn();
     this.validerEtternavn();
