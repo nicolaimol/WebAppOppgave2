@@ -35,3 +35,7 @@ nav {
 #navmenu {
   justify-content: flex-end;
 }
+
+.nav-link{
+  text-align: center;
+}
