@@ -8,6 +8,8 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalSlettComponent implements OnInit {
 
+  message: string;
+
   constructor(public modal: NgbActiveModal) { }
 
   ngOnInit() {

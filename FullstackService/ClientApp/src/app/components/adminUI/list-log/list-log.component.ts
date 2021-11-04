@@ -32,7 +32,6 @@ export class ListLogComponent implements OnInit {
     })
 
     this.logService.hentAlleLog().subscribe(logs => {
-      console.log(logs)
       this.logs = logs;
       this.filter();
     })
@@ -56,7 +55,7 @@ export class ListLogComponent implements OnInit {
               break;
           case "tid":
               this.logView = this.logs.filter(l => {
-                  return (l.datoEndret.toLocaleString("dd:MM:yyyy HH:mm:ss").includes(this.sok) )
+                  return (this.printDate(l.datoEndret).includes(this.sok) )
               })
               break;
           default:
@@ -64,6 +63,11 @@ export class ListLogComponent implements OnInit {
               break;
         }
     }
+  }
+
+  printDate(date: Date): string{
+    date = new Date(date);
+    return `${date.getDate() > 10 ? date.getDate(): "0" + date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours() > 10 ? date.getHours() : date.getHours() + 10}:${date.getMinutes() > 10 ? date.getMinutes() : "0" + date.getMinutes()}:${date.getSeconds() > 10 ? date.getSeconds() : "0" + date.getSeconds() }`
   }
 
 }
