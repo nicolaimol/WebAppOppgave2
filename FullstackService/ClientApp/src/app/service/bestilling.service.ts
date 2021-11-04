@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Bestilling } from '../interface/bestilling';
+import { Kunde } from '../interface/kunde';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,9 @@ export class BestillingService {
 
   slettBestillingById(id: number): Observable<Bestilling> {
     return this.httpClient.delete<Bestilling>(this.url + "/" + id);
+  }
+
+  updateBestillingById(id: number, b: Bestilling): Observable<Bestilling> {
+    return this.httpClient.put<Bestilling>(this.url + "/" + id, b, {headers: this.httpHeaders})
   }
 }

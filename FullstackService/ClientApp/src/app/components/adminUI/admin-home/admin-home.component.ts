@@ -14,6 +14,7 @@ export class AdminHomeComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    // sjekker om brukeren er logget inn eller ikke
     this.authService.auth.subscribe(auth => {
         this.validUser = auth;
     })

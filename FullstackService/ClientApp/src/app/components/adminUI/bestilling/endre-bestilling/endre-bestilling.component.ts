@@ -26,6 +26,7 @@ export class EndreBestillingComponent implements OnInit {
     this.id = Number(this.route.snapshot.paramMap.get("id"));
 
     this.bestillingService.hentBestillingById(this.id).subscribe(b => {
+      // flytter til /admin om brukeren ikke er logget inn
       this.bestilling = b;
     }, error => {
       if (error.status === 401) {
@@ -36,17 +37,24 @@ export class EndreBestillingComponent implements OnInit {
       }
     })
   }
-
+  // sender edring av kontaktperson til backend
   changeKontaktPerson(kp: KontaktPerson) {
     this.reisendeService.ChangeKontaktPerson(kp).subscribe(k => {
       console.log(k)
     }, err => console.log(err))
   }
 
+  // sender endringer av andre reisende til backend
   changeVoksen(kunde: KundeObj) {
     this.reisendeService.ChangeVoksen(kunde.kunde).subscribe(k => {
       console.log(k)
     }, err => console.log(err))
+  }
+
+  lagre() {
+    this.bestillingService.updateBestillingById(this.bestilling.id, this.bestilling).subscribe(v => {
+      console.log(v)
+    })
   }
 
 }

@@ -18,18 +18,23 @@ export class ListBestillingerComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService, private bestillingService: BestillingService, private modalService: NgbModal) { }
 
   ngOnInit() {
+    // flytter til /admin om brukeren ikke er logget inn
     this.authService.auth.subscribe(auth => {
       if (!auth) this.router.navigate(['/admin'])
+      else {
+        // henter alle bestillinger
+        this.bestillingService.hentAlleBestillinger().subscribe(b => {
+          this.bestillinger = b;
+        })
+      }
     })
 
-    this.bestillingService.hentAlleBestillinger().subscribe(b => {
-      this.bestillinger = b;
-    })
 
   }
 
   slett(b: Bestilling) {
-
+    // bekreftmodal vises
+    // ved slett slettes bestilling fra database
     const modalRef = this.modalService.open(ModalSlettComponent)
     modalRef.componentInstance.message = "Slett bestillingen: " + b.referanse;
 
@@ -38,7 +43,7 @@ export class ListBestillingerComponent implements OnInit {
 
       } else {
         this.bestillingService.slettBestillingById(b.id).subscribe(be => {
-      this.bestillinger = this.bestillinger.filter(be => be.id != b.id)})
+        this.bestillinger = this.bestillinger.filter(be => be.id != b.id)})
       }
     })
     

@@ -21,6 +21,7 @@ export class LagBrukerComponent implements OnInit {
   ngOnInit() {
   }
 
+  // sendes til forleder at bruker skal lages med ny bruker
   registrer() {
     this.brukerService.lagBruker(this.bruker).subscribe(bruker => {
       this.notifyParent.emit(bruker)
