@@ -129,6 +129,64 @@ Vi har tester som alle går igjennom.
 
 ## Skjermbilder
 
+#### Innlogging
+
+![Innlogging](./res/logg-inn.JPG)
+
+#### Innlogget velkomst
+
+![velkomst](./res/velkomst.JPG)
+
+### Reiser og alle underkomponenter av reiser
+
+#### Reiser liste
+
+![Reiser liste](./res/reiser-liste.JPG)
+
+#### Reiser rediger
+
+![Reiser rediger](./res/reiser-rediger.JPG)
+
+#### Reiser rediger lugar
+
+![Reiser rediger lugar](./res/reiser-rediger-lugar.JPG)
+
+#### Reiser rediger lugar opprett
+
+![opprett lugar](./res/reise-rediger-lugar-opprett.JPG)
+
+#### Reise delete
+
+![Delete reise](./res/reise-liste-slettepopup.JPG)
+
+### Bestilling skjermbilder
+
+#### Bestilling liste
+
+![Bestilling liste](./res/bestillinger-liste.JPG)
+
+#### Bestilling endre
+
+![Bestillling endre](./res/bestillinger-endre.JPG)
+
+#### Bestilling endre kontakt
+
+![Bestilling endre kontakt](./res/bestillinger-kontakt-endre.JPG)
+
+### Bruker skjermbilde
+
+![Bruker Skjermbilde](./res/bruker.JPG)
+
+### Logg skjermbilder
+
+#### Logg liste eksempel
+
+![Logg skjermbilde](./res/logg.JPG)
+
+#### Logg søk eksempel
+
+![søk eksempel](./res/logg-sok.JPG)
+
 
 
 ## Kommentarer om valg vi har tatt
