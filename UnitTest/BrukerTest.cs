@@ -399,6 +399,29 @@ namespace UnitTest
             
         }
         
+        [Fact]
+        public async Task SlettBrukerTestBad()
+        {
+            // Arrange
+
+            mockRep.Setup(b => b.SlettBrukerAsync(1)).ReturnsAsync(() => null);
+            
+            var brukerController = new BrukerController(mockRep.Object);
+            
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            
+            brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
+            
+            // Act
+            var resultat = await brukerController.DeleteBruker(1) as BadRequestObjectResult;
+            
+            // Assert
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("No user med id: 1", resultat.Value);
+            
+        }
+        
     }
     
     
