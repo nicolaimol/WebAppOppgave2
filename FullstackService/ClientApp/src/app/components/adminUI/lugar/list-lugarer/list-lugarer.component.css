@@ -8,7 +8,7 @@
     justify-content: center;
 }
 
-
+/* Create new and Cancel buttons styling and placement*/
 .float-right {
     position: fixed;
     right: 40px;
@@ -16,6 +16,7 @@
     box-shadow: 2px 2px 3px #999;
 }
 
+/* CBack button styling and placement*/
 .float-left {
     position: fixed;
     left: 40px;

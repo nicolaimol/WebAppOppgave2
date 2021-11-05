@@ -2,7 +2,8 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">{{bruker.brukernavn}}</h5>
-      <!-- Toggle button expanding to edit or delete, and contracting to get a compact view -->
+
+      <!-- Toggle button expanding to edit or delete and contracting to get a compact list view -->
         <button type="button" (click)="toggle()" class="btn {{endre ? 'btn-warning' : 'btn-primary'}}">{{endre ? "Lukk": "Endre"}}</button>
         <div class="mt-2" *ngIf="endre">
 

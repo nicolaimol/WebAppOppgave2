@@ -1,3 +1,4 @@
+<!-- Container with create user card and admin users card list  -->
 <div class="container">
     <div class="column">
         <app-item-bruker *ngFor="let item of brukere" (notifyParent)="slett($event)" [bruker]="item" ></app-item-bruker>

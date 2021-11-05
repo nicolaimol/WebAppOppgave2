@@ -1,7 +1,10 @@
+<!-- Container with login -->
 <div class="container">
     <form (submit)="login()">
         <input [(ngModel)]="username" type=text name="username" placeholder="Brukernavn" >
         <input [(ngModel)]="password" type=password name="password" placeholder="Passord" >
+
+      <!-- Login button, taking you to the admin home page -->
         <button type="submit"class="btn btn-primary">Logg inn</button>
     </form>
 </div>

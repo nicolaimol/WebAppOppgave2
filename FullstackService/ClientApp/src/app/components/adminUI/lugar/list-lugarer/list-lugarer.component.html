@@ -1,11 +1,11 @@
-
+<!-- Container listing cabin cards -->
 <div *ngIf="vis">
     <div class="container center">
-        <h3>{{reise.strekning}}</h3>   
+        <h3>{{reise.strekning}}</h3>
     </div>
-    <div *ngIf="lugarer.length > 0" class="container">  
+    <div *ngIf="lugarer.length > 0" class="container">
         <app-item-lugarer (notifyParent)="slett($event)" class="m-5" *ngFor="let lugar of lugarer" [lugar]="lugar"></app-item-lugarer>
-    </div> 
+    </div>
     <div *ngIf="lugarer.length == 0" class="container">
         <h5>Vi finner ingen lugarer på denne reisen</h5>
     </div>
@@ -15,6 +15,11 @@
     <app-lag-lugar [id]="id" (notifyParent)="lagret($event)"></app-lag-lugar>
 </div>
 
+<!-- Button creates new cabin -->
 <button *ngIf="vis" type="button" class="btn btn-primary float-right" (click)="ny()">Lag ny lugar</button>
+
+<!-- Cancel button takes you back to cabin overview -->
 <button class="btn btn-danger float-right" *ngIf="!vis" (click)="avbryt()">Avbryt</button>
+
+<!-- Back button takes you to admin homepage -->
 <button class="btn btn-secondary float-left" [routerLink]="['/admin/reiser/hent', id]">Tilbake</button>
