@@ -1,17 +1,18 @@
+/*  Footer */
 .footer {
     background-color: #102C66;
     width: 100%;
     padding-bottom: 2em;
     padding-top: 1em;
 }
-
+/*  Column text */
 .column * {
     color: white;
     opacity: 0.7;
     margin: 0;
-    
-}
 
+}
+/* Header padding */
 .container h6 {
     padding-top: 0.5em;
     padding-bottom: 1em;
@@ -33,22 +34,24 @@
 .right {
     margin-right: 1em;
 }
-
+/* Styling right column */
 .right p:hover{
     cursor: pointer;
     opacity: 1;
-    
+
 }
 
+/*Style for browsers with defined definition or less*/
+
 @media only screen and (max-width: 510px){
-    
+
     .left {
         margin-right: 1em;
         width: 100%;
         text-align: center;
         margin-bottom: 2em;
     }
-    
+
     .right {
         margin-left: 1em;
         width: 100%;

@@ -1,3 +1,4 @@
+<!-- Container with card for creating new cabin  -->
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -7,7 +8,8 @@
             <input class="form-control" name=pris [(ngModel)]="lugar.pris">
             <label for="antall">Antall:</label>
             <input class="form-control" name=antall [(ngModel)]="lugar.antall">
+          <!-- Save button takes you to cabin overview -->
             <button class="btn btn-primary mt-2" (click)="lagre()">Lagre</button>
-        </div>    
+        </div>
     </div>
 </div>

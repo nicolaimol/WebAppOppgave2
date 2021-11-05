@@ -1,6 +1,8 @@
+<!-- Edit existing order -->
 <div *ngIf="bestilling == null" class="container">
     <p>Vennligst vent</p>
 </div>
+<!-- Container with input fields for changing different informatin -->
 <div *ngIf="bestilling != null" class="container">
     <div class="card">
         <div class="card-body">
@@ -8,24 +10,25 @@
             <p>Ferjestrekning: {{bestilling.ferjestrekning}}</p>
             <p>Utreisedato: <input [(ngModel)]="bestilling.utreiseDato" type="date" class="form-control"></p>
             <p *ngIf="bestilling.hjemreiseDato != null">Hjemreisedato: <input type="date" class="form-control" [(ngModel)]="bestilling.hjemreiseDato"></p>
-            <p *ngIf="bestilling.registreringsnummer != null">Registreringsnummer: 
+            <p *ngIf="bestilling.registreringsnummer != null">Registreringsnummer:
                 <input type="text" class="form-control" [(ngModel)]="bestilling.registreringsnummer">
             </p>
+          <!-- Buttons for changing info about travellers -->
             <div class="knapper">
-                <app-kontakt-person 
-                    (notifyParent)="changeKontaktPerson($event)" 
-                    [avreise]="bestilling.utreiseDato" 
+                <app-kontakt-person
+                    (notifyParent)="changeKontaktPerson($event)"
+                    [avreise]="bestilling.utreiseDato"
                     [person]="bestilling.kontaktPerson"></app-kontakt-person>
-                <app-kunde 
-                    *ngFor="let kunde of bestilling.voksne; index as i" 
-                    [person]="kunde" 
+                <app-kunde
+                    *ngFor="let kunde of bestilling.voksne; index as i"
+                    [person]="kunde"
                     [index]="i"
                     [avreise]="bestilling.utreiseDato"
                     type="voksen"
                     (notifyParent)="changeVoksen($event)"></app-kunde>
-                <app-kunde 
-                    *ngFor="let kunde of bestilling.barn; index as i" 
-                    [person]="kunde" 
+                <app-kunde
+                    *ngFor="let kunde of bestilling.barn; index as i"
+                    [person]="kunde"
                     [index]="i"
                     [avreise]="bestilling.utreiseDato"
                     type="barn"

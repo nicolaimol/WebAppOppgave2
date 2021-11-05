@@ -1,12 +1,19 @@
+<!-- Existing cabin card -->
     <div class="card">
         <div class="card-body">
+
+          <!-- Input fields makes it possible to edit existing content -->
             <label for="type">Type:</label>
             <input name="type" class="form-control card-title" type=text [(ngModel)]="lugar.type" placeholder="Type">
             <label for="pris">Pris:</label>
             <input class="form-control" name=pris [(ngModel)]="lugar.pris">
             <label for="antall">Antall:</label>
             <input class="form-control" name=antall [(ngModel)]="lugar.antall">
+
+          <!-- Saves and takes you back to overview -->
             <button class="btn btn-primary mt-2" (click)="lagre()">Lagre</button>
+
+          <!-- Deletes cabin -->
             <button class="btn btn-danger mt-2 ml-2" (click)="slett()">Slett</button>
-        </div>    
+        </div>
     </div>

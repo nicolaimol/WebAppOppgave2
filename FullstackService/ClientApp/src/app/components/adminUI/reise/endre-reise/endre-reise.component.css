@@ -1,38 +1,43 @@
+
+/* Button - width and margin */
 button {
     max-width: 10rem;
     margin: 1em;
 }
 
-
+/* Row flex and width */
 .row {
     flex-direction: row;
     width: 100%;
 }
 
+/* Colum flex direction, wrap and width */
 .column {
     flex-direction: column;
     width: fit-content;
     flex-wrap: wrap;
 }
 
+/* Colum flex dir, wrap and width */
 .right {
     display: flex;
     justify-content: flex-end;
 }
-
+/* Save and Cancel button flex*/
 .flex1 {
     flex: 1;
 }
 
+/* Card margin */
 .card-body * {
     margin: .2em;
-    
 }
 
+/* Input area */
 textarea {
     height: 10rem;
 }
-
+/* Height of uploaded image heigh*/
 img {
     height: 10rem;
 }

@@ -1,20 +1,20 @@
 <div class="rad">
-        <div id="reise">
-            
+    <div id="reise">
+
         <!-- Price -->
-        
+
         <div id="pris">
             <p>Din totalpris blir: {{pris}},- kr</p>
         </div>
     </div>
 
     <!-- Table for the form to fill out information -->
-    
+
     <table class="table td">
         <tr class="index-media">
 
             <!-- Selector for journey -->
-            
+
             <td><label for="ferjestrekning">Ferjestrekning</label></td>
             <td>
                 <select [ngClass]="{'is-valid': validStrekning}" [(ngModel)]="strekning" (change)="validerStrekning()" class="form-control trykkemus" name="ferjestrekning" id="ferjestrekning">
@@ -26,14 +26,14 @@
         <tr class="index-media">
 
             <!-- Pick date to leave -->
-            
+
             <td><label for="velgUtreise">Velg utreise</label></td>
             <td><input [ngClass]="{'is-valid': validUtreise}" [(ngModel)]="utreise" (change)="validerUtreise()" class="form-control trykkemus" id="velgUtreise" type="date"></td>
         </tr>
         <tr class="index-media">
 
             <!-- Pick date to return -->
-            
+
             <td><label for="hjemDato">Velg hjemreise</label></td>
             <td><input [ngClass]="{'is-valid': validHjemreise && skalHjem}"  [disabled]="!skalHjem" [(ngModel)]="hjemreise" (change)="validerHjemreise()" class="form-control trykkemus" id="hjemDato" type="date">
             <input (change)="setSkalHjem()" [(ngModel)]="skalHjem" class="trykkemus" (click)="setHjem()" id="skalHjem" type="checkbox"><label for="skalHjem" class="ml-2">Skal ha hjemreise</label> </td>
@@ -41,7 +41,7 @@
         <tr class="index-media">
 
             <!-- Selector for what type of sleeping accommodation (three to five stars) -->
-            
+
             <td><label for="lugar">Velg lugar</label></td>
             <td>
                 <select [ngClass]="{'is-valid': validLugar && skalLugar}" [(ngModel)]="lugar" (change)="validerLugar()" class="form-control trykkemus" [disabled]="!skalLugar" id="lugar">
@@ -55,7 +55,7 @@
         <tr class="index-media">
 
             <!-- Car yes/no and license plate number -->
-            
+
             <td><label for="regNummer">Velg bil</label></td>
             <td><input [disabled]="!skalBil" [ngClass]="{'is-valid': validBil && skalBil}" [(ngModel)]="bil" (keyup)="validerRegnummer()" class="form-control" id="regNummer" disabled type="text" placeholder="regnummer her">
                 <input (change)="setSkalBil()" [(ngModel)]="skalBil" class="trykkemus" id="regCheck" type="checkbox"> <label
@@ -64,30 +64,30 @@
         <tr class="index-media">
 
             <!-- Number of passengers -->
-            
+
             <td><p>Velg antall</p></td>
 
             <!-- Number of adults -->
-            
+
             <td><label style="margin-right: 5%" for="voksen">Voksen</label>
                 <input [ngClass]="{'is-valid': validAntallVoksen}" [(ngModel)]="antallVoksen" (keyup)="validerVoksne()" (change)="validerVoksne()" class="form-control" id="voksen"
                         style="margin-right: 5%" type="number">
 
                 <!-- Number of children -->
-                
+
                 <label style="margin-right: 5%" for="barn">Barn</label>
                 <input [ngClass]="{'is-valid': validAntallBarn}" [(ngModel)]="antallBarn" (keyup)="validerBarn()" (change)="validerBarn()" class="form-control" id="barn" type="number"></td>
         </tr>
         <tr class="align-under index-media">
 
             <!-- Button to move on with the order -->
-            
+
             <td><button (click)="videre()" id="videre" class="btn btn-success" [disabled]="!validTotal">
                 Gå videre med bestillingen</button></td>
             <td>
 
                 <!-- Placing some information about the journey here -->
-                
+
                 <div id="flags">
                     <div *ngIf="reiseItem != null">
                         <img class="boat" src={{reiseItem.bildeLink.url}} alt="img">

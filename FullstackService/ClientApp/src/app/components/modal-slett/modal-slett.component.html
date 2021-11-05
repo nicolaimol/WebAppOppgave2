@@ -1,3 +1,4 @@
+<!-- User notification for deleting item -->
 <div class="modal-content">
     <div class="modal-header">
         <h4 class="modal-title">Ønsker du å slette?</h4>
@@ -6,7 +7,11 @@
         <p>{{message}}</p>
     </div>
     <div class="modal-footer">
+
+      <!-- Cancel, goes back to admin page -->
         <button (click)="modal.close('Lukk')"  class="btn btn-default">Lukk</button>
+
+      <!-- Delete, removes chosen component -->
         <button (click)="modal.close('Slett')"  class="btn btn-danger">Slett</button>
     </div>
 </div>

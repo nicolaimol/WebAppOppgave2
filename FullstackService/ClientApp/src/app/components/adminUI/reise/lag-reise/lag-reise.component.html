@@ -1,13 +1,18 @@
+<!-- Create new travel -->
 <div class="container">
     <div class="card">
         <div class="card-body">
+          <!-- Distance name -->
             <label for="strekning">Strekning</label>
             <input type="text" class="form-control" placeholder="Strekning" id="strekning" [(ngModel)]="reise.strekning">
+          <!-- Input for info about travel -->
             <label for="info">Info</label>
             <textarea class="form-control" placeholder="Info" [(ngModel)]="reise.info"></textarea>
             <input type="checkbox"  [(ngModel)]="reise.maLugar">
+          <!-- Toggle for need a cabin / does not need a cabin -->
             <label for="flexSwitchCheckDefault">Må ha lugar</label><br>
 
+          <!-- Insert prices -->
             <div class="row">
                 <div class="column">
                     <label for="prisPerGjest">Pris per gjest</label>
@@ -18,19 +23,23 @@
                     <input type="number" class="form-control" [(ngModel)]="reise.prisBil" >
                 </div>
             </div>
-            
-            <div class="column right">
+
+          <!-- Add image -->
+          <div class="column right">
                 <img src={{reise.bildeLink.url}} alt="bilde reise">
                 <select [(ngModel)]="reise.bildeLink.url">
                     <option (change)="updateId(bilde.id)" *ngFor="let bilde of bilder" value={{bilde.url}}>{{bilde.url}}</option>
                 </select>
                 <input #file (change)="updateImage(file.files)" type="file" id="inputGroupFile02">
+            <!-- Upload image button-->
                 <button type="button" class="btn btn-info" (click)="upload()">Upload</button>
             </div>
 
 
             <div class="row right">
+              <!-- Save travel - takes you back to travel overview-->
                 <button class="btn btn-success" (click)="lagre()">Lagre</button>
+              <!-- Discard changes - takes you back to travel overview-->
                 <button class="btn btn-danger" (click)="avbryt()">Avbryt</button>
             </div>
         </div>

@@ -43,14 +43,15 @@
   </nav>
 </header>-->
 
+<!-- Nav bar -->
 <header>
   <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark border-bottom box-shadow mb-3" style="background-color: #102c66;">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="../../res/Color_Line_logo.svg" alt="" style="background-color: white; padding: 5px" height="60px">
         </a>
-
-        <button 
+      <!-- Button for expanding/ collapsing nav bar -->
+        <button
             class="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -62,6 +63,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+      <!-- Output Expanded nav bar -->
         <div class="navbar-collapse collapse d-md-inline-flex justify-content-end" id="navmenu"
           [ngClass]="{ show: isExpanded }">
             <ul class="navbar-nav ms-auto flex-grow">

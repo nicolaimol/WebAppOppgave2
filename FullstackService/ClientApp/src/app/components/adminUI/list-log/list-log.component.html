@@ -1,7 +1,12 @@
+<!-- Log showing table with admin activity -->
 <div class="container">
     <div class="right">
+
+      <!-- Search input field -->
         <p>Søk i logg</p>
         <div class="sok input-group mb-2">
+
+          <!-- Filter for search field -->
             <select class="form-control" [(ngModel)]="filterValg" (change)="filter()">
                 <option selected value="brukernavn">Brukernavn</option>
                 <option value="beskrivelse">Beskrivelse</option>
