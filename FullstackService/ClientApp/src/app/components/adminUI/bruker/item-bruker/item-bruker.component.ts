@@ -15,18 +15,25 @@ export class ItemBrukerComponent implements OnInit {
   endre: boolean = false;
 
   @Input() bruker: BrukerUpdate
+  validSlett = false;
 
   constructor(private brukerService: BrukerService, private modalService: NgbModal, private authService: AuthService) { }
 
   @Output() notifyParent = new EventEmitter<number>();
 
   ngOnInit() {
+    // deaktiverer slett for aktiv bruker
+    this.authService.user.subscribe(data => {
+      this.validSlett = this.bruker.brukernavn == data;
+    })
   }
 
+  // toggler om endring skal vises
   toggle() {
     this.endre = !this.endre;
   }
 
+  // sender update til backend
   update() {
     this.brukerService.updateBruker(this.bruker, this.bruker.id).subscribe(data => {
       console.log(data)
@@ -36,6 +43,7 @@ export class ItemBrukerComponent implements OnInit {
     })
   }
 
+  // slettemodal vises, om slett sendes id til foreldre component
   slett() {
     const modalRef = this.modalService.open(ModalSlettComponent);
     modalRef.componentInstance.message = "Slett brukeren " + this.bruker.brukernavn + "?"

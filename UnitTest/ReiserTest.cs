@@ -12,7 +12,7 @@ using Moq;
 using UnitTest;
 using Xunit;
 
-namespace unitTest
+namespace UnitTest
 {
     public class ReiserTest
     {

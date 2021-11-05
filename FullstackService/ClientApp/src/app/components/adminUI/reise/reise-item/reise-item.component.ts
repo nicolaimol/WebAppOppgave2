@@ -23,6 +23,8 @@ export class ReiseItemComponent implements OnInit {
   endre() {
     this.router.navigate([`/admin/reiser/hent/${this.reise.id}`]);
   }
+
+  // modal for sletting, etter slett sendes til parent for å fjerne fra liste
   fjern() {
     const modalRef = this.modalService.open(ModalSlettComponent)
 

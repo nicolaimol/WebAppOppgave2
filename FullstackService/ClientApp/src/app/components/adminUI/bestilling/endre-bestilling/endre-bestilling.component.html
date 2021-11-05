@@ -34,7 +34,10 @@
                     type="barn"
                     (notifyParent)="changeVoksen($event)"></app-kunde>
             </div>
+            <button (click)="lagre()" class="btn btn-primary mt-3">Lagre</button>
         </div>
     </div>
 </div>
+
+<button class="btn btn-secondary float-left" [routerLink]="['/admin/bestillinger']">Tilbake</button>
 

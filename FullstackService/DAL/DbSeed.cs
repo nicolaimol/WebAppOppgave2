@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FullstackService.DTO;
 using FullstackService.Models;
@@ -158,6 +159,50 @@ namespace FullstackService.DAL
                     }
                     
                 }
+
+                var barn = new List<Barn>();
+                barn.Add(new Barn
+                {
+                    Fornavn = "Kari",
+                    Etternavn = "Nordmann",
+                    Foedselsdato = "2006-01-01"
+                });
+
+                var voksne = new List<Voksen>();
+                voksne.Add(new Voksen
+                {
+                    Fornavn = "Jane",
+                    Etternavn = "Doe",
+                    Foedselsdato = "1960-01-01"
+                });
+
+                var bestilling = new Bestilling
+                {
+                    Reise = reise1,
+                    Referanse = "a1b2c3d4",
+                    Registreringsnummer = "DR 12345",
+                    ReiseId = reise1.Id,
+                    Pris = 1000,
+                    AntallLugarer = 2,
+                    LugarType = lugar3,
+                    LugarTypeId = lugar3.Id,
+                    KontaktPerson = new KontaktPerson
+                    {
+                        Fornavn = "Ola",
+                        Etternavn = "Nordamnn",
+                        Adresse = "Osloveien 82",
+                        Epost = "ola.nordmann@gmail.com",
+                        Telefon = "22225555",
+                        Foedselsdato = "1998-01-01",
+                        Post = db.PostSteder.Find("1275")
+                    },
+                    Barn = barn,
+                    Voksne = voksne,
+                    UtreiseDato = "2021-11-09",
+                    HjemreiseDato = "2021-11-10"
+                };
+
+                db.Bestillinger.Add(bestilling);
                 
                 db.SaveChanges();
                 Console.WriteLine("--> Seeding");

@@ -9,6 +9,8 @@ import { BrukerService } from 'src/app/service/bruker.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  // variabler tilkoblet inputfeltene i html
   username: string = "";
   password: string = "";
 
@@ -17,12 +19,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  // funksjonen for å logge inn
   login() {
+
+    // lager bruker med brukernavn og passord fra inputfeltene
     const b:Bruker = {
       brukernavn:this.username,
       passord:this.password
     };
     
+    // Endrer slik at du blir autorisert. Når du blir autorisert settes denne brukeren.
+    // Printer alle eventuelle errorer
     this.brukerService.validerBruker(b).subscribe(data => {
       //sessionStorage.setItem("auth", JSON.stringify(data));
       this.authService.changeAuth(true);

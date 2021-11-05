@@ -16,16 +16,19 @@ export class ListBrukerComponent implements OnInit {
   constructor(private brukerService: BrukerService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    // sender bruker til /admin om den ikke er logget inn
     this.authService.auth.subscribe(auth => {
       if (!auth) this.router.navigate(['/admin'])
-    })
-
-
-    this.brukerService.hentAlleBRukere().subscribe(b => {
-      this.brukere = b;
+      else {
+        // henter alle brukere fra server
+        this.brukerService.hentAlleBRukere().subscribe(b => {
+          this.brukere = b;
+        })
+      }
     })
   }
 
+  // sender slett til backend, sletter bruker
   slett(id: number) {
     this.brukerService.slettBruker(id).subscribe(data => {
         this.brukere = this.brukere.filter(b => b.id !== id);
@@ -33,6 +36,7 @@ export class ListBrukerComponent implements OnInit {
       console.log(error);
     })
   }
+  // ny bruker legges til i listen
   leggTil(b: Bruker) {
     this.brukere.push(b);
   }  

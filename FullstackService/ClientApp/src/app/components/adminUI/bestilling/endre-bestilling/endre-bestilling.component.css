@@ -1,3 +1,10 @@
 .knapper * {
     margin-right: 1rem;
 }
+
+.float-left {
+    position: fixed;
+    left: 40px;
+    bottom: 40px;
+    box-shadow: 2px 2px 3px #999;
+}

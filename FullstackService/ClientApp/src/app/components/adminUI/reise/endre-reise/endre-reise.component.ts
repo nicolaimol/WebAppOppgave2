@@ -38,22 +38,27 @@ export class EndreReiseComponent implements OnInit {
 
   ngOnInit() {
 
+    // flytter til /admin om bruker ikke er logget inn, henter alle bilder ellers
     this.authService.auth.subscribe(auth => {
       if (!auth) this.router.navigate(['/admin'])
+      else {
+
+        this.imageService.getAllBilder().subscribe(bilder => {
+          this.bilder = bilder;
+        })
+
+        this.id = Number(this.route.snapshot.paramMap.get('id'));
+        this.reiseService.hentReiseById(this.id).subscribe(reise => {
+          this.reise = reise
+        }, error => {
+          this.router.navigate(['/admin/reiser'])
+        })
+      }
     })
 
-    this.imageService.getAllBilder().subscribe(bilder => {
-      this.bilder = bilder;
-    })
-
-      this.id = Number(this.route.snapshot.paramMap.get('id'));
-      this.reiseService.hentReiseById(this.id).subscribe(reise => {
-        this.reise = reise
-      }, error => {
-        this.router.navigate(['/admin/reiser'])
-      })
+    
   }
-
+  // sender oppdatert reise til server
   update():void {
     this.reiseService.updateReise(this.reise).subscribe(reise => {
       this.router.navigate(['/admin/reiser'])
@@ -69,8 +74,8 @@ export class EndreReiseComponent implements OnInit {
     this.reise.bildeLink.id = id;
   }
 
+  // sender bilde til server
   upload() {
-
     let fileToUpload = <File>this.image[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);

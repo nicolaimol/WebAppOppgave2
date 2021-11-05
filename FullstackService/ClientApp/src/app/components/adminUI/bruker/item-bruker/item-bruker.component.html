@@ -12,7 +12,7 @@
 
           <!-- Buttons updating and deleting user info -->
             <button class="btn btn-success mr-2" (click)="update()">Lagre</button>
-            <button class="btn btn-danger" (click)="slett()">Slett</button>
+            <button class="btn btn-danger" [disabled]="validSlett" (click)="slett()">Slett</button>
         </div>
     </div>
 </div>

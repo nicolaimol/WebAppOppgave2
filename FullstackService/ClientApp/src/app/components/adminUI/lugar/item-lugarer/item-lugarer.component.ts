@@ -20,6 +20,7 @@ export class ItemLugarerComponent implements OnInit {
   ngOnInit() {
   }
 
+  // lagrer endringer til lugar i databasen
   lagre() {
     this.lugarService.updateLugar(this.lugar).subscribe(lugar => {
       console.log(lugar)
@@ -28,6 +29,7 @@ export class ItemLugarerComponent implements OnInit {
     })
   }
 
+  // sletter valgt lugar fra databasen
   slett() {
     const modalRef = this.modalService.open(ModalSlettComponent);
     modalRef.componentInstance.message = "Slett lugar " + this.lugar.type
