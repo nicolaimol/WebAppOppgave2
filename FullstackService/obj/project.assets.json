@@ -6589,19 +6589,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\emiliemartin\\.nuget\\packages\\": {}
+    "C:\\Users\\Bruker\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\emiliemartin\\OneDrive - OsloMet\\Dokumenter\\5. semester\\ITPE3200\\WebAppOppgave2\\FullstackService\\FullstackService.csproj",
+      "projectUniqueName": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\FullstackService.csproj",
       "projectName": "FullstackService",
-      "projectPath": "C:\\Users\\emiliemartin\\OneDrive - OsloMet\\Dokumenter\\5. semester\\ITPE3200\\WebAppOppgave2\\FullstackService\\FullstackService.csproj",
-      "packagesPath": "C:\\Users\\emiliemartin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\emiliemartin\\OneDrive - OsloMet\\Dokumenter\\5. semester\\ITPE3200\\WebAppOppgave2\\FullstackService\\obj\\",
+      "projectPath": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\FullstackService.csproj",
+      "packagesPath": "C:\\Users\\Bruker\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bruker\\RiderProjects\\WebAppOppgave2\\FullstackService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\emiliemartin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Bruker\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6670,7 +6670,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

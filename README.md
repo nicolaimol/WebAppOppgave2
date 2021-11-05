@@ -10,7 +10,8 @@ kan enkelt endre på reiser, bestillinger og alt vedkommende kunne ville endre p
 
 ## Påloggingsinformasjon
 
-Du kommer til innlogging ved https://localhost:5001/admin
+Du kommer til innlogging ved https://localhost:5001/admin (gitt at serveren kjører på
+maskinen din)
 - Brukernavn: admin
 - Passord: admin
 
