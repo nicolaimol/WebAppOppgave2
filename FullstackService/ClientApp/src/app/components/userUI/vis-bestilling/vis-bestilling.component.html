@@ -27,7 +27,7 @@
     </div>
     
     <p>Det anbefales å møte opp i god tid før avreise. Selv om pass ikke er nødvendig innenfor Schengen, så er dette sterkt anbefalt.</p>
-    <p>Vi ønsker deg velkommen om bord hos oss, og en god reise til <span id="placeDestinationHere"></span>!</p>
+    <p>Vi ønsker deg velkommen om bord hos oss, og en god reise til {{bestilling.ferjestrekning.split("-")[1]}}!</p>
 
     <app-hent-bestilling (notifyParent)="update($event)"></app-hent-bestilling>
 </div>
