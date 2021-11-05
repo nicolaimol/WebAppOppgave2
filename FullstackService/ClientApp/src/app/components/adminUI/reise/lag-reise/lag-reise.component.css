@@ -1,26 +1,32 @@
+/* Button margin and width */
 button {
     max-width: 5rem;
     margin: 1em;
 }
 
+/* Row flex direction and width */
 .row {
     flex-direction: row;
     width: 100%;
 }
 
+/* Right row flex direction */
 .right {
     justify-content: flex-end;
 }
 
+/* Margin to card */
 .card-body * {
     margin: .2em;
-    
+
 }
 
+/* Text input height */
 textarea {
     height: 10rem;
 }
 
+/* Image input height */
 img {
     height: 10rem;
 }

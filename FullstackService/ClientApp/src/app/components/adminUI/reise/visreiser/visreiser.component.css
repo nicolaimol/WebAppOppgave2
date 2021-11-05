@@ -1,4 +1,4 @@
-
+/* Card size appearance */
 .kort {
     max-width: 100%;
     display: flex;
@@ -6,6 +6,7 @@
     justify-content: center;
 }
 
+/* Card list appearance */
 .start {
     max-width: fit-content!important;
     flex-shrink: 0;
@@ -16,6 +17,7 @@
     justify-content: flex-start;
 }
 
+/* Button styling */
 .float {
     position: fixed;
     right: 40px;

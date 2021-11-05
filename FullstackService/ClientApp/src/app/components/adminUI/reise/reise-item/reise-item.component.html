@@ -1,3 +1,4 @@
+<!-- Travel card design -->
 <div class="container">
     <div class="card">
         <img src="{{reise.bildeLink.url}}" alt="" class="card-img-top">
@@ -5,12 +6,14 @@
             <h5 class="card-title">{{reise.strekning}}</h5>
             <!--<p class="card-text">{{reise.info}}</p>-->
             <div class=row>
+              <!-- Edit button -->
                 <button class="btn btn-primary"
                 (click)="endre()">
                     <span class="material-icons">
                         edit
                     </span>
                 </button>
+              <!-- Delete travel button -->
                 <button class="btn btn-danger"
                 (click)="fjern()">
                     <span class="material-icons">

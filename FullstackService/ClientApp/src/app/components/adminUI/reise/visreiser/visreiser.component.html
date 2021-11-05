@@ -1,7 +1,8 @@
+<!-- Travel card "list" - show all active travels -->
 <div class="container">
     <div class="kort">
         <div class="start">
-            <app-reise-item 
+            <app-reise-item
             *ngFor="let reise of reiser"
             [reise]="reise"
             (notifyParent)="slett($event)"></app-reise-item>
@@ -9,4 +10,5 @@
     </div>
 </div>
 
+<!-- Create travel button, takes you to 'lag-reise.component.html' -->
 <button type="button" class="btn btn-primary float" (click)="ny()">Lag ny reise</button>

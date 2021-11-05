@@ -1,3 +1,4 @@
+<!-- Admin login -->
 <div *ngIf="!validUser" class="container">
 
     <h5 class="ml-4">Vennligst logg inn for å få administrator-tilgang</h5>
@@ -6,6 +7,7 @@
 
     <app-login></app-login>
 </div>
+<!-- Admin home page after login -->
 <div *ngIf="validUser" class="container center">
     <h3 class="mb-4">Velkommen {{user}}</h3>
 
@@ -14,6 +16,7 @@
         I tillegg har du en logg med oversikt over endringer i databasen
     </p>
 
+  <!-- Admin tools -->
     <ul>
         <li [routerLink]="['reiser']"><span class="material-icons-outlined">directions_boat</span>Reiser</li>
         <li [routerLink]="['bestillinger']"><span class="material-icons-outlined">toc</span>Bestillinger</li>

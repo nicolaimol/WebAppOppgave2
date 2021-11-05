@@ -1,12 +1,16 @@
+<!-- Card for each admin accounts -->
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">{{bruker.brukernavn}}</h5>
-
+      <!-- Toggle button expanding to edit or delete, and contracting to get a compact view -->
         <button type="button" (click)="toggle()" class="btn {{endre ? 'btn-warning' : 'btn-primary'}}">{{endre ? "Lukk": "Endre"}}</button>
-
         <div class="mt-2" *ngIf="endre">
+
+          <!-- Input fields to edit password -->
             <p>Passord: <input type="password" class="form-control" placeholder="passord" [(ngModel)]="bruker.passord"></p>
             <p>Nytt Password: <input type="password" class="form-control" placeholder="nytt passord" [(ngModel)]="bruker.NyttPassord"></p>
+
+          <!-- Buttons updating and deleting user info -->
             <button class="btn btn-success mr-2" (click)="update()">Lagre</button>
             <button class="btn btn-danger" (click)="slett()">Slett</button>
         </div>

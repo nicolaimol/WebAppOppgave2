@@ -49,7 +49,7 @@ td{
     max-width: 50%!important;
 }
 
-/*Styles for browsers with defined definition or less*/
+/*Styles for browsers with defined size or less*/
 @media only screen and (max-width: 510px){
 
     tr {
