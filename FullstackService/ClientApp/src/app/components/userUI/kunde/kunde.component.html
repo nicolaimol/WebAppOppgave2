@@ -12,8 +12,8 @@
       <!-- Checking if input content is valid, adding a green checkmark on input field if content is valid-->
 
         <form class="form-vertical" role="form" (submit)="submit()">
-            <input [ngClass]="{'is-valid': validFornavn}" (keyup)="validerFornavn()" type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
-            <input [ngClass]="{'is-valid': validEtternavn}" (keyup)="validerEtternavn()" type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
+            <input [ngClass]="{'is-valid': validFornavn}" (keyup)="validerFornavn()" (change)="validerFornavn()" type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
+            <input [ngClass]="{'is-valid': validEtternavn}" (keyup)="validerEtternavn()" (change)="validerEtternavn()" type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
             <input [ngClass]="{'is-valid': validFoedselsdato}" (change)="validerFoedselsdato()" type="date" class="form-control" name="foedselsdato" [(ngModel)]="person.foedselsdato">
 
           <!-- Save button - sending you back to to list of passengers on the trip-->

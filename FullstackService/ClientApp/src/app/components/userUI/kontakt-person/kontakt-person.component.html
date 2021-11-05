@@ -14,16 +14,16 @@
     <!-- Checking if input content is valid, adding a green checkmark on input field if content is valid-->
 
     <form class="form-vertical" role="form" (submit)="submit()">
-      <input [ngClass]="{'is-valid': validFornavn}" (keyup)="validerFornavn()" type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
-      <input [ngClass]="{'is-valid': validEtternavn}" (keyup)="validerEtternavn()" type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
+      <input [ngClass]="{'is-valid': validFornavn}" (keyup)="validerFornavn()" (change)="validerFornavn()" type="text" class="form-control" name="fornavn" placeholder="Fornavn" [(ngModel)]="person.fornavn">
+      <input [ngClass]="{'is-valid': validEtternavn}" (keyup)="validerEtternavn()" (change)="validerEtternavn()" type="text" class="form-control" name="etternavn" placeholder="Etternavn" [(ngModel)]="person.etternavn">
       <input [ngClass]="{'is-valid': validFoedselsdato}" (change)="validerFoedselsdato()" type="date" class="form-control" name="foedselsdato" [(ngModel)]="person.foedselsdato">
       <div class="input-group" id="adresse-block">
-        <input [(ngModel)]="person.adresse" [ngClass]="{'is-valid': validAdresse}" name=adresse (keyup)="validerAdresse()" class="form-control" type="text" id="adresse">
-        <input [(ngModel)]="person.post.postNummer" [ngClass]="{'is-valid': validPost}" name="postnummer" (keyup)="validerPostNummer()" class="form-control zip" type="text" id="postnummer" placeholder="postNr." maxlength="4" size="4">
+        <input [(ngModel)]="person.adresse" [ngClass]="{'is-valid': validAdresse}" name=adresse (keyup)="validerAdresse()" (change)="validerAdresse()" class="form-control" type="text" id="adresse">
+        <input [(ngModel)]="person.post.postNummer" [ngClass]="{'is-valid': validPost}" name="postnummer" (keyup)="validerPostNummer()" (change)="validerPostNummer()" class="form-control zip" type="text" id="postnummer" placeholder="postNr." maxlength="4" size="4">
         <input [(ngModel)]="person.post.postSted" [ngClass]="{'is-valid': validPost}" name="poststed" disabled class="form-control zip" type="text" id="poststed" placeholder="poststed">
       </div>
-      <input [ngClass]="{'is-valid': validTelefon}" (keyup)="validerTelefon()" type="text" class="form-control" name="telefon" placeholder="Telefon" [(ngModel)]="person.telefon">
-      <input [ngClass]="{'is-valid': validEpost}" (keyup)="validerEpost()" type="email" class="form-control" name="epost" placeholder="Epost" [(ngModel)]="person.epost">
+      <input [ngClass]="{'is-valid': validTelefon}" (keyup)="validerTelefon()" (change)="validerTelefon()" type="text" class="form-control" name="telefon" placeholder="Telefon" [(ngModel)]="person.telefon">
+      <input [ngClass]="{'is-valid': validEpost}" (keyup)="validerEpost()" (change)="validerEpost()" type="email" class="form-control" name="epost" placeholder="Epost" [(ngModel)]="person.epost">
 
       <!-- Save button -->
 
