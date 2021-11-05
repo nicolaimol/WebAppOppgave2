@@ -99,16 +99,12 @@ namespace FullstackService.Controllers
                 return Unauthorized("Ikke logget inn");
             }
 
-            try
-            {
-                var returBruker = await _db.EndreBrukerAsync(id, bruker);
+            
+            var returBruker = await _db.EndreBrukerAsync(id, bruker);
 
-                return returBruker is null ? BadRequest("Brukernavn eller passord er feil") : Ok(returBruker);
-            }
-            catch
-            {
-                return NotFound();
-            }
+            return returBruker is null ? BadRequest("Brukernavn eller passord er feil") : Ok(returBruker);
+            
+            
             
         }
         

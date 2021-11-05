@@ -205,7 +205,7 @@ namespace UnitTest
         
 
         [Fact]
-        public void AutoriserTest()
+        public void AutoriserTestOk()
         {
             // Arrange
             var brukerController = new BrukerController(mockRep.Object);
@@ -223,6 +223,25 @@ namespace UnitTest
             
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
             Assert.Equal( string2, string1);
+
+        }
+        
+        [Fact]
+        public void AutoriserTestFail()
+        {
+            // Arrange
+            var brukerController = new BrukerController(mockRep.Object);
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
+            
+            // Act
+            var resultat = brukerController.AutoriserBruker() as UnauthorizedObjectResult;
+            
+            // Assert
+
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal( "Ikke logget inn", resultat.Value);
 
         }
         

@@ -91,7 +91,7 @@ namespace FullstackService.DAL
 
             if (dbBruker is null)
             {
-                throw new ArgumentOutOfRangeException();
+                return null;
             }
 
             var hash = HashPassord(innBruker.Passord, dbBruker.Salt);
