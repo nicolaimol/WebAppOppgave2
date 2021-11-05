@@ -275,6 +275,27 @@ namespace UnitTest
         }
         
         [Fact]
+        public async Task HentByIdBad()
+        {
+            // Arrange
+            
+            mockRep.Setup(b => b.HentEnBestillingAsync(1)).ReturnsAsync(() => null);
+
+            var bestillingController = new BestillingsController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            bestillingController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat =
+                await bestillingController.HentBestillingByIdAsync(1) as NotFoundResult;
+
+            // Assert
+            Assert.Equal((int) HttpStatusCode.NotFound, resultat.StatusCode);
+        }
+        
+        [Fact]
         public async Task HentByRefFail()
         {
             // Arrange
