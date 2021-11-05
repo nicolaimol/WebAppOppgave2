@@ -3,5 +3,6 @@
         <input [(ngModel)]="username" type=text name="username" placeholder="Brukernavn" >
         <input [(ngModel)]="password" type=password name="password" placeholder="Passord" >
         <button type="submit"class="btn btn-primary">Logg inn</button>
+        <button [routerLink]="['/']" class="btn btn-secondary">Hjem</button>
     </form>
 </div>
