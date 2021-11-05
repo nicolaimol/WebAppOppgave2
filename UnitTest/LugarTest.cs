@@ -127,6 +127,32 @@ namespace UnitTest
         }
         
         [Fact]
+        public async Task UpdateLugarTestBad()
+        {
+            // Arrange
+            var lugar = new Lugar
+            {
+                Id = 1, ReiseId = 1, Antall = 4, Type = "***"
+            };
+
+            mockRep.Setup(l => l.UpdateLugarAsync(lugar)).ReturnsAsync(() => null);
+            
+            var lugarController = new LugarController(mockRep.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            lugarController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await lugarController.UpdateLugar(lugar) as BadRequestObjectResult;
+            
+            // Assert
+            Assert.Equal((int)HttpStatusCode.BadRequest,resultat.StatusCode);
+            Assert.Equal("No lugar with id", resultat.Value);
+            
+        }
+        
+        [Fact]
         public async Task DeleteLugarTestOk()
         {
             // Arrange

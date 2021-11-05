@@ -127,6 +127,25 @@ namespace UnitTest
             Assert.Equal("Ikke logget inn", resultat.Value);
 
         }
+        
+        [Fact]
+        public async Task HentBrukerTestNot()
+        {
+            // Arrange
+            var bruker1 = new BrukerDTO() {Id = 1, Brukernavn = "Per", Passord = "Askeladden"};
+            mockRep.Setup(b => b.HentEnBrukerByIdAsync(bruker1.Id)).ReturnsAsync(() => null);
+            var brukerController = new BrukerController(mockRep.Object);
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            brukerController.ControllerContext.HttpContext = mockHttpContext.Object;
+            
+            // Act
+            var resultat = await brukerController.HentBruker(1) as NotFoundResult;
+            
+            // Assert
+            Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
+
+        }
 
         [Fact]
         public async Task VerifiserBrukerTestOk()
